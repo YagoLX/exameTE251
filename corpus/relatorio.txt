@@ -1,0 +1,9 @@
+origem: fide_handbook_E012023.html
+chunks numerados: 210
+blocos sem numero (titulos de Artigo, Apendices): 180
+linhas de glossario (NAO indexadas): 294
+paragrafos com imagem: 10
+continuacoes orfas (deveria ser 0): 0
+chunks por nivel: n2=81, n3=106, n4=23
+tamanho do texto: min=8 mediana=116 max=1004
+chunks com menos de 40 caracteres (23): 3.7, 3.8.1, 3.9, 4.4, 6.2, 6.3, 6.7, 6.10, 7.4, 7.5, 8.1, 8.5, 9.1, 9.5, 11.2, 11.2.3.1, 11.3, 12.2, 12.2.1, 12.9.1

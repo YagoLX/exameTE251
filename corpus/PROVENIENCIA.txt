@@ -1,0 +1,5 @@
+baixado em: 2026-11-08T13:25:50-03:00
+handbook.fide.com/chapter/E012023
+rcc.fide.com/fide-laws-of-chess_fulltexthtml/
+c5b1692a0614d4bd93fe9238287b9ab7d1f47320934d5df3be113523906c476f  fide_handbook_E012023.html
+ca47f9a27e91a8025212fb4ff06864f3c85df40f8b5bbe7b2ea5dcbda2c8f738  fide_rcc_fulltext.html

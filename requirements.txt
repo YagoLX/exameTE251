@@ -1,0 +1,6 @@
+chess==1.11.2
+scikit-learn==1.7.2
+numpy>=2.0
+sentence-transformers
+# torch: instalar do indice CPU, fora deste arquivo:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
