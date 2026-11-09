@@ -9,7 +9,8 @@ Atualizado em 09/11/2026 (noite).
 - **Perguntas em inglês** estão em `PERGUNTAS_EN` (`suite/suite_30.py`), congeladas antes de rodar a busca. O texto em português ficou em `pergunta_pt`.
 - **c31–c35** (fora de escopo, `recusa`): **rascunho, aguardando revisão humana.** A suíte tem 35 casos; o nome `suite_30` foi mantido.
 - **Busca: e5-large** (`intfloat/multilingual-e5-large`). Foi escolhido pela checagem abaixo, com as perguntas já congeladas.
-- **Ramo A: Groq, `llama-3.3-70b-versatile`, temperatura 0, k=5** (padrões em `src/agente.py`). O trace grava o id servido (`meta.modelo_servido`); confirmar na primeira chamada real.
+- **Ramo A: Groq, `openai/gpt-oss-120b`, temperatura 0, k=5** (padrões em `src/agente.py`). O `llama-3.3-70b-versatile` não é mais servido: o `/models` do Groq só lista Llama prompt-guard. A primeira chamada real (c12) confirmou `modelo_servido = openai/gpt-oss-120b`. É um modelo de raciocínio: ~420 dos 557 tokens de saída foram de raciocínio.
+- **Chave:** `GROQ_API_KEY` fica em `.env` na raiz (no `.gitignore`). O `agente.py` lê esse arquivo.
 - **c19/c20 (mate):** o gabarito continua `legal`. A pergunta sobre o mate fica com o humano, que vê `depois.mate` do python-chess na interface (c19: mate; c20: não é mate).
 
 ## Busca: artigo_ouro no top-k (29 casos com ouro)
@@ -37,9 +38,9 @@ Fonte: `resultados/checagem_trechos_*_k*.csv`. A coluna `rotulo` (suficiente/par
 
 ## Em aberto
 
-- [ ] Primeira chamada real ao Groq (`GROQ_API_KEY`), conferindo `modelo_servido`.
+- [x] Primeira chamada real ao Groq. c12: o modelo disse `legal`, citou a 3.8.2.2 e a parada foi `concordam` (a suíte esperava discordância). Trace de fumaça descartado.
 - [ ] Revisar os 35 casos na aba Revisão da interface (c31–c35 primeiro).
 - [ ] Rótulos de trechos (suficiente/parcial/ausente) na aba Trechos → `resultados/rotulos_humanos.json`.
 - [ ] Classroom: prazo, páginas, resumo, palavras-chave.
-- [ ] Commit (o usuário pediu para segurar).
+- [x] Repositório: github.com/YagoLX/exameTE251 (branch `main`).
 - [ ] Depois: as 90 execuções e `src/grader.py`.
