@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from buscar_artigo import Indice  # noqa: E402
+from buscar_artigo import Indice, E5_MODELO  # noqa: E402
 
 # (id, pergunta em portugues, pergunta em ingles, artigos aceitos como ouro)
 CONSULTAS = [
@@ -85,15 +85,16 @@ def rodar(idx: Indice, k: int, lingua: str) -> tuple[list[dict], dict]:
 def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--backend", default="tfidf", choices=["tfidf", "e5"])
+    p.add_argument("--modelo", default=E5_MODELO)
     p.add_argument("-k", type=int, default=3)
     p.add_argument("--csv", help="grava as linhas num CSV")
     a = p.parse_args()
 
-    idx = Indice.carregar(a.backend)
+    idx = Indice.carregar(a.backend, a.modelo)
     n = len(CONSULTAS)
     todas = []
 
-    print(f"backend={a.backend}  k={a.k}  chunks={len(idx.chunks)}  consultas={n}\n")
+    print(f"backend={a.backend}  modelo={idx.modelo or chr(45)}  k={a.k}  chunks={len(idx.chunks)}  consultas={n}\n")
     for lingua in ("en", "pt"):
         linhas, agg = rodar(idx, a.k, lingua)
         todas += linhas

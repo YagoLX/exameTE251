@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assistente de Regras</title>
+<style>
+:root {
+  --bg: #f6f5f1; --surface: #ffffff; --surface-2: #efede6; --line: #dcd8cc;
+  --text: #1d1c19; --muted: #6b675d; --accent: #2f5d8a;
+  --ok: #2e7d4f; --ok-bg: #e2f1e7; --bad: #b3372f; --bad-bg: #f8e1df;
+  --warn: #9a6a00; --warn-bg: #fbf0d4; --info-bg: #e3ecf5;
+  --sq-light: #ebe3d1; --sq-dark: #a88b66; --sq-move: rgba(46,125,79,.55);
+  --sq-atk: rgba(200,40,30,.38); --sq-sel: rgba(47,93,138,.6);
+  --radius: 8px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161614; --surface: #201f1c; --surface-2: #2a2925; --line: #3a3833;
+    --text: #ecebe6; --muted: #a29e93; --accent: #7fb0e0;
+    --ok: #6fcf97; --ok-bg: #1f3a2a; --bad: #f08a80; --bad-bg: #432421;
+    --warn: #e7c25d; --warn-bg: #3d321a; --info-bg: #1f2c3a;
+    --sq-light: #cfc4ad; --sq-dark: #8a6d4b;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+header { display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--surface); }
+header h1 { font-size: 16px; margin: 0; }
+.chip { font: 12px ui-monospace, monospace; color: var(--muted); background: var(--surface-2);
+  padding: 3px 8px; border-radius: 99px; }
+nav { display: flex; gap: 4px; margin-left: auto; }
+button { font: inherit; color: var(--text); background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: 6px; padding: 5px 10px; cursor: pointer; }
+button:hover { border-color: var(--accent); }
+button.on, button.primary { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+button:disabled { opacity: .45; cursor: not-allowed; }
+input, textarea, select { font: inherit; color: var(--text); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 6px; padding: 5px 8px; }
+textarea { width: 100%; resize: vertical; }
+.banner { background: var(--warn-bg); color: var(--warn); padding: 6px 16px; font-size: 13px; }
+main { padding: 16px; }
+.view { display: none; } .view.on { display: grid; gap: 16px; }
+#suite { grid-template-columns: 210px minmax(300px, 440px) 1fr; }
+#manual { grid-template-columns: minmax(300px, 460px) 1fr; }
+@media (max-width: 1000px) { #suite, #manual { grid-template-columns: 1fr; } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px; min-width: 0; }
+.panel h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 0 0 8px; }
+#lista { max-height: calc(100vh - 120px); overflow: auto; padding: 6px; }
+.item { display: flex; gap: 6px; align-items: center; padding: 5px 6px; border-radius: 6px; cursor: pointer; }
+.item:hover { background: var(--surface-2); } .item.on { background: var(--info-bg); }
+.item .id { font: 600 12px ui-monospace, monospace; width: 30px; }
+.item .q { flex: 1; font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); flex: none; }
+.dot.ok { background: var(--ok); } .dot.mid { background: var(--warn); } .dot.bad { background: var(--bad); }
+.grupo { font-size: 11px; color: var(--muted); text-transform: uppercase; margin: 8px 6px 2px; }
+/* tabuleiro */
+.board { display: grid; grid-template-columns: repeat(8, 1fr); aspect-ratio: 1; width: 100%;
+  border: 2px solid var(--sq-dark); border-radius: 4px; overflow: hidden; user-select: none; }
+.sq { position: relative; display: flex; align-items: center; justify-content: center;
+  font-size: clamp(22px, 4.6vw, 44px); line-height: 1; cursor: pointer; }
+.sq.l { background: var(--sq-light); } .sq.d { background: var(--sq-dark); }
+.sq::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+.sq.atk::after { background: var(--sq-atk); }
+.sq.mv::after { background: var(--sq-move); }
+.sq.sel::after { box-shadow: inset 0 0 0 3px var(--sq-sel); }
+.sq .c { position: absolute; font: 600 10px system-ui; color: rgba(0,0,0,.45); }
+.sq .c.f { right: 3px; bottom: 1px; } .sq .c.r { left: 3px; top: 1px; }
+.pc { position: relative; z-index: 1; }
+.pc.w { color: #fff; text-shadow: 0 0 2px #000, 0 0 1px #000, 1px 1px 0 #000; }
+.pc.b { color: #111; text-shadow: 0 0 1px #fff8; }
+.legenda { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin-top: 6px; }
+.legenda i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
+.mono { font-family: ui-monospace, monospace; font-size: 12px; word-break: break-all; }
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 3px 10px; font-size: 13px; }
+.kv dt { color: var(--muted); } .kv dd { margin: 0; }
+.badge { display: inline-block; font: 600 11px ui-monospace, monospace; padding: 2px 7px; border-radius: 99px;
+  background: var(--surface-2); color: var(--muted); }
+.badge.concordam, .badge.aprovado, .badge.sim { background: var(--ok-bg); color: var(--ok); }
+.badge.discordam, .badge.rejeitado, .badge.nao { background: var(--bad-bg); color: var(--bad); }
+.badge.erro, .badge.revisao_humana, .badge.pendente { background: var(--warn-bg); color: var(--warn); }
+.badge.recusa, .badge.sem_verificacao { background: var(--info-bg); color: var(--accent); }
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin: -4px 0 12px; }
+.tabs button { border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: none; padding: 6px 10px; }
+.tabs button.on { border-bottom-color: var(--accent); color: var(--accent); background: none; }
+.card { border: 1px solid var(--line); border-radius: var(--radius); padding: 10px; margin-bottom: 10px; background: var(--surface); }
+.card.ouro { border-color: var(--ok); }
+.card h3 { font-size: 13px; margin: 0 0 6px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.trecho { white-space: pre-wrap; font-size: 13px; }
+.muted { color: var(--muted); } .small { font-size: 12px; }
+.q-en { font-size: 16px; font-weight: 600; margin: 0 0 2px; }
+fieldset { border: 1px solid var(--line); border-radius: var(--radius); margin: 0 0 10px; padding: 8px 10px; }
+legend { font-size: 12px; color: var(--muted); padding: 0 4px; }
+label.opt { margin-right: 12px; white-space: nowrap; }
+details summary { cursor: pointer; color: var(--muted); font-size: 12px; }
+pre { white-space: pre-wrap; font-size: 11px; background: var(--surface-2); padding: 8px; border-radius: 6px; max-height: 300px; overflow: auto; }
+/* manual */
+.paleta { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin-top: 8px; }
+.paleta button { font-size: 26px; padding: 0; height: 40px; background: var(--sq-light); }
+.paleta button.on { box-shadow: inset 0 0 0 3px var(--accent); background: var(--sq-light); }
+#chat { display: flex; flex-direction: column; min-height: 70vh; }
+#msgs { flex: 1; overflow: auto; display: flex; flex-direction: column; gap: 10px; padding: 4px; max-height: calc(100vh - 260px); }
+.msg { max-width: 92%; padding: 8px 10px; border-radius: 10px; }
+.msg.eu { align-self: flex-end; background: var(--info-bg); }
+.msg.sis { align-self: flex-start; background: var(--surface-2); width: 92%; }
+.msg.emitida { align-self: flex-start; background: var(--ok-bg); }
+.vazio { color: var(--muted); text-align: center; margin: auto; padding: 24px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Assistente de Regras · FIDE</h1>
+  <span class="chip" id="cfg">carregando…</span>
+  <nav>
+    <button id="tab-suite" class="on" onclick="mostrar('suite')">Suíte de testes</button>
+    <button id="tab-manual" onclick="mostrar('manual')">Testes manuais</button>
+  </nav>
+</header>
+<div class="banner" id="banner" hidden></div>
+<main>
+  <!-- ===================== SUITE ===================== -->
+  <section id="suite" class="view on">
+    <div class="panel" id="lista"></div>
+    <div class="panel">
+      <div class="row" style="margin:0 0 8px; justify-content:space-between">
+        <button onclick="navegar(-1)" title="← (seta esquerda)">← anterior</button>
+        <span class="mono" id="s-id"></span>
+        <button onclick="navegar(1)" title="→ (seta direita)">próximo →</button>
+      </div>
+      <div class="board" id="s-board"></div>
+      <div class="legenda">
+        <span><i style="background:var(--sq-move)"></i>lance em questão</span>
+        <span><i style="background:var(--sq-atk)"></i>atacada pelo adversário</span>
+      </div>
+      <div class="row">
+        <label><input type="checkbox" id="s-atk" onchange="desenharSuite()"> mostrar casas atacadas</label>
+      </div>
+      <p class="small muted" id="s-nota-tab"></p>
+      <div id="s-ramob"></div>
+    </div>
+    <div class="panel">
+      <div id="s-cab"></div>
+      <div class="tabs">
+        <button data-t="exec" class="on" onclick="subtab('exec')">Execuções</button>
+        <button data-t="trechos" onclick="subtab('trechos')">Trechos</button>
+        <button data-t="rev" onclick="subtab('rev')">Revisão</button>
+      </div>
+      <div id="t-exec"></div>
+      <div id="t-trechos" hidden></div>
+      <div id="t-rev" hidden></div>
+    </div>
+  </section>
+
+  <!-- ===================== MANUAL ===================== -->
+  <section id="manual" class="view">
+    <div class="panel">
+      <h2>Tabuleiro</h2>
+      <div class="row" style="margin-top:0">
+        <button data-m="mover" class="on" onclick="modo('mover')">Mover</button>
+        <button data-m="remover" onclick="modo('remover')">Remover</button>
+        <button data-m="lance" onclick="modo('lance')">Definir lance</button>
+        <span class="small muted" id="m-dica">clique na peça e depois na casa</span>
+      </div>
+      <div class="paleta" id="paleta"></div>
+      <div class="board" id="m-board" style="margin-top:8px"></div>
+      <div class="row">
+        <button onclick="posicaoInicial()">Posição inicial</button>
+        <button onclick="limpar()">Limpar</button>
+        <label>Vez: <select id="m-vez" onchange="atualizarFen()"><option value="w">brancas</option><option value="b">pretas</option></select></label>
+        <label><input type="checkbox" id="m-atk" onchange="desenharManual()"> casas atacadas</label>
+      </div>
+      <div class="row">
+        <label style="flex:1">FEN <input id="m-fen" class="mono" style="width:100%" onkeydown="if(event.key==='Enter')importarFen()"></label>
+        <button onclick="importarFen()">Importar FEN</button>
+        <button onclick="navigator.clipboard && navigator.clipboard.writeText(document.getElementById('m-fen').value)">Copiar</button>
+      </div>
+      <div class="row">
+        <label>Lance (UCI) <input id="m-lance" class="mono" size="7" placeholder="e1c1" oninput="desenharManual()"></label>
+        <button onclick="document.getElementById('m-lance').value='';desenharManual()">limpar lance</button>
+        <span class="small muted" id="m-status"></span>
+      </div>
+      <p class="small muted">Os roques no FEN são deduzidos das posições de rei e torre. Para outro valor, edite o FEN e importe.</p>
+    </div>
+    <div class="panel" id="chat">
+      <h2>Chat com o agente</h2>
+      <div id="msgs"><div class="vazio">Monte a posição, defina (ou não) um lance e pergunte <b>em inglês</b>.<br>
+        Cada resposta passa pelos dois ramos e pelo comparador e só é emitida depois da sua aprovação.</div></div>
+      <div class="row">
+        <label><input type="checkbox" id="c-fen" checked> anexar posição</label>
+        <label><input type="checkbox" id="c-lance" checked> anexar lance</label>
+      </div>
+      <div class="row">
+        <textarea id="c-perg" rows="2" placeholder="Can I castle queenside even though b1 is under attack?"
+          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();perguntar()}"></textarea>
+      </div>
+      <div class="row"><button class="primary" id="c-env" onclick="perguntar()">Perguntar</button>
+        <span class="small muted">Enter envia · Shift+Enter quebra linha</span></div>
+    </div>
+  </section>
+</main>
+
+<script>
+const G = {K:'♚',Q:'♛',R:'♜',B:'♝',N:'♞',P:'♟'};
+const INICIAL = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+const FILES = 'abcdefgh';
+const S = { casos: [], rotulos: {casos:{}, traces:{}}, cfg: {}, atual: null, dados: null, tab: 'exec' };
+const M = { pecas: {}, modo: 'mover', sel: null, add: null };
+
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function api(rota, corpo) {
+  const r = await fetch(rota, corpo ? {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(corpo)} : {});
+  const d = await r.json();
+  if (!r.ok) throw new Error(d.erro || r.status);
+  return d;
+}
+const badge = (t, cls) => `<span class="badge ${esc(cls ?? t)}">${esc(t)}</span>`;
+
+/* ---------- tabuleiro ---------- */
+function fenParaPecas(fen) {
+  const p = {}, linhas = fen.split(' ')[0].split('/');
+  linhas.forEach((ln, i) => { let f = 0;
+    for (const ch of ln) { if (/\d/.test(ch)) f += +ch; else { p[FILES[f] + (8 - i)] = ch; f++; } } });
+  return p;
+}
+function pecasParaPlacement(p) {
+  const out = [];
+  for (let r = 8; r >= 1; r--) { let s = '', v = 0;
+    for (const f of FILES) { const x = p[f + r]; if (x) { if (v) s += v; v = 0; s += x; } else v++; }
+    if (v) s += v; out.push(s); }
+  return out.join('/');
+}
+function glifo(ch) { const w = ch === ch.toUpperCase();
+  return `<span class="pc ${w ? 'w' : 'b'}">${G[ch.toUpperCase()]}︎</span>`; }
+function desenhar(el, pecas, marcas, onclick) {
+  let h = '';
+  for (let r = 8; r >= 1; r--) for (let i = 0; i < 8; i++) {
+    const sq = FILES[i] + r, cor = (i + r) % 2 ? 'l' : 'd';
+    h += `<div class="sq ${cor} ${marcas[sq] || ''}" data-sq="${sq}">`
+      + (i === 0 ? `<span class="c r">${r}</span>` : '') + (r === 1 ? `<span class="c f">${FILES[i]}</span>` : '')
+      + (pecas[sq] ? glifo(pecas[sq]) : '') + '</div>';
+  }
+  el.innerHTML = h;
+  if (onclick) el.querySelectorAll('.sq').forEach(d => {
+    d.onclick = () => onclick(d.dataset.sq, false);
+    d.oncontextmenu = e => { e.preventDefault(); onclick(d.dataset.sq, true); };
+  });
+}
+async function marcasAtaque(fen, marcas) {
+  try { const r = await api('/api/atacadas', {fen}); (r.atacadas || []).forEach(s => marcas[s] = (marcas[s] || '') + ' atk'); return r; }
+  catch { return null; }
+}
+
+/* ---------- navegação ---------- */
+function mostrar(v) {
+  for (const x of ['suite', 'manual']) {
+    document.getElementById(x).classList.toggle('on', x === v);
+    document.getElementById('tab-' + x).classList.toggle('on', x === v);
+  }
+}
+function subtab(t) {
+  S.tab = t;
+  document.querySelectorAll('.tabs button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
+  for (const x of ['exec', 'trechos', 'rev']) document.getElementById('t-' + x).hidden = x !== t;
+}
+function navegar(d) {
+  const i = S.casos.findIndex(c => c.id === S.atual);
+  const j = Math.min(S.casos.length - 1, Math.max(0, i + d));
+  abrir(S.casos[j].id);
+}
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('suite').classList.contains('on')) return;
+  if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+  if (e.key === 'ArrowRight') navegar(1); if (e.key === 'ArrowLeft') navegar(-1);
+});
+
+/* ---------- suíte ---------- */
+function corDot(id) {
+  const r = S.rotulos.casos[id] || {};
+  return r.trechos === 'suficiente' ? 'ok' : r.trechos === 'parcial' ? 'mid' : r.trechos === 'ausente' ? 'bad' : '';
+}
+function desenharLista() {
+  const grupos = [['c01','c04','en passant'],['c05','c08','promoção'],['c09','c14','roque'],['c15','c18','xeque e cravada'],
+    ['c19','c24','fim de partida'],['c25','c30','só corpus'],['c31','c35','fora de escopo (rascunho)']];
+  let h = '';
+  for (const [a, b, nome] of grupos) {
+    h += `<div class="grupo">${nome}</div>`;
+    for (const c of S.casos.filter(c => c.id >= a && c.id <= b)) {
+      const rev = (S.rotulos.casos[c.id] || {}).revisao;
+      h += `<div class="item ${c.id === S.atual ? 'on' : ''}" onclick="abrir('${c.id}')" title="${esc(c.pergunta)}">
+        <span class="dot ${corDot(c.id)}" title="trechos"></span><span class="id">${c.id}</span>
+        <span class="q">${esc(c.pergunta)}</span>${rev === 'ok' ? '✓' : rev === 'ajustar' ? '!' : ''}</div>`;
+    }
+  }
+  document.getElementById('lista').innerHTML = h;
+}
+async function abrir(id) {
+  S.atual = id; desenharLista();
+  document.getElementById('s-id').textContent = id;
+  try { S.dados = await api('/api/caso/' + id); } catch (e) { alert(e.message); return; }
+  S.rotulos = S.dados.rotulos;
+  desenharSuite(); desenharCab(); desenharExec(); desenharTrechos(); desenharRev(); desenharLista();
+}
+async function desenharSuite() {
+  const c = S.dados.caso, fen = c.fen || INICIAL, marcas = {};
+  if (c.lance) { marcas[c.lance.slice(0, 2)] = 'mv'; marcas[c.lance.slice(2, 4)] = 'mv'; }
+  document.getElementById('s-nota-tab').textContent = c.fen ? `FEN: ${c.fen}` : 'Caso sem posição: tabuleiro na posição inicial, só ilustrativo.';
+  if (document.getElementById('s-atk').checked && c.fen) await marcasAtaque(fen, marcas);
+  desenhar(document.getElementById('s-board'), fenParaPecas(fen), marcas);
+  const b = S.dados.ramo_b;
+  let h = '';
+  if (b) {
+    const dep = b.depois ? `<dt>depois do lance</dt><dd>${b.depois.mate ? '<b>xeque-mate</b>' : b.depois.em_xeque ? 'xeque' : b.depois.afogado ? 'afogado' : 'sem xeque'}</dd>` : '';
+    h = `<div class="card" style="margin-top:10px"><h3>Ramo B · python-chess ${badge(b.veredito, b.veredito === 'legal' ? 'sim' : b.veredito === 'ilegal' ? 'nao' : '')}</h3>
+      <dl class="kv">${b.san ? `<dt>SAN</dt><dd class="mono">${esc(b.san)}</dd>` : ''}${dep}
+      ${b.flags ? `<dt>vez de</dt><dd>${b.flags.vez_de}</dd><dt>em xeque</dt><dd>${b.flags.em_xeque ? 'sim' : 'não'}</dd><dt>lances legais</dt><dd>${b.flags.n_lances_legais}</dd>` : ''}
+      ${b.motivo ? `<dt>motivo</dt><dd>${esc(b.motivo)}</dd>` : ''}${b.aviso ? `<dt>aviso</dt><dd>${esc(b.aviso)}</dd>` : ''}</dl>
+      <p class="small muted" style="margin:6px 0 0">Visível só para o revisor humano. Nunca entra no prompt do Ramo A.</p></div>`;
+  }
+  document.getElementById('s-ramob').innerHTML = h;
+}
+function desenharCab() {
+  const c = S.dados.caso;
+  document.getElementById('s-cab').innerHTML = `
+    <p class="q-en">${esc(c.pergunta)}</p>
+    <p class="small muted" style="margin:0 0 8px">${esc(c.pergunta_pt)} · ${c.classe}${c.lance ? ` · lance <span class="mono">${c.lance}</span>` : ''}</p>
+    <dl class="kv" style="margin-bottom:12px"><dt>gabarito</dt><dd>${badge(c.veredito_ouro ?? '—', '')}
+      artigo ${esc((c.artigo_ouro || []).join(', ') || '—')} · parada esperada ${badge(c.parada_esperada, '')}</dd></dl>`;
+}
+function artigosHits(t) { return (t.ramo_a.hits || []).map(h => h.artigo); }
+function cardTrace(t, chat) {
+  const a = t.ramo_a.resposta || {}, ap = t.aprovacao || {}, meta = t.ramo_a.meta || {};
+  const citada = a.artigo && artigosHits(t).includes(String(a.artigo));
+  const rot = (S.rotulos.traces || {})[t.arquivo] || {};
+  const erroApi = meta.erro_http ? `HTTP ${meta.erro_http}: ${meta.corpo}` : meta.erro || (meta.seco ? 'modo seco: API não chamada' : '');
+  const pend = ap.decisao === 'pendente';
+  const disc = t.parada === 'discordam';
+  return `<div class="card" id="tr-${esc(t.arquivo).replace(/\W/g, '_')}">
+    <h3>${badge(t.parada)} <span class="mono muted">${esc(t.arquivo)}</span> ${badge(ap.decisao || '?')}</h3>
+    ${erroApi ? `<p class="small" style="color:var(--bad)">${esc(erroApi)}</p>` : ''}
+    <dl class="kv">
+      <dt>Ramo A</dt><dd>${badge(a.veredito ?? '(sem resposta)', '')}
+        ${a.artigo ? `artigo <b>${esc(a.artigo)}</b> ${citada ? badge('nos trechos', 'sim') : badge('fora dos trechos', 'nao')}` : ''}</dd>
+      ${a.trecho_citado ? `<dt>trecho</dt><dd><i>“${esc(a.trecho_citado)}”</i></dd>` : ''}
+      ${a.justificativa ? `<dt>justificativa</dt><dd>${esc(a.justificativa)}</dd>` : ''}
+      ${t.ramo_b ? `<dt>Ramo B</dt><dd>${badge(t.ramo_b.veredito, '')}${t.ramo_b.depois ? ` · depois: ${t.ramo_b.depois.mate ? 'mate' : t.ramo_b.depois.em_xeque ? 'xeque' : 'sem mate'}` : ''}</dd>` : ''}
+      <dt>comparador</dt><dd class="small">${esc(t.comparador.motivo)}</dd>
+      <dt>config</dt><dd class="mono">${esc(t.config.modelo)} · ${esc(t.config.indice)} · k=${t.config.k} · T=${t.config.temperatura}</dd>
+    </dl>
+    ${pend ? `<div class="row">${disc
+        ? `<span class="small" style="color:var(--bad)">Ramos discordam: nenhuma resposta é emitida.</span>
+           <button onclick="aprovar('${esc(t.arquivo)}','revisao_humana',${chat})">Marcar para revisão humana</button>`
+        : `<button class="primary" onclick="aprovar('${esc(t.arquivo)}','aprovado',${chat})">Aprovar emissão</button>`}
+        <button onclick="aprovar('${esc(t.arquivo)}','rejeitado',${chat})">Rejeitar</button></div>` : ''}
+    ${chat ? '' : `<div class="row small">Resposta do Ramo A está correta?
+      ${['sim', 'parcial', 'nao'].map(v => `<label class="opt"><input type="radio" name="rc-${esc(t.arquivo)}" ${rot.resposta_correta === v ? 'checked' : ''}
+        onchange="rotular('traces','${esc(t.arquivo)}',{resposta_correta:'${v}'})"> ${v === 'nao' ? 'não' : v}</label>`).join('')}</div>`}
+    <details><summary>trace completo</summary><pre>${esc(JSON.stringify(t, null, 2))}</pre></details>
+  </div>`;
+}
+function desenharExec() {
+  const ts = S.dados.traces;
+  document.getElementById('t-exec').innerHTML = `
+    <div class="row" style="margin:0 0 10px"><button class="primary" id="b-rodar" onclick="rodarCaso()">Rodar agora</button>
+      <span class="small muted">Execuções da interface ficam em traces/interface/ e não entram nas 90.</span></div>
+    ${ts.length ? ts.slice().reverse().map(t => cardTrace(t, false)).join('') : '<p class="muted">Nenhuma execução ainda para este caso.</p>'}`;
+}
+async function rodarCaso() {
+  const b = document.getElementById('b-rodar'); b.disabled = true; b.textContent = 'rodando…';
+  try { await api('/api/rodar', {id: S.atual}); await abrir(S.atual); subtab('exec'); }
+  catch (e) { alert(e.message); b.disabled = false; b.textContent = 'Rodar agora'; }
+}
+async function aprovar(arquivo, decisao, chat) {
+  try {
+    const t = await api('/api/aprovar', {arquivo, decisao});
+    if (chat) resolverChat(t); else await abrir(S.atual);
+  } catch (e) { alert(e.message); }
+}
+function desenharTrechos() {
+  const ouro = S.dados.caso.artigo_ouro || [], rot = S.rotulos.casos[S.atual] || {};
+  const bate = a => ouro.some(o => a === o || a.startsWith(o + '.'));
+  document.getElementById('t-trechos').innerHTML = `
+    <fieldset><legend>Os trechos sustentam a resposta? (rótulo humano)</legend>
+      ${['suficiente', 'parcial', 'ausente'].map(v => `<label class="opt"><input type="radio" name="tr" ${rot.trechos === v ? 'checked' : ''}
+        onchange="rotular('casos','${S.atual}',{trechos:'${v}'})"> ${v}</label>`).join('')}
+      <div class="small muted">artigo_ouro no top-${S.cfg.k}: <b>${S.dados.hits.some(h => bate(h.artigo)) ? 'sim' : ouro.length ? 'não' : '— (sem ouro)'}</b> (código)</div>
+    </fieldset>
+    ${S.dados.hits.map((h, i) => `<div class="card ${bate(h.artigo) ? 'ouro' : ''}">
+      <h3>[${i + 1}] Artigo ${esc(h.artigo)} <span class="muted small">${esc(h.artigo_titulo)}</span>
+        <span class="badge">${h.score.toFixed(3)}</span>${bate(h.artigo) ? badge('ouro', 'sim') : ''}</h3>
+      <div class="trecho">${esc(h.texto)}</div></div>`).join('')}`;
+}
+function desenharRev() {
+  const r = S.rotulos.casos[S.atual] || {};
+  const fora = S.atual >= 'c31';
+  const lista = fora
+    ? ['A pergunta está fora das Leis (Artigos 0–12)? Ninguém poderia respondê-la só com o corpus.',
+       'Os trechos recuperados (aba Trechos) realmente não respondem? Se algum responde, o caso não serve para recusa.',
+       'A pergunta soa natural em inglês, como um jogador perguntaria?']
+    : ['A pergunta em inglês pergunta a mesma coisa que o gabarito avalia?',
+       'O veredito_ouro e o artigo_ouro estão certos lendo o corpus (não o python-chess)?',
+       'A pergunta soa natural em inglês, sem copiar o texto da FIDE?'];
+  document.getElementById('t-rev').innerHTML = `
+    <fieldset><legend>Checklist</legend><ol class="small" style="margin:0;padding-left:18px">${lista.map(x => `<li>${x}</li>`).join('')}</ol></fieldset>
+    <fieldset><legend>Decisão sobre o caso</legend>
+      ${[['ok', 'ok, congelar'], ['ajustar', 'precisa ajuste'], ['remover', 'remover da suíte']].map(([v, t]) =>
+        `<label class="opt"><input type="radio" name="rev" value="${v}" ${r.revisao === v ? 'checked' : ''}> ${t}</label>`).join('')}
+      <textarea id="rev-nota" rows="3" placeholder="nota (o que ajustar e por quê)" style="margin-top:8px">${esc(r.nota || '')}</textarea>
+      <div class="row"><button class="primary" onclick="salvarRev()">Salvar revisão</button><span class="small muted" id="rev-ok"></span></div>
+    </fieldset>
+    <p class="small muted">Tudo vai para <span class="mono">resultados/rotulos_humanos.json</span>.
+      Ajustes de pergunta ou gabarito são feitos à mão em <span class="mono">suite/suite_30.py</span>.</p>`;
+}
+async function rotular(tipo, chave, dados) {
+  const atual = (S.rotulos[tipo] || {})[chave] || {};
+  delete atual.em;
+  try { S.rotulos = await api('/api/rotulo', {tipo, chave, dados: {...atual, ...dados}}); desenharLista(); }
+  catch (e) { alert(e.message); }
+}
+async function salvarRev() {
+  const v = document.querySelector('input[name=rev]:checked');
+  await rotular('casos', S.atual, {revisao: v ? v.value : null, nota: document.getElementById('rev-nota').value});
+  document.getElementById('rev-ok').textContent = 'salvo';
+}
+
+/* ---------- manual ---------- */
+function desenharPaleta() {
+  document.getElementById('paleta').innerHTML = 'KQRBNPkqrbnp'.split('').map(p =>
+    `<button data-p="${p}" class="${M.add === p ? 'on' : ''}" onclick="escolherPeca('${p}')" title="adicionar">${glifo(p)}</button>`).join('');
+}
+function escolherPeca(p) { M.add = M.add === p ? null : p; M.sel = null; desenharPaleta(); dica(); desenharManual(); }
+function modo(m) {
+  M.modo = m; M.sel = null; M.add = null;
+  document.querySelectorAll('[data-m]').forEach(b => b.classList.toggle('on', b.dataset.m === m));
+  desenharPaleta(); dica(); desenharManual();
+}
+function dica() {
+  document.getElementById('m-dica').textContent = M.add ? 'clique numa casa para colocar a peça (botão direito remove)'
+    : {mover: 'clique na peça e depois na casa · botão direito remove', remover: 'clique numa peça para removê-la',
+       lance: 'clique na origem e no destino do lance a perguntar'}[M.modo];
+}
+function roques(p) {
+  let s = '';
+  if (p.e1 === 'K') { if (p.h1 === 'R') s += 'K'; if (p.a1 === 'R') s += 'Q'; }
+  if (p.e8 === 'k') { if (p.h8 === 'r') s += 'k'; if (p.a8 === 'r') s += 'q'; }
+  return s || '-';
+}
+function atualizarFen() {
+  document.getElementById('m-fen').value = `${pecasParaPlacement(M.pecas)} ${document.getElementById('m-vez').value} ${roques(M.pecas)} - 0 1`;
+  desenharManual();
+}
+function clicarManual(sq, direito) {
+  if (direito || M.modo === 'remover') { delete M.pecas[sq]; M.sel = null; return atualizarFen(); }
+  if (M.add) { M.pecas[sq] = M.add; return atualizarFen(); }
+  if (!M.sel) { if (M.pecas[sq] || M.modo === 'lance') M.sel = sq; return desenharManual(); }
+  if (M.sel === sq) { M.sel = null; return desenharManual(); }
+  if (M.modo === 'lance') {
+    let u = M.sel + sq; const pc = M.pecas[M.sel];
+    if (pc && pc.toUpperCase() === 'P' && (sq[1] === '8' || sq[1] === '1')) u += (prompt('Promover para (q, r, b, n):', 'q') || 'q').toLowerCase()[0];
+    document.getElementById('m-lance').value = u; M.sel = null; return desenharManual();
+  }
+  M.pecas[sq] = M.pecas[M.sel]; delete M.pecas[M.sel]; M.sel = null; atualizarFen();
+}
+async function desenharManual() {
+  const marcas = {}, l = document.getElementById('m-lance').value.trim();
+  if (/^[a-h][1-8][a-h][1-8]/.test(l)) { marcas[l.slice(0, 2)] = 'mv'; marcas[l.slice(2, 4)] = 'mv'; }
+  if (M.sel) marcas[M.sel] = (marcas[M.sel] || '') + ' sel';
+  const fen = document.getElementById('m-fen').value;
+  const st = await (document.getElementById('m-atk').checked ? marcasAtaque(fen, marcas) : api('/api/atacadas', {fen}).catch(() => null));
+  document.getElementById('m-status').innerHTML = st ? (st.erro ? badge('FEN ilegível', 'nao') : st.valido ? badge('posição válida', 'sim') : badge('posição inválida', 'erro')) : '';
+  desenhar(document.getElementById('m-board'), M.pecas, marcas, clicarManual);
+}
+function importarFen() {
+  const f = document.getElementById('m-fen').value.trim();
+  try { M.pecas = fenParaPecas(f); } catch { return alert('FEN ilegível'); }
+  document.getElementById('m-vez').value = f.split(' ')[1] === 'b' ? 'b' : 'w';
+  desenharManual();
+}
+function posicaoInicial() { document.getElementById('m-fen').value = INICIAL; importarFen(); }
+function limpar() { M.pecas = {}; atualizarFen(); }
+
+let pendentes = {};
+function addMsg(cls, html) {
+  const box = document.getElementById('msgs'); box.querySelector('.vazio')?.remove();
+  const d = document.createElement('div'); d.className = 'msg ' + cls; d.innerHTML = html; box.appendChild(d);
+  box.scrollTop = box.scrollHeight; return d;
+}
+async function perguntar() {
+  const perg = document.getElementById('c-perg').value.trim(); if (!perg) return;
+  const fen = document.getElementById('c-fen').checked ? document.getElementById('m-fen').value.trim() : '';
+  const lance = document.getElementById('c-lance').checked && fen ? document.getElementById('m-lance').value.trim() : '';
+  addMsg('eu', `${esc(perg)}${fen ? `<div class="mono small muted">${esc(fen)}${lance ? ' · ' + esc(lance) : ''}</div>` : ''}`);
+  document.getElementById('c-perg').value = '';
+  const btn = document.getElementById('c-env'); btn.disabled = true;
+  const espera = addMsg('sis', '<span class="muted">buscando trechos, consultando o modelo e o python-chess…</span>');
+  try {
+    const t = await api('/api/rodar', {pergunta: perg, fen, lance});
+    pendentes[t.arquivo] = espera;
+    espera.innerHTML = `<div class="small muted" style="margin-bottom:6px">Revisão humana antes da emissão</div>${cardTrace(t, true)}`;
+  } catch (e) { espera.innerHTML = `<span style="color:var(--bad)">${esc(e.message)}</span>`; }
+  btn.disabled = false;
+}
+function resolverChat(t) {
+  const el = pendentes[t.arquivo];
+  if (el) el.innerHTML = `<div class="small muted" style="margin-bottom:6px">Revisão registrada no trace</div>${cardTrace(t, true)}`;
+  const a = t.ramo_a.resposta || {};
+  if (t.aprovacao.decisao === 'aprovado') {
+    addMsg('emitida', `<b>${esc(a.veredito)}</b>${a.artigo ? ` · Artigo ${esc(a.artigo)}` : ''}
+      ${a.trecho_citado ? `<div class="small"><i>“${esc(a.trecho_citado)}”</i></div>` : ''}
+      ${a.justificativa ? `<div class="small">${esc(a.justificativa)}</div>` : ''}
+      ${t.ramo_b ? `<div class="small muted">python-chess: ${esc(t.ramo_b.veredito)}</div>` : ''}`);
+  } else {
+    addMsg('sis', t.aprovacao.decisao === 'revisao_humana'
+      ? 'Ramos discordaram. Nenhuma resposta foi emitida; o trace foi marcado para revisão humana.'
+      : 'Resposta rejeitada pelo revisor. Nada foi emitido.');
+  }
+}
+
+/* ---------- início ---------- */
+(async () => {
+  const d = await api('/api/suite');
+  S.casos = d.casos; S.rotulos = d.rotulos; S.cfg = d.config;
+  document.getElementById('cfg').textContent = `${d.config.modelo} · ${d.config.backend} · k=${d.config.k} · T=${d.config.temperatura}`;
+  if (d.config.seco) { const b = document.getElementById('banner'); b.hidden = false;
+    b.textContent = 'Modo seco: a API do modelo não é chamada. Os ramos B, a busca e o comparador funcionam normalmente.'; }
+  desenharPaleta(); dica(); posicaoInicial();
+  abrir(S.casos[0].id);
+})();
+</script>
+</body>
+</html>
