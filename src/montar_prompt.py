@@ -152,6 +152,18 @@ def autoteste(idx: Indice, k: int) -> int:
     else:
         print("  ok     montar_prompt nao importa legalidade")
 
+    # 1b. Importa chess so para desenhar: nenhuma chamada que decida legalidade.
+    proibidos = {"san", "is_legal", "legal_moves", "pseudo_legal_moves", "push", "is_check",
+                 "is_checkmate", "is_stalemate", "is_insufficient_material", "can_claim_fifty_moves",
+                 "is_attacked_by", "attackers", "is_valid", "status", "is_castling", "outcome"}
+    usados = sorted({no.attr for no in ast.walk(arvore)
+                     if isinstance(no, ast.Attribute) and no.attr in proibidos})
+    if usados:
+        print(f"  FALHA  montar_prompt usa API de legalidade do chess: {usados}")
+        falhas += 1
+    else:
+        print("  ok     montar_prompt nao chama nenhuma API de legalidade do chess")
+
     # 2. Mutar o gabarito nao pode mudar um unico byte do prompt.
     iguais = 0
     casos = [c for c in carregar_suite().values() if c["fen"]]

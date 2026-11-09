@@ -25,6 +25,21 @@ Fonte: `resultados/checagem_trechos_*_k*.csv`. A coluna `rotulo` (suficiente/par
 - **c12** com a pergunta final: no e5 a 3.8.2.2 fica em 1º lugar. No TF-IDF ela some do top-3. A checagem "suficiente" anterior usava a consulta no vocabulário da FIDE.
 - **Roque (c09–c14)** é o ponto fraco nos dois backends ("castle" ≠ "castling"; os chunks 4.4.x atraem a consulta).
 
+## Verificação de vazamento (09/11)
+
+**Sem vazamento em código:**
+- O prompt dos 35 casos não contém gabarito nem saída do Ramo B. Os termos achados (`checkmate`, `legal`) vêm das próprias perguntas.
+- O autoteste agora também proíbe chamadas de legalidade do `chess` dentro de `montar_prompt.py`.
+- Os traces gravados têm prompt idêntico ao de `montar()`.
+
+**A declarar no artigo:**
+1. **Premissas nas perguntas.** c10, c11, c14 e c17 afirmam o fato decisivo ("I'm in check", "rook is hitting f1"). Essas premissas já estavam no gabarito em português. O Ramo A testa a *leitura da regra dada a premissa*, não a leitura do tabuleiro.
+2. **c18: premissa introduzida na tradução.** "right next to the other king" não existe no original em português ("O rei pode avancar para d2?") e aponta para a resposta. Decisão pendente.
+3. **Seleção no conjunto de teste.** O backend e o k foram escolhidos com o `artigo_ouro` da suíte, então 22/29 é otimista. Contraprova independente (`resultados/recall_e5.csv`, 10 consultas próprias): e5 9/10 EN e 8/10 PT; TF-IDF 7/10 EN e 1/10 PT.
+4. **`ACEITA_SEM_LANCE`** foi escrita conhecendo as perguntas c21–c23.
+5. **Contaminação do modelo.** O gpt-oss provavelmente viu as Leis da FIDE no treino e pode acertar de memória. O critério "citação nos trechos" mitiga, mas não elimina. A sonda possível: rodar com trechos irrelevantes e ver se ele recusa.
+6. **Revisor vê o gabarito e o Ramo B** na interface ao rotular "resposta correta": risco de viés de confirmação.
+
 ## Pronto
 
 - `src/montar_prompt.py`: trechos primeiro, tabuleiro ASCII, lance em palavras (UCI + peça na origem), sem `--consulta`. O autoteste passa.
