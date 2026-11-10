@@ -351,7 +351,9 @@ function cardTrace(t, chat) {
       <dt>comparador</dt><dd class="small">${esc(t.comparador.motivo)}</dd>
       <dt>config</dt><dd class="mono">${esc(t.config.modelo)} · ${esc(t.config.indice)} · k=${t.config.k} · T=${t.config.temperatura}</dd>
     </dl>
-    ${pend ? `<div class="row">${disc
+    ${pend && t.parada === 'erro' ? `<div class="row"><span class="small" style="color:var(--warn)">Execução com erro: não há resposta para emitir.</span>
+        <button onclick="aprovar('${esc(t.arquivo)}','rejeitado',${chat})">Descartar</button></div>`
+    : pend ? `<div class="row">${disc
         ? `<span class="small" style="color:var(--bad)">Ramos discordam: nenhuma resposta é emitida.</span>
            <button onclick="aprovar('${esc(t.arquivo)}','revisao_humana',${chat})">Marcar para revisão humana</button>`
         : `<button class="primary" onclick="aprovar('${esc(t.arquivo)}','aprovado',${chat})">Aprovar emissão</button>`}
