@@ -1,0 +1,372 @@
+{
+  "casos": {
+    "c01": {
+      "trechos": "suficiente",
+      "revisao": "ok",
+      "nota": "Pergunta e gabarito fiéis (FEN com alvo em d6, exd6 legal pelo python-chess). Falha de leitura do modelo: o qwen3:8b citou o 3.7.3.2 e afirmou que o peão não avançou duas casas, contra o FEN. Busca ok.",
+      "em": "2026-11-11T11:49:36+00:00"
+    },
+    "c02": {
+      "trechos": "suficiente",
+      "revisao": "ok",
+      "nota": "Pergunta e gabarito fiéis (FEN sem alvo de en passant, python-chess ilegal, artigo 3.7.3.2). Falha de leitura do modelo: confundiu “o peão avançou duas casas” com “o avanço foi o último lance” e deu uma justificativa falsa sobre a origem do d5. Busca ok.",
+      "em": "2026-11-11T11:52:16+00:00"
+    },
+    "c03": {
+      "trechos": "ausente",
+      "revisao": "ok",
+      "nota": "ergunta e gabarito fiéis (FEN com alvo d3, python-chess ilegal, cravada horizontal pela torre h4, artigos 3.9.2 e 3.7.3.2). Falhas combinadas: busca (3.9.2 fora do top-5) e leitura do modelo (afirmou que os peões não estavam na mesma fileira e citou o 4.4.4). Concordância por acaso.",
+      "em": "2026-11-11T11:53:29+00:00"
+    },
+    "c04": {
+      "trechos": "suficiente",
+      "revisao": "ok",
+      "nota": "Nota: Pergunta e gabarito fiéis (FEN com alvo b6, python-chess legal, peão a5 ao lado do b5 que acabou de avançar, artigos 3.7.3.1 e 3.7.3.2). Falha de leitura do modelo: ignorou o alvo de en passant do FEN, afirmou que a condição não se cumpria sem justificar e citou um artigo (“4”) que não está nos trechos. Busca ok.",
+      "em": "2026-11-11T11:55:08+00:00"
+    },
+    "c05": {
+      "trechos": "suficiente",
+      "revisao": "ok",
+      "nota": "ergunta e gabarito fiéis (peão branco em a7, a8 livre, sem xeque, a8=Q legal pelo python-chess, artigo 3.7.3.3). O modelo acertou o veredito e o artigo, com justificativa correta, mas genérica. Busca ok.",
+      "em": "2026-11-11T11:57:24+00:00"
+    },
+    "c06": {
+      "trechos": "parcial",
+      "revisao": "ajustar",
+      "nota": "Pergunta e FEN fiéis (axb8=Q+ legal pelo python-chess, com xeque após o lance). O ouro do gabarito (só 3.7.3.3) está incompleto: a pergunta combina captura e promoção, então o 3.7.3 também deveria ser ouro. Falha de leitura do modelo: aplicou o 7.5.2 (irregularidade) fora do contexto. Busca parcial: veio a promoção, não a captura.",
+      "em": "2026-11-11T11:59:16+00:00"
+    },
+    "c07": {
+      "trechos": "suficiente",
+      "revisao": "ok",
+      "nota": "",
+      "em": "2026-11-11T12:00:15+00:00"
+    },
+    "c08": {
+      "trechos": "suficiente",
+      "revisao": "ok",
+      "nota": "Pergunta e gabarito fiéis (g8=N+ legal pelo python-chess, cavalo em g8 ataca o rei em e7, artigos 3.7.3.3 e 3.9.1). Falha de leitura do modelo: tratou o xeque como condição de legalidade e não o verificou. Busca ok para a legalidade (3.9.1 fora do top-5, sem efeito no veredito).",
+      "em": "2026-11-11T12:12:46+00:00"
+    },
+    "c09": {
+      "trechos": "parcial",
+      "revisao": "ok",
+      "nota": "Pergunta e gabarito fiéis (FEN r3k2r/R3K2R com KQkq, e1g1 legal pelo python-chess, artigo 3.8.2). Falha de leitura do modelo: inventou uma posição que não existe (rei fora de e1, torre fora de h1) e citou o 4.4.3, sobre toque de peças. Busca parcial: só o 3.8.2.2, sem a regra base do roque.",
+      "em": "2026-11-11T12:29:27+00:00"
+    },
+    "c10": {
+      "trechos": "suficiente",
+      "revisao": "ok",
+      "nota": "ergunta e gabarito fiéis (rei em e1 em xeque pela torre em e2, 0-0 ilegal pelo python-chess, só 3 lances legais, artigo 3.8.2.2). O modelo acertou o veredito mas pelo artigo errado (4.4.3) e com justificativa circular. Busca ok, mas o ouro ficou em 5º, atrás de quatro trechos sobre toque de peças.",
+      "em": "2026-11-11T12:32:11+00:00"
+    },
+    "c11": {
+      "trechos": "ausente",
+      "revisao": "ok",
+      "nota": "Pergunta e gabarito fiéis (torre preta em f2 ataca f1, 0-0 ilegal pelo python-chess, artigo 3.8.2.2). Falhas combinadas: busca (3.8.2.2 fora do top-5) e leitura do modelo (inventou toque de peças e citou o 4.4.2). Concordância por acaso.",
+      "em": "2026-11-11T12:33:50+00:00"
+    },
+    "c12": {
+      "trechos": "suficiente",
+      "revisao": "ok",
+      "nota": "Pergunta e gabarito fiéis (torre preta em b2 ataca b1, mas o rei não passa por b1, então 0-0-0 é legal pelo python-chess, artigo 3.8.2.2). A discordância esperada se confirmou. Falha de leitura do modelo: confundiu a casa da torre (b1) com as casas do rei e citou o 3.1.3, que não trata de roque. Busca ok.",
+      "em": "2026-11-11T12:35:20+00:00"
+    },
+    "c13": {
+      "trechos": "suficiente",
+      "revisao": "ok",
+      "nota": "Pergunta e gabarito fiéis (FEN sem direitos brancos de roque, kq, 0-0 ilegal pelo python-chess, artigo 3.8.2.1). Raciocínio do modelo correto, mas o artigo citado é o errado (4.4.1) apesar de o ouro (3.8.2.1) estar em 1º. Falha de seleção do artigo, não de busca.",
+      "em": "2026-11-11T12:37:04+00:00"
+    },
+    "c14": {
+      "revisao": "ok",
+      "nota": "ergunta e gabarito fiéis (torre preta em g2 ataca g1, 0-0 ilegal pelo python-chess, artigo 3.8.2.2). Falha de busca: 3.8.2.2 fora do top-5. O modelo acertou o veredito e o motivo por conhecimento próprio, sem base nos trechos, e citou o 4.4.3 (toque em peças). Evidência de acerto sem fundamento recuperado.",
+      "trechos": "ausente",
+      "em": "2026-11-11T12:39:21+00:00"
+    },
+    "c15": {
+      "trechos": "ausente",
+      "revisao": "ok",
+      "nota": "Pergunta e gabarito fiéis (cavalo em e2 cravado pela torre em e8, só 4 lances legais e todos do rei, e2c3 ilegal pelo python-chess, artigo 3.9.2). Falhas combinadas: busca (3.9.2 fora do top-5, com trechos sobre roque e promoção no lugar) e leitura do modelo (checou só o movimento geométrico).",
+      "em": "2026-11-11T12:40:21+00:00"
+    },
+    "c16": {
+      "trechos": "ausente",
+      "revisao": "ok",
+      "nota": "Pergunta e gabarito fiéis (só rei branco em e1, torre preta em f3 ataca f1, Kf1 ilegal pelo python-chess, só 3 lances legais, artigo 3.9.2). Falhas combinadas: busca (3.9.2 fora do top-5, recuperação puxada para roque por “king step”) e leitura do modelo (alucinou um roque com torre inexistente). Concordância por acaso.",
+      "em": "2026-11-11T12:41:56+00:00"
+    },
+    "c17": {
+      "trechos": "parcial",
+      "revisao": "ok",
+      "nota": "Pergunta e gabarito fiéis (torre preta em e2 dando xeque e sem proteção, Kxe2 legal pelo python-chess, só 3 lances legais, artigos 3.9.1 e 3.8.1). Falha de leitura do modelo: aplicou a regra de xeque sem considerar a captura da peça que ataca, e citou um artigo fora dos trechos. Busca parcial: veio o 3.9.2, mas não o 3.8.1 nem o 3.9.1.",
+      "em": "2026-11-11T12:43:44+00:00"
+    },
+    "c18": {
+      "trechos": "suficiente",
+      "revisao": "ok",
+      "nota": "ergunta e gabarito fiéis (reis em d1 e d3, Kd2 ilegal pelo python-chess, só 2 lances legais, artigo 3.9.2). O modelo acertou veredito, artigo e motivo. Busca ok, com o ouro em 2º.",
+      "em": "2026-11-11T12:44:54+00:00"
+    },
+    "c19": {
+      "revisao": "ok",
+      "nota": "Pergunta e gabarito fiéis (Ra8 dá mate pelo python-chess, rei preto preso pelos peões f7/g7/h7, artigos 1.4.1 e 5.1.1). Falhas combinadas: busca parcial (definição de mate, 1.4.1, fora do top-5) e leitura do modelo (resposta hesitante e artigo de resignação).",
+      "trechos": "parcial",
+      "em": "2026-11-11T12:46:41+00:00"
+    },
+    "c20": {
+      "trechos": "parcial",
+      "revisao": "ajustar",
+      "nota": "gabarito “legal” só mede a legalidade de a1a8, mas a pergunta é “dá mate?”, e a resposta correta é não (Ra8+ é só xeque, Kg7 escapa). O c19 tem a mesma pergunta e o mesmo gabarito “legal”, com resposta oposta (lá é mate). O comparador não distingue as duas, e o Ramo A “acerta” o c20 dizendo algo falso. Sugestão: trocar o gabarito para “não é mate” ou reformular a pergunta para legalidade. Falha de leitura do modelo: não viu a casa g7 livre.",
+      "em": "2026-11-11T12:49:28+00:00"
+    },
+    "c21": {
+      "trechos": "ausente",
+      "em": "2026-11-11T12:50:31+00:00"
+    },
+    "c22": {
+      "trechos": "parcial",
+      "revisao": "remover",
+      "nota": "gabarito “posicao_morta” depende de conhecimento de xadrez que o corpus não contém (a regra é genérica e não lista K+N). O caso mede inferência fora do material, não recuperação, e a recusa do Ramo A é um comportamento aceitável. Sem ajuste, ele pune a abstenção correta e premia só quem alucina ou usa conhecimento externo.",
+      "em": "2026-11-11T12:55:49+00:00"
+    },
+    "c23": {
+      "trechos": "suficiente",
+      "em": "2026-11-11T12:59:06+00:00"
+    },
+    "c24": {
+      "trechos": "parcial",
+      "revisao": "ok",
+      "nota": "ergunta e gabarito fiéis (23 lances legais pelo python-chess, sem ouro, recusa esperada). Teste de abstenção: o modelo deveria dizer que a informação não consta no material e, em vez disso, respondeu com um veredito vazio e um artigo irrelevante. Falha de leitura do modelo, não de busca.",
+      "em": "2026-11-11T13:06:49+00:00"
+    },
+    "c25": {
+      "revisao": "ok",
+      "nota": "Pergunta e gabarito fiéis (caso só-corpus, sem FEN, artigo 7.5.1). Falha de leitura do modelo: trocou “fez um lance ilegal e apertou” por “apertou sem mover” e citou o 7.5.3. A pergunta é aberta (“o que acontece?”), então o rótulo de veredito do Ramo A não a responde. Busca ok.",
+      "trechos": "suficiente",
+      "em": "2026-11-11T13:19:05+00:00"
+    },
+    "c26": {
+      "trechos": "suficiente",
+      "revisao": "ok",
+      "nota": "ergunta e gabarito fiéis (caso normativo, só corpus, artigo 7.5.5). Falha de leitura do modelo: usou a cláusula de exceção como regra principal e deu o veredito invertido (empate em vez de derrota), com o 7.5.5 em 2º e legível por inteiro. Busca ok.",
+      "em": "2026-11-11T13:20:09+00:00"
+    },
+    "c27": {
+      "trechos": "parcial",
+      "revisao": "ajustar",
+      "nota": "Pergunta fiel. O gabarito (7.4, 7.4.1) está incompleto: o 7.6 também cobre o caso (peça deslocada, posição anterior reinstalada) e foi o 1º colocado e o artigo do modelo. Sugestão: incluir o 7.6 como ouro secundário. Falha de leitura do modelo: omitiu que a correção é feita no tempo de quem deslocou as peças.",
+      "em": "2026-11-11T13:21:26+00:00"
+    },
+    "c28": {
+      "trechos": "suficiente",
+      "em": "2026-11-11T13:23:37+00:00"
+    },
+    "c29": {
+      "trechos": "ausente",
+      "em": "2026-11-11T13:25:09+00:00"
+    },
+    "c30": {
+      "trechos": "suficiente",
+      "revisao": "ok",
+      "nota": "O gabarito (só 11.3.2) está incompleto. O 12.8 também cobre o caso e foi o 1º colocado e o artigo do modelo. A pergunta é vaga: “qual é a regra?” pode visar a proibição ou a penalidade (11.3.2.2). Sugestão: incluir o 12.8 como ouro secundário e decidir se o 11.3.2.2 entra como ouro. Falha do modelo: omitiu a consequência.",
+      "em": "2026-11-11T13:28:20+00:00"
+    },
+    "c31": {
+      "trechos": "ausente",
+      "revisao": "ajustar",
+      "nota": "Pergunta fora de escopo (Chess960), gabarito sem artigo e recusa esperada, obtida nas duas execuções. Risco real de o modelo responder com o roque padrão, já que o 3.8.2 foi o 1º colocado, e ele resistiu. Busca irrelevante por construção.",
+      "em": "2026-11-11T13:30:07+00:00"
+    },
+    "c32": {
+      "trechos": "ausente",
+      "revisao": "ok",
+      "nota": "Pergunta fora de escopo, recusa esperada e obtida; busca irrelevante por construção",
+      "em": "2026-11-11T13:31:52+00:00"
+    },
+    "c33": {
+      "trechos": "ausente",
+      "revisao": "ok",
+      "nota": "Pergunta fora de escopo, recusa esperada e obtida; busca irrelevante por construção”",
+      "em": "2026-11-11T13:32:12+00:00"
+    },
+    "c34": {
+      "trechos": "ausente",
+      "revisao": "ok",
+      "nota": "Pergunta fora de escopo, recusa esperada e obtida; busca irrelevante por construção”",
+      "em": "2026-11-11T13:32:31+00:00"
+    },
+    "c35": {
+      "trechos": "ausente",
+      "revisao": "ok",
+      "nota": "Pergunta fora de escopo, recusa esperada e obtida; busca irrelevante por construção”",
+      "em": "2026-11-11T13:33:00+00:00"
+    }
+  },
+  "traces": {
+    "interface/c01_20261109-164847-072264.json": {
+      "resposta_correta": "sim",
+      "em": "2026-11-09T19:48:59+00:00"
+    },
+    "interface/c02_20261109-170146-823866.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-10T13:53:14+00:00"
+    },
+    "interface/c03_20261109-180823-074244.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-10T13:39:21+00:00"
+    },
+    "interface/c04_20261109-181024-113633.json": {
+      "resposta_correta": "sim",
+      "em": "2026-11-10T13:44:45+00:00"
+    },
+    "interface/c05_20261109-181035-171026.json": {
+      "resposta_correta": "sim",
+      "em": "2026-11-10T13:45:21+00:00"
+    },
+    "interface/c06_20261109-181042-850778.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-10T13:51:04+00:00"
+    },
+    "interface/c01_20261111-083535-237605.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-11T11:45:37+00:00"
+    },
+    "interface/c02_20261111-083726-875909.json": {
+      "resposta_correta": "parcial",
+      "em": "2026-11-11T11:51:47+00:00"
+    },
+    "interface/c03_20261111-083756-997312.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-11T11:53:06+00:00"
+    },
+    "interface/c04_20261111-085412-130789.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-11T11:54:45+00:00"
+    },
+    "interface/c05_20261111-085643-677988.json": {
+      "resposta_correta": "sim",
+      "em": "2026-11-11T11:57:07+00:00"
+    },
+    "interface/c06_20261111-085756-635234.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-11T11:58:39+00:00"
+    },
+    "interface/c07_20261111-085955-762295.json": {
+      "resposta_correta": "sim",
+      "em": "2026-11-11T12:00:04+00:00"
+    },
+    "interface/c08_20261111-090049-133387.json": {
+      "resposta_correta": "parcial",
+      "em": "2026-11-11T12:11:50+00:00"
+    },
+    "interface/c09_20261111-091337-777069.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-11T12:29:08+00:00"
+    },
+    "interface/c10_20261111-093114-872746.json": {
+      "resposta_correta": "parcial",
+      "em": "2026-11-11T12:31:48+00:00"
+    },
+    "interface/c11_20261111-093243-323028.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-11T12:33:31+00:00"
+    },
+    "interface/c12_20261111-093424-600888.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-11T12:34:52+00:00"
+    },
+    "interface/c13_20261111-093551-600269.json": {
+      "resposta_correta": "parcial",
+      "em": "2026-11-11T12:36:47+00:00"
+    },
+    "interface/c14_20261111-093749-093683.json": {
+      "resposta_correta": "parcial",
+      "em": "2026-11-11T12:38:44+00:00"
+    },
+    "interface/c15_20261111-093947-278046.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-11T12:40:07+00:00"
+    },
+    "interface/c16_20261111-094101-637089.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-11T12:41:29+00:00"
+    },
+    "interface/c17_20261111-094226-865118.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-11T12:43:05+00:00"
+    },
+    "interface/c18_20261111-094416-128521.json": {
+      "resposta_correta": "sim",
+      "em": "2026-11-11T12:44:37+00:00"
+    },
+    "interface/c19_20261111-094542-609254.json": {
+      "resposta_correta": "parcial",
+      "em": "2026-11-11T12:46:22+00:00"
+    },
+    "interface/c20_20261111-094751-226219.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-11T12:48:52+00:00"
+    },
+    "interface/c21_20261111-094957-280605.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-11T12:50:26+00:00"
+    },
+    "interface/c22_20261111-095113-837119.json": {
+      "resposta_correta": "parcial",
+      "em": "2026-11-11T12:55:29+00:00"
+    },
+    "interface/c23_20261111-095628-369740.json": {
+      "resposta_correta": "parcial",
+      "em": "2026-11-11T12:57:17+00:00"
+    },
+    "interface/c24_20261111-100134-799606.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-11T13:06:13+00:00"
+    },
+    "interface/c25_20261111-100734-251207.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-11T13:18:53+00:00"
+    },
+    "interface/c26_20261111-101455-375721.json": {
+      "resposta_correta": "nao",
+      "em": "2026-11-11T13:19:52+00:00"
+    },
+    "interface/c27_20261111-101947-689369.json": {
+      "resposta_correta": "parcial",
+      "em": "2026-11-11T13:21:09+00:00"
+    },
+    "interface/c28_20261111-102224-543868.json": {
+      "resposta_correta": "sim",
+      "em": "2026-11-11T13:23:34+00:00"
+    },
+    "interface/c29_20261111-102420-949438.json": {
+      "resposta_correta": "parcial",
+      "em": "2026-11-11T13:24:57+00:00"
+    },
+    "interface/c30_20261111-102558-182446.json": {
+      "resposta_correta": "parcial",
+      "em": "2026-11-11T13:27:14+00:00"
+    },
+    "interface/c31_20261111-102841-080441.json": {
+      "resposta_correta": "sim",
+      "em": "2026-11-11T13:29:51+00:00"
+    },
+    "interface/c32_20261111-103041-803381.json": {
+      "resposta_correta": "sim",
+      "em": "2026-11-11T13:31:26+00:00"
+    },
+    "interface/c33_20261111-103100-598132.json": {
+      "resposta_correta": "sim",
+      "em": "2026-11-11T13:32:02+00:00"
+    },
+    "c34_r1.json": {
+      "resposta_correta": "sim",
+      "em": "2026-11-11T13:32:21+00:00"
+    },
+    "c35_r1.json": {
+      "resposta_correta": "sim",
+      "em": "2026-11-11T13:32:48+00:00"
+    }
+  }
+}
