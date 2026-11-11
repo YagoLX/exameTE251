@@ -42,7 +42,7 @@ TRACES = RAIZ / "traces"
 TRACES_GUI = TRACES / "interface"
 ROTULOS = RAIZ / "resultados" / "rotulos_humanos.json"
 TRAVA = threading.Lock()          # pipeline: um por vez (indice e rate limit)
-TRAVA_ROTULOS = threading.Lock()  # separada: gravar rotulo nao espera o Groq
+TRAVA_ROTULOS = threading.Lock()  # separada: gravar rotulo nao espera o modelo
 ESTADO: dict = {}
 
 
@@ -178,6 +178,7 @@ class Handler(BaseHTTPRequestHandler):
 def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--porta", type=int, default=8251)
+    p.add_argument("--provedor", default=agente.PROVEDOR_PADRAO, choices=list(agente.PROVEDORES))
     p.add_argument("--modelo", default=agente.MODELO_PADRAO)
     p.add_argument("--temperatura", type=float, default=0.0)
     p.add_argument("--backend", default=agente.BACKEND_PADRAO, choices=["tfidf", "e5"])
@@ -186,7 +187,7 @@ def main() -> None:
     p.add_argument("--seco", action="store_true", help="nao chama a API (testa a interface)")
     a = p.parse_args()
 
-    ESTADO["cfg"] = SimpleNamespace(modelo=a.modelo, temperatura=a.temperatura, k=a.k,
+    ESTADO["cfg"] = SimpleNamespace(provedor=a.provedor, modelo=a.modelo, temperatura=a.temperatura, k=a.k,
                                     backend=a.backend, seco=a.seco, execucao="interface")
     ESTADO["suite"] = carregar_suite()
     print(f"carregando indice {a.backend}...")

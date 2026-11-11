@@ -1,6 +1,14 @@
 # Estado do projeto
 
-Atualizado em 09/11/2026 (noite).
+Atualizado em 11/11/2026.
+
+## Decisão de 11/11: modelo local no Ramo A
+
+- **Ramo A: Ollama, `qwen3:8b`, temperatura 0, `seed=0`, raciocínio desligado, k=5** (padrões em `src/agente.py`; `--provedor ollama`). Roda em CPU na máquina do projeto, sem chave e sem rede.
+- **Por quê:** (1) o primeiro modelo escolhido (`openai/gpt-oss-120b` no Groq) saiu do ar em 10/11 (404 em todos os endpoints, inclusive `/models`), e as alternativas gratuitas na nuvem dependem de cota e de terceiros; (2) o modelo local é estável e reproduzível: o modelo e a versão não mudam durante as 105 execuções, e nenhuma pergunta sai da máquina; (3) custo zero; (4) pelo que vimos no teste de fumaça, é suficiente para o objetivo do trabalho, que é medir a *discordância entre os ramos*, não maximizar a acurácia do Ramo A.
+- **Teste de fumaça (c12, c02, c03):** ~70–110 s por execução. c12: `ilegal` contra `legal` do Ramo B → `discordam` (o caso foi desenhado para isso). c02 e c03: `concordam`. Três casos não medem qualidade; a taxa de discordância virá das execuções oficiais.
+- **Limitações a declarar:** modelo de 8B é mais fraco que o 120B e pode errar mais a leitura da regra (isso aumenta a discordância, que é o que o comparador mede); não-determinismo residual em CPU não está descartado, por isso o pass^3 é medido; o `gpt-oss-120b` ficou só como execução complementar se o Groq voltar (um único caso, c12, foi testado: `legal`, `concordam`).
+- Os registros abaixo sobre Groq são anteriores a esta decisão.
 
 ## Decisões de 09/11 (sessão da tarde)
 

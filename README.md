@@ -46,7 +46,7 @@ O RAG, porém, não garante que o modelo *leu* a regra direito. É por isso que 
   O gabarito (`veredito_ouro`, `artigo_ouro`) é **humano**. O `python-chess` só confere os 24 posicionais e hoje bate em 24/24.
 - **Prompt do Ramo A:** os trechos vêm primeiro, depois o tabuleiro em ASCII, o lance descrito em palavras e por fim instruções curtas. Um **autoteste** prova que o prompt não contém nada do Ramo B nem do gabarito.
 - **Comparador**, **agente** (o pipeline completo, com trace JSON e aprovação humana) e **interface gráfica** local.
-- **Modelo do Ramo A:** `openai/gpt-oss-120b` no Groq, temperatura 0. Na primeira chamada real, no caso c12, o modelo respondeu `legal`, citou o Artigo 3.8.2.2 e o comparador deu `concordam`.
+- **Modelo do Ramo A:** `qwen3:8b` local, via [Ollama](https://ollama.com), temperatura 0, `seed=0`, raciocínio desligado. A escolha inicial foi `openai/gpt-oss-120b` no Groq, que saiu do ar em 10/11/2026 (404 em todos os endpoints). O modelo local é estável (o modelo não muda durante as execuções), reproduzível, gratuito e não envia nada para fora; no teste de fumaça levou 70–110 s por execução e foi suficiente para o objetivo, que é medir a discordância entre os ramos. Detalhes e limitações em `docs/estado_do_projeto.md`. Os provedores Groq e OpenRouter continuam disponíveis com `--provedor`.
 
 ---
 
@@ -61,7 +61,7 @@ pip install torch --index-url https://download.pytorch.org/whl/cpu
 pip install -r requirements.txt
 ```
 
-Crie um arquivo `.env` na raiz com a sua chave do [Groq](https://console.groq.com/keys). Ele já está no `.gitignore` e nunca deve ir para o repositório.
+Instale o [Ollama](https://ollama.com), suba o servidor (`ollama serve`) e baixe o modelo: `ollama pull qwen3:8b` (~5 GB). Não precisa de chave. Para usar a nuvem no lugar (`--provedor groq` ou `openrouter`), crie um `.env` na raiz com a chave do provedor (ele já está no `.gitignore` e nunca deve ir para o repositório).
 
 ```
 GROQ_API_KEY=gsk_...
@@ -121,7 +121,7 @@ pergunta (+ FEN + lance UCI)
    │
    ├─ classe, decidida em código: tem FEN? → posicional; senão → normativa
    │
-   ├─ Ramo A ─ buscar_artigo (e5, top-5) → montar_prompt → Groq (gpt-oss-120b) → JSON
+   ├─ Ramo A ─ buscar_artigo (e5, top-5) → montar_prompt → Ollama (qwen3:8b) → JSON
    │                                                      {veredito, artigo, trecho_citado, justificativa}
    ├─ Ramo B ─ legalidade(fen, lance) com python-chess   → {veredito, flags, depois: {xeque, mate}}
    │
@@ -163,7 +163,7 @@ O agente executa no máximo 4 passos por pergunta: buscar, redigir, verificar e 
 | `src/legalidade.py` | **Ramo B.** Função pura sobre o python-chess. Não importa nada do Ramo A. FEN ou lance inválido vira veredito `erro`, nunca exceção. |
 | `src/montar_prompt.py` | **Ramo A.** Único lugar onde o prompt existe. Só lê pergunta, FEN e lance do caso. Descreve o lance a partir da UCI e da peça na casa de origem, sem `board.san()`, que vazaria a legalidade. `--autoteste` verifica, pela AST, que não há import de `legalidade` e que o prompt fica byte a byte idêntico com o gabarito adulterado. |
 | `src/comparador.py` | O único ponto de encontro: função pura que devolve uma das quatro paradas. Nos casos sem lance (afogado, posição morta, 50 lances), usa uma tabela declarada de respostas aceitas. |
-| `src/agente.py` | O pipeline: classe → Ramo A (Groq) → Ramo B → comparador → trace → aprovação. Padrões fixados: modelo, k=5, e5, temperatura 0. Lê a chave do `.env`. |
+| `src/agente.py` | O pipeline: classe → Ramo A (modelo local) → Ramo B → comparador → trace → aprovação. Padrões fixados: modelo, k=5, e5, temperatura 0. Provedores: ollama (padrão), groq, openrouter (chaves no `.env`). |
 
 **Interface e apoio**
 
@@ -199,7 +199,7 @@ O agente executa no máximo 4 passos por pergunta: buscar, redigir, verificar e 
   - **pass^3 medido** por caso e critério (não calculado como p³);
   - (a) discordâncias entre os ramos nos 24 casos posicionais;
   - (b) quem errou quando discordaram.
-- [ ] *(se der tempo)* Rodada extra com um modelo local de ~8B, fora das execuções oficiais, para comparação e como reserva para a demo.
+- [ ] *(se der tempo)* Rodada extra com o `gpt-oss-120b` em nuvem, fora das execuções oficiais, para comparar com o modelo local.
 
 ### Relatório (artigo) e apresentação
 - [ ] Conferir no Classroom: prazo do artigo, limite de páginas, tamanho do resumo e número de palavras-chave.

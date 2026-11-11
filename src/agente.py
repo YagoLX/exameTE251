@@ -39,10 +39,21 @@ from montar_prompt import montar, carregar_suite  # noqa: E402
 RAIZ = Path(__file__).resolve().parents[1]
 TRACES = RAIZ / "traces"
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
+# Segundo provedor, mesmo modelo, mesmo formato de API (OpenAI-compatível).
+# Usado quando o Groq está fora do ar (404 em todos os endereços do Groq, observado em 10/11/2026).
+OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+PROVEDORES = {
+    "groq": {"url": GROQ_URL, "chave": "GROQ_API_KEY", "modelo_padrao": "openai/gpt-oss-120b"},
+    "openrouter": {"url": OPENROUTER_URL, "chave": "OPENROUTER_API_KEY", "modelo_padrao": "openai/gpt-oss-120b"},
+    # Modelo local via Ollama (sem chave, nada sai da maquina). Tempo limite maior: CPU.
+    "ollama": {"url": "http://127.0.0.1:11434/v1/chat/completions", "chave": None,
+               "modelo_padrao": "qwen3:8b", "timeout": 900},
+}
+PROVEDOR_PADRAO = "ollama"   # decisao de 11/11: modelo local (ver docs/estado_do_projeto.md)
 # Escolhido em 09/11: gpt-oss-120b no Groq (llama-3.3-70b nao e mais servido; so ha
 # Llama prompt-guard na lista de /models). O id SERVIDO
 # vai para o trace (meta.modelo_servido); confira-o antes das 90 execucoes.
-MODELO_PADRAO = "openai/gpt-oss-120b"
+MODELO_PADRAO = "qwen3:8b"
 K_PADRAO = 5            # 22/29 com ouro no top-5 (e5), contra 18/29 no top-3
 BACKEND_PADRAO = "e5"
 
@@ -55,21 +66,27 @@ def ler_env() -> dict:
     return dict(l.split("=", 1) for l in arq.read_text().split() if "=" in l)
 
 
-def chamar_groq(prompt: str, modelo: str, temperatura: float) -> tuple[str | None, dict]:
-    chave = os.environ.get("GROQ_API_KEY") or ler_env().get("GROQ_API_KEY")
-    if not chave:
-        sys.exit("ERRO: defina GROQ_API_KEY (ambiente ou arquivo .env na raiz)")
-    corpo = json.dumps({
+def chamar_llm(prompt: str, modelo: str, temperatura: float, provedor: str = PROVEDOR_PADRAO) -> tuple[str | None, dict]:
+    cfg = PROVEDORES[provedor]
+    nome_chave = cfg["chave"]
+    cab = {"Content-Type": "application/json", "User-Agent": "te251-agente"}
+    if nome_chave:
+        chave = os.environ.get(nome_chave) or ler_env().get(nome_chave)
+        if not chave:
+            sys.exit(f"ERRO: defina {nome_chave} (ambiente ou arquivo .env na raiz)")
+        cab["Authorization"] = f"Bearer {chave}"
+    pedido = {
         "model": modelo, "temperature": temperatura,
         "messages": [{"role": "user", "content": prompt}],
         "response_format": {"type": "json_object"},
-    }).encode()
-    req = urllib.request.Request(GROQ_URL, data=corpo, headers={
-        "Authorization": f"Bearer {chave}", "Content-Type": "application/json",
-        "User-Agent": "te251-agente"})
+    }
+    if provedor == "ollama":
+        pedido["seed"] = 0                    # reprodutibilidade local
+        pedido["reasoning_effort"] = "none"   # sem cadeia de raciocinio (tempo em CPU)
+    req = urllib.request.Request(cfg["url"], data=json.dumps(pedido).encode(), headers=cab)
     for tentativa in range(4):
         try:
-            with urllib.request.urlopen(req, timeout=60) as r:
+            with urllib.request.urlopen(req, timeout=cfg.get("timeout", 60)) as r:
                 d = json.load(r)
             return d["choices"][0]["message"]["content"], {
                 "modelo_servido": d.get("model"), "uso": d.get("usage"),
@@ -124,7 +141,7 @@ def rodar(caso: dict, idx: Indice, a) -> dict:
     if a.seco:
         bruto, meta = None, {"seco": True}
     else:
-        bruto, meta = chamar_groq(prompt, a.modelo, a.temperatura)  # passo 2: redigir
+        bruto, meta = chamar_llm(prompt, a.modelo, a.temperatura, getattr(a, "provedor", PROVEDOR_PADRAO))  # passo 2: redigir
         passos.append("llm")
     resposta = parsear(bruto)
 
@@ -143,7 +160,7 @@ def rodar(caso: dict, idx: Indice, a) -> dict:
 
     trace = {
         "caso": caso["id"], "execucao": a.execucao, "inicio": agora(), "classe": classe,
-        "config": {"provedor": "groq", "modelo": a.modelo, "temperatura": a.temperatura,
+        "config": {"provedor": getattr(a, "provedor", PROVEDOR_PADRAO), "modelo": a.modelo, "temperatura": a.temperatura,
                    "k": a.k, "backend": a.backend, "indice": idx.slug},
         "pergunta": caso["pergunta"], "fen": caso.get("fen"), "lance": caso.get("lance"),
         "ramo_a": {"hits": hits, "prompt": prompt,
@@ -170,7 +187,8 @@ def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("caso", nargs="?")
     p.add_argument("--todos", action="store_true")
-    p.add_argument("--modelo", default=MODELO_PADRAO, help="id exato do modelo no Groq (vai para o trace)")
+    p.add_argument("--provedor", default=PROVEDOR_PADRAO, choices=list(PROVEDORES), help="onde roda o modelo (vai para o trace)")
+    p.add_argument("--modelo", default=MODELO_PADRAO, help="id exato do modelo no provedor escolhido (vai para o trace)")
     p.add_argument("--temperatura", type=float, default=0.0)
     p.add_argument("--execucao", type=int, default=1)
     p.add_argument("--backend", default=BACKEND_PADRAO, choices=["tfidf", "e5"])
