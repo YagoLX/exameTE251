@@ -47,7 +47,7 @@ O RAG, porém, não garante que o modelo *leu* a regra direito. É por isso que 
 - **Prompt do Ramo A:** os trechos vêm primeiro, depois o tabuleiro em ASCII, o lance descrito em palavras e por fim instruções curtas. Um **autoteste** prova que o prompt não contém nada do Ramo B nem do gabarito.
 - **Comparador**, **agente** (o pipeline completo, com trace JSON e aprovação humana) e **interface gráfica** local.
 - **Revisão humana dos 35 casos** feita na interface (rótulos de caso, trechos e resposta correta, em `resultados/rotulos_humanos.json`, que não vai ao repositório). Dois ajustes de gabarito na suíte, declarados: `parada_esperada` do c25 passou a `sem_verificacao` e a do c28 a `recusa`, porque casos sem FEN não passam pelo comparador.
-- **Execuções oficiais iniciadas em 11/11/2026:** 35 casos × 3 repetições, com tudo fixo (`qwen3:8b` local, e5, k=5, temperatura 0, `seed=0`). Os traces ficam em `traces/` (não vão ao repositório). As respostas consolidadas estão em `resultados/respostas_execucoes_oficiais.csv`, gerado por `python3 src/exportar_respostas.py`. Enquanto as 105 execuções não terminarem, o arquivo é parcial.
+- **Execuções oficiais concluídas em 11/11/2026:** 35 casos × 3 repetições, com tudo fixo (`qwen3:8b` local, e5, k=5, temperatura 0, `seed=0`). Os traces ficam em `traces/` (não vão ao repositório). As respostas consolidadas estão em `resultados/respostas_execucoes_oficiais.csv`, gerado por `python3 src/exportar_respostas.py`. O arquivo tem as 105 execuções.
 - **Modelo do Ramo A:** `qwen3:8b` local, via [Ollama](https://ollama.com), temperatura 0, `seed=0`, raciocínio desligado. A escolha inicial foi `openai/gpt-oss-120b` no Groq, que saiu do ar em 10/11/2026 (404 em todos os endpoints). O modelo local é estável (o modelo não muda durante as execuções), reproduzível, gratuito e não envia nada para fora; no teste de fumaça levou 70–110 s por execução e foi suficiente para o objetivo, que é medir a discordância entre os ramos. Detalhes e limitações em `docs/estado_do_projeto.md`. Os provedores Groq e OpenRouter continuam disponíveis com `--provedor`.
 
 ---
@@ -191,7 +191,6 @@ O agente executa no máximo 4 passos por pergunta: buscar, redigir, verificar e 
 ## O que falta
 
 ### Execuções e revisão
-- [ ] **Terminar as 105 execuções oficiais** (35 × 3) e regenerar `resultados/respostas_execucoes_oficiais.csv`.
 - [ ] **Revisar os traces oficiais** na interface: rótulo de "resposta correta" e decisão de aprovação em cada um, começando pelos `discordam` (quem errou) e depois os `concordam` (justificativa sustentada?). Sem aprovação gravada nos traces não se afirma que há revisão humana.
 - [ ] Rotular os trechos recuperados nos traces oficiais, para separar erro de busca de erro de leitura.
 
