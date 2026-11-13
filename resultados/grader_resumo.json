@@ -1,0 +1,254 @@
+{
+  "execucoes": 105,
+  "casos": 35,
+  "config": {
+    "distintas": 1,
+    "valores": [
+      {
+        "backend": "e5",
+        "indice": "e5-multilingual-e5-large",
+        "k": 5,
+        "modelo": "qwen3:8b",
+        "provedor": "ollama",
+        "temperatura": 0.0
+      }
+    ],
+    "modelo_servido": {
+      "qwen3:8b": 105
+    },
+    "casos_com_prompt_identico_nas_3": 35
+  },
+  "criterios": {
+    "citacao_identificavel": {
+      "execucoes_passam": 72,
+      "execucoes_aplicaveis": 81,
+      "casos_pass3": 24,
+      "casos_aplicaveis": 27,
+      "casos_falham_alguma": [
+        "c04",
+        "c12",
+        "c17"
+      ]
+    },
+    "trecho_ancorado": {
+      "execucoes_passam": 81,
+      "execucoes_aplicaveis": 81,
+      "casos_pass3": 27,
+      "casos_aplicaveis": 27,
+      "casos_falham_alguma": []
+    },
+    "recusa_correta": {
+      "execucoes_passam": 96,
+      "execucoes_aplicaveis": 105,
+      "casos_pass3": 32,
+      "casos_aplicaveis": 35,
+      "casos_falham_alguma": [
+        "c22",
+        "c24",
+        "c29"
+      ]
+    },
+    "revisao_registrada": {
+      "execucoes_passam": 2,
+      "execucoes_aplicaveis": 105,
+      "casos_pass3": 0,
+      "casos_aplicaveis": 35,
+      "casos_falham_alguma": [
+        "c01",
+        "c02",
+        "c03",
+        "c04",
+        "c05",
+        "c06",
+        "c07",
+        "c08",
+        "c09",
+        "c10",
+        "c11",
+        "c12",
+        "c13",
+        "c14",
+        "c15",
+        "c16",
+        "c17",
+        "c18",
+        "c19",
+        "c20",
+        "c21",
+        "c22",
+        "c23",
+        "c24",
+        "c25",
+        "c26",
+        "c27",
+        "c28",
+        "c29",
+        "c30",
+        "c31",
+        "c32",
+        "c33",
+        "c34",
+        "c35"
+      ]
+    },
+    "veredito_a_correto": {
+      "execucoes_passam": 39,
+      "execucoes_aplicaveis": 72,
+      "casos_pass3": 13,
+      "casos_aplicaveis": 24,
+      "casos_falham_alguma": [
+        "c01",
+        "c04",
+        "c06",
+        "c09",
+        "c12",
+        "c15",
+        "c17",
+        "c21",
+        "c22",
+        "c23",
+        "c24"
+      ]
+    },
+    "veredito_b_correto": {
+      "execucoes_passam": 72,
+      "execucoes_aplicaveis": 72,
+      "casos_pass3": 24,
+      "casos_aplicaveis": 24,
+      "casos_falham_alguma": []
+    }
+  },
+  "paradas": {
+    "discordam": 30,
+    "concordam": 39,
+    "recusa": 24,
+    "sem_verificacao": 12
+  },
+  "paradas_por_classe": {
+    "posicional:discordam": 30,
+    "posicional:concordam": 39,
+    "posicional:recusa": 3,
+    "normativa:sem_verificacao": 12,
+    "normativa:recusa": 21
+  },
+  "parada_vs_esperada": {
+    "diferente": 33,
+    "igual": 72
+  },
+  "casos_parada_diferente_da_esperada": [
+    "c01",
+    "c04",
+    "c06",
+    "c09",
+    "c15",
+    "c17",
+    "c21",
+    "c22",
+    "c23",
+    "c24",
+    "c29"
+  ],
+  "posicionais": {
+    "execucoes": 72,
+    "casos": 24,
+    "discordam_execucoes": 30,
+    "discordam_casos": [
+      "c01",
+      "c04",
+      "c06",
+      "c09",
+      "c12",
+      "c15",
+      "c17",
+      "c21",
+      "c23",
+      "c24"
+    ],
+    "quem_errou_nas_discordancias": {
+      "so_A_errou": 30
+    },
+    "concordam_execucoes": 39,
+    "concordam_casos": [
+      "c02",
+      "c03",
+      "c05",
+      "c07",
+      "c08",
+      "c10",
+      "c11",
+      "c13",
+      "c14",
+      "c16",
+      "c18",
+      "c19",
+      "c20"
+    ],
+    "concordam_sem_artigo_ouro_nos_trechos": [
+      "c11",
+      "c14",
+      "c16"
+    ],
+    "concordam_com_citacao_nao_identificavel": []
+  },
+  "variacao_entre_repeticoes": {
+    "c02": [
+      "ilegal|3.7.3.1",
+      "ilegal|3.7.3.2"
+    ],
+    "c16": [
+      "ilegal|4.4.1",
+      "ilegal|4.4.3"
+    ]
+  },
+  "busca_ouro_no_top5": {
+    "casos": 22,
+    "de": 29
+  },
+  "revisao_humana": {
+    "aprovacao_execucoes_oficiais": {
+      "pendente": 103,
+      "rejeitado": 2
+    },
+    "interface_exploratoria": {
+      "openai/gpt-oss-120b:aprovado": 4,
+      "qwen3:8b:pendente": 7,
+      "openai/gpt-oss-120b:rejeitado": 2,
+      "qwen3:8b:aprovado": 6,
+      "openai/gpt-oss-120b:revisao_humana": 1,
+      "openai/gpt-oss-120b:pendente": 4,
+      "qwen3:8b:rejeitado": 22,
+      "qwen3:8b:revisao_humana": 4
+    },
+    "rotulos": {
+      "casos_rotulados": 35,
+      "trechos": {
+        "suficiente": 15,
+        "ausente": 12,
+        "parcial": 8
+      },
+      "revisao_do_caso": {
+        "ok": 26,
+        "ajustar": 4,
+        "sem_rotulo": 4,
+        "remover": 1
+      },
+      "casos_ajustar_ou_remover": [
+        "c06",
+        "c20",
+        "c22",
+        "c27",
+        "c31"
+      ],
+      "casos_sem_revisao": [
+        "c21",
+        "c23",
+        "c28",
+        "c29"
+      ],
+      "traces_oficiais_com_resposta_correta": [
+        "c34_r1.json",
+        "c35_r1.json"
+      ]
+    }
+  }
+}

@@ -25,7 +25,7 @@ O RAG, porém, não garante que o modelo *leu* a regra direito. É por isso que 
 
 ---
 
-## Estado atual (09/11/2026)
+## Estado atual (12/11/2026)
 
 ### Feito
 
@@ -46,8 +46,20 @@ O RAG, porém, não garante que o modelo *leu* a regra direito. É por isso que 
   O gabarito (`veredito_ouro`, `artigo_ouro`) é **humano**. O `python-chess` só confere os 24 posicionais e hoje bate em 24/24.
 - **Prompt do Ramo A:** os trechos vêm primeiro, depois o tabuleiro em ASCII, o lance descrito em palavras e por fim instruções curtas. Um **autoteste** prova que o prompt não contém nada do Ramo B nem do gabarito.
 - **Comparador**, **agente** (o pipeline completo, com trace JSON e aprovação humana) e **interface gráfica** local.
-- **Revisão humana dos 35 casos** feita na interface (rótulos de caso, trechos e resposta correta, em `resultados/rotulos_humanos.json`, que não vai ao repositório). Dois ajustes de gabarito na suíte, declarados: `parada_esperada` do c25 passou a `sem_verificacao` e a do c28 a `recusa`, porque casos sem FEN não passam pelo comparador.
-- **Execuções oficiais concluídas em 11/11/2026:** 35 casos × 3 repetições, com tudo fixo (`qwen3:8b` local, e5, k=5, temperatura 0, `seed=0`). Os traces ficam em `traces/` (não vão ao repositório). As respostas consolidadas estão em `resultados/respostas_execucoes_oficiais.csv`, gerado por `python3 src/exportar_respostas.py`. O arquivo tem as 105 execuções.
+- **Revisão humana dos 35 casos** feita na interface (rótulos de caso, trechos e resposta correta, em `resultados/rotulos_humanos.json`). Dois ajustes de gabarito na suíte, declarados: `parada_esperada` do c25 passou a `sem_verificacao` e a do c28 a `recusa`, porque casos sem FEN não passam pelo comparador.
+- **Execuções oficiais concluídas em 11/11/2026:** 35 casos × 3 repetições, com tudo fixo (`qwen3:8b` local, e5, k=5, temperatura 0, `seed=0`). Os traces estão em `traces/` (e as execuções exploratórias da interface em `traces/interface/`, fora da contagem). As respostas consolidadas estão em `resultados/respostas_execucoes_oficiais.csv`, gerado por `python3 src/exportar_respostas.py`. O arquivo tem as 105 execuções.
+- **Grader (`src/grader.py`), rodado em 12/11/2026** sobre os 105 traces oficiais, sem IA. Grava `resultados/grader_execucoes.csv`, `grader_resumo.json` e `grader_resumo.md`. Principais números:
+
+  | | execuções | pass^3 (casos) |
+  |---|---|---|
+  | citação identificável (número exato de um trecho recuperado) | 72/81 | 24/27 |
+  | trecho citado presente nos trechos recuperados | 81/81 | 27/27 |
+  | recusa correta | 96/105 | 32/35 |
+  | revisão humana registrada no trace | 2/105 | 0/35 |
+  | veredito do Ramo A = gabarito (posicionais) | 39/72 | 13/24 |
+  | veredito do Ramo B = gabarito (posicionais) | 72/72 | 24/24 |
+
+  Posicionais: 39 `concordam`, 30 `discordam` (10 casos), 3 `recusa` (c22). Nas 30 discordâncias, quem errou foi sempre o Ramo A. c11, c14 e c16 concordaram sem nenhum artigo do gabarito entre os trechos. Variaram entre repetições só c02 e c16 (artigo citado). **Aprovação:** as execuções oficiais rodaram em lote, sem terminal; 103 de 105 ficaram com aprovação `pendente` (nada foi emitido) e 2 foram rejeitadas na interface. A revisão humana foi feita por rótulos de caso, não aprovando cada trace oficial.
 - **Modelo do Ramo A:** `qwen3:8b` local, via [Ollama](https://ollama.com), temperatura 0, `seed=0`, raciocínio desligado. A escolha inicial foi `openai/gpt-oss-120b` no Groq, que saiu do ar em 10/11/2026 (404 em todos os endpoints). O modelo local é estável (o modelo não muda durante as execuções), reproduzível, gratuito e não envia nada para fora; no teste de fumaça levou 70–110 s por execução e foi suficiente para o objetivo, que é medir a discordância entre os ramos. Detalhes e limitações em `docs/estado_do_projeto.md`. Os provedores Groq e OpenRouter continuam disponíveis com `--provedor`.
 
 ---
@@ -157,6 +169,7 @@ O agente executa no máximo 4 passos por pergunta: buscar, redigir, verificar e 
 | `suite/suite_30.py` | Fonte da suíte: gabarito humano e perguntas em inglês (`PERGUNTAS_EN`). `--verificar` confere os posicionais contra o python-chess; `--emitir` gera o `.jsonl`. |
 | `suite/suite_30.jsonl` | A suíte que os outros scripts leem (35 casos, apesar do nome). |
 | `src/checar_trechos.py` | Para cada caso: top-k recuperado e se o `artigo_ouro` está entre eles (calculado em código) → `resultados/checagem_trechos_*.csv`. |
+| `src/grader.py` | Lê os 105 traces oficiais e aplica os quatro critérios binários (regras no docstring), mede o pass^3 por caso, conta paradas, discordâncias e quem errou, e resume a revisão humana → `resultados/grader_*.{csv,json,md}`. Sem IA. |
 
 **Os dois ramos e o encontro**
 
@@ -191,16 +204,11 @@ O agente executa no máximo 4 passos por pergunta: buscar, redigir, verificar e 
 ## O que falta
 
 ### Execuções e revisão
-- [ ] **Revisar os traces oficiais** na interface: rótulo de "resposta correta" e decisão de aprovação em cada um, começando pelos `discordam` (quem errou) e depois os `concordam` (justificativa sustentada?). Sem aprovação gravada nos traces não se afirma que há revisão humana.
-- [ ] Rotular os trechos recuperados nos traces oficiais, para separar erro de busca de erro de leitura.
+- [ ] **Aprovação nos traces oficiais:** 103 de 105 estão `pendente` (o grader mostra). Ou se registra a decisão humana em cada um (na interface, pelo menos nos 30 `discordam`) e se roda o grader de novo, ou o artigo declara que a revisão foi por rótulos de caso e que nenhuma resposta oficial foi emitida. Não afirmar "há HITL" sem isso.
+- [ ] Revisar os casos sem rótulo de revisão (c21, c23, c28, c29) e decidir os marcados `ajustar`/`remover` (c06, c20, c22, c27, c31) e a premissa do c18. Mudança de gabarito depois das execuções vai declarada no artigo.
 
 ### Análise
-- [ ] **`src/grader.py`:**
-  - quatro critérios binários: resposta sustentada pelo trecho, citação identificável, recusa correta, revisão antes da ação;
-  - **pass^3 medido** por caso e critério (não calculado como p³);
-  - (a) discordâncias entre os ramos nos 24 casos posicionais;
-  - (b) quem errou quando discordaram.
-- [ ] Definir e declarar a regra de "citação identificável" (o modelo às vezes cita o item pai, como `3`, e não o artigo exato).
+- [x] **`src/grader.py`:** quatro critérios binários, pass^3 medido, discordâncias e quem errou. A regra de "citação identificável" está no docstring: só vale o número exato de um trecho recuperado (citar o item pai, como `3`, falha). "Sustentada pelo trecho" é medida por um proxy automático (o trecho citado aparece literalmente nos trechos recuperados); a justificativa correta continua sendo julgamento humano.
 - [ ] *(se der tempo)* Rodada extra com o `gpt-oss-120b` em nuvem, fora das execuções oficiais, para comparar com o modelo local.
 
 ### Relatório (artigo) e apresentação
@@ -212,7 +220,8 @@ O agente executa no máximo 4 passos por pergunta: buscar, redigir, verificar e 
   - **Resultados:** taxa de discordância, quem errou, pass^3 por critério, erros de busca × erros de leitura.
   - **AI Assurance / limitações:** perguntas só em inglês; o comparador pega **uma** classe de erro; "concordaram" não significa "está certo"; temperatura 0 não garante determinismo; diferenças pequenas (26/30 × 28/30) não são significativas.
   - **Apêndice:** o prompt literal, que prova que o Ramo A não vê o Ramo B.
-- [ ] Preparar a demo, com um roteiro sugerido:
+- [ ] Slides: exportar o PDF como `TE251_2026-2_Exame_<nome_curto>_slides.pdf` e enviar pelo Classroom. Os números dos slides batem com `resultados/grader_resumo.json`.
+- [ ] Preparar a demo (e uma captura ou vídeo curto como plano B: cada execução leva 70–110 s em CPU), com um roteiro sugerido:
   1. o c12 (roque com b1 atacada);
   2. um roque ilegal montado no editor;
   3. uma pergunta fora de escopo, que deve ser recusada.

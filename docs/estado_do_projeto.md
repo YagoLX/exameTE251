@@ -1,6 +1,13 @@
 # Estado do projeto
 
-Atualizado em 11/11/2026.
+Atualizado em 12/11/2026.
+
+## 12/11: grader rodado sobre os 105 traces oficiais
+
+- `python3 src/grader.py` → `resultados/grader_execucoes.csv`, `grader_resumo.json`, `grader_resumo.md`. Configuração única nas 105 (`qwen3:8b`, temperatura 0, k=5, e5); prompt idêntico nas 3 repetições em 35/35 casos.
+- Critérios (execuções / pass^3 em casos): citação identificável 72/81 e 24/27 (falham c04, c12, c17); trecho citado presente nos trechos 81/81 e 27/27; recusa correta 96/105 e 32/35 (falham c22, c24, c29); revisão registrada 2/105 e 0/35.
+- Posicionais: 39 `concordam`, 30 `discordam`, 3 `recusa`. Nas 30 discordâncias errou sempre o Ramo A (o Ramo B bate com o gabarito em 72/72). c11, c14 e c16 concordaram sem nenhum artigo do gabarito nos trechos.
+- **Aprovação:** 103 de 105 traces oficiais estão `pendente` (rodados em lote, sem terminal) e 2 foram rejeitados na interface (c34_r1, c35_r1). Nenhuma resposta oficial foi emitida. Para o artigo: ou registrar as decisões e rodar o grader de novo, ou declarar que a revisão foi por rótulos de caso.
 
 ## Decisão de 11/11: modelo local no Ramo A
 
@@ -66,4 +73,5 @@ Fonte: `resultados/checagem_trechos_*_k*.csv`. A coluna `rotulo` (suficiente/par
 - [ ] Rótulos de trechos (suficiente/parcial/ausente) na aba Trechos → `resultados/rotulos_humanos.json`.
 - [ ] Classroom: prazo, páginas, resumo, palavras-chave.
 - [x] Repositório: github.com/YagoLX/exameTE251 (branch `main`).
-- [ ] Depois: as 90 execuções e `src/grader.py`.
+- [x] As execuções oficiais (105, não 90: a suíte tem 35 casos) e `src/grader.py`.
+- [ ] Decisão de aprovação nos traces oficiais (103 pendentes).
