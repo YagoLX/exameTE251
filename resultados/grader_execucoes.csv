@@ -1,106 +1,106 @@
-caso,execucao,classe,parada,parada_esperada,veredito_a,artigo_citado,veredito_b,veredito_ouro,artigo_ouro,artigos_recuperados,ouro_no_topk,aprovacao,citacao_identificavel,trecho_ancorado,recusa_correta,revisao_registrada,veredito_a_correto,veredito_b_correto
-c01,1,posicional,discordam,concordam,ilegal,3.7.3.2,legal,legal,3.7.3.1;3.7.3.2,9.2.3.1;3.7.3;3.7.3.1;3.7.3.2;9.6.2,True,pendente,True,True,True,False,False,True
-c01,2,posicional,discordam,concordam,ilegal,3.7.3.2,legal,legal,3.7.3.1;3.7.3.2,9.2.3.1;3.7.3;3.7.3.1;3.7.3.2;9.6.2,True,pendente,True,True,True,False,False,True
-c01,3,posicional,discordam,concordam,ilegal,3.7.3.2,legal,legal,3.7.3.1;3.7.3.2,9.2.3.1;3.7.3;3.7.3.1;3.7.3.2;9.6.2,True,pendente,True,True,True,False,False,True
-c02,1,posicional,concordam,concordam,ilegal,3.7.3.1,ilegal,ilegal,3.7.3.2,3.7.3.2;9.2.3.1;3.7.3.1;3.7.1;3.7.3,True,pendente,True,True,True,False,True,True
-c02,2,posicional,concordam,concordam,ilegal,3.7.3.2,ilegal,ilegal,3.7.3.2,3.7.3.2;9.2.3.1;3.7.3.1;3.7.1;3.7.3,True,pendente,True,True,True,False,True,True
-c02,3,posicional,concordam,concordam,ilegal,3.7.3.2,ilegal,ilegal,3.7.3.2,3.7.3.2;9.2.3.1;3.7.3.1;3.7.1;3.7.3,True,pendente,True,True,True,False,True,True
-c03,1,posicional,concordam,concordam,ilegal,4.4.4,ilegal,ilegal,3.9.2;3.7.3.2,9.2.3.1;3.7.3;3.7.3.1;3.7.3.2;4.4.4,True,pendente,True,True,True,False,True,True
-c03,2,posicional,concordam,concordam,ilegal,4.4.4,ilegal,ilegal,3.9.2;3.7.3.2,9.2.3.1;3.7.3;3.7.3.1;3.7.3.2;4.4.4,True,pendente,True,True,True,False,True,True
-c03,3,posicional,concordam,concordam,ilegal,4.4.4,ilegal,ilegal,3.9.2;3.7.3.2,9.2.3.1;3.7.3;3.7.3.1;3.7.3.2;4.4.4,True,pendente,True,True,True,False,True,True
-c04,1,posicional,discordam,concordam,ilegal,4,legal,legal,3.7.3.1;3.7.3.2,9.2.3.1;3.7.3.1;3.7.3;3.7.3.2;9.6.2,True,pendente,False,True,True,False,False,True
-c04,2,posicional,discordam,concordam,ilegal,4,legal,legal,3.7.3.1;3.7.3.2,9.2.3.1;3.7.3.1;3.7.3;3.7.3.2;9.6.2,True,pendente,False,True,True,False,False,True
-c04,3,posicional,discordam,concordam,ilegal,4,legal,legal,3.7.3.1;3.7.3.2,9.2.3.1;3.7.3.1;3.7.3;3.7.3.2;9.6.2,True,pendente,False,True,True,False,False,True
-c05,1,posicional,concordam,concordam,legal,3.7.3.3,legal,legal,3.7.3.3,7.5.2;3.7.3.3;4.6.2;3.4;4.4.4,True,pendente,True,True,True,False,True,True
-c05,2,posicional,concordam,concordam,legal,3.7.3.3,legal,legal,3.7.3.3,7.5.2;3.7.3.3;4.6.2;3.4;4.4.4,True,pendente,True,True,True,False,True,True
-c05,3,posicional,concordam,concordam,legal,3.7.3.3,legal,legal,3.7.3.3,7.5.2;3.7.3.3;4.6.2;3.4;4.4.4,True,pendente,True,True,True,False,True,True
-c06,1,posicional,discordam,concordam,ilegal,7.5.2,legal,legal,3.7.3.3,3.7.3.3;7.5.2;3.5;3.4;4.4.1,True,pendente,True,True,True,False,False,True
-c06,2,posicional,discordam,concordam,ilegal,7.5.2,legal,legal,3.7.3.3,3.7.3.3;7.5.2;3.5;3.4;4.4.1,True,pendente,True,True,True,False,False,True
-c06,3,posicional,discordam,concordam,ilegal,7.5.2,legal,legal,3.7.3.3,3.7.3.3;7.5.2;3.5;3.4;4.4.1,True,pendente,True,True,True,False,False,True
-c07,1,posicional,concordam,concordam,ilegal,7.5.2,ilegal,ilegal,3.7.3.3,7.5.2;3.7.3.3;3.7.3.1;3.8.2;6.2.1.2,True,pendente,True,True,True,False,True,True
-c07,2,posicional,concordam,concordam,ilegal,7.5.2,ilegal,ilegal,3.7.3.3,7.5.2;3.7.3.3;3.7.3.1;3.8.2;6.2.1.2,True,pendente,True,True,True,False,True,True
-c07,3,posicional,concordam,concordam,ilegal,7.5.2,ilegal,ilegal,3.7.3.3,7.5.2;3.7.3.3;3.7.3.1;3.8.2;6.2.1.2,True,pendente,True,True,True,False,True,True
-c08,1,posicional,concordam,concordam,legal,3.7.3.3,legal,legal,3.7.3.3;3.9.1,3.7.3.3;3.6;3.7.3.5;8.1.1.2;6.11.2,True,pendente,True,True,True,False,True,True
-c08,2,posicional,concordam,concordam,legal,3.7.3.3,legal,legal,3.7.3.3;3.9.1,3.7.3.3;3.6;3.7.3.5;8.1.1.2;6.11.2,True,pendente,True,True,True,False,True,True
-c08,3,posicional,concordam,concordam,legal,3.7.3.3,legal,legal,3.7.3.3;3.9.1,3.7.3.3;3.6;3.7.3.5;8.1.1.2;6.11.2,True,pendente,True,True,True,False,True,True
-c09,1,posicional,discordam,concordam,ilegal,4.4.3,legal,legal,3.8.2,4.4.1;4.4.3;4.7.2;4.4.2;3.8.2.2,True,pendente,True,True,True,False,False,True
-c09,2,posicional,discordam,concordam,ilegal,4.4.3,legal,legal,3.8.2,4.4.1;4.4.3;4.7.2;4.4.2;3.8.2.2,True,pendente,True,True,True,False,False,True
-c09,3,posicional,discordam,concordam,ilegal,4.4.3,legal,legal,3.8.2,4.4.1;4.4.3;4.7.2;4.4.2;3.8.2.2,True,pendente,True,True,True,False,False,True
-c10,1,posicional,concordam,concordam,ilegal,4.4.3,ilegal,ilegal,3.8.2.2,4.4.3;4.4.1;4.7.2;4.4.2;3.8.2.2,True,pendente,True,True,True,False,True,True
-c10,2,posicional,concordam,concordam,ilegal,4.4.3,ilegal,ilegal,3.8.2.2,4.4.3;4.4.1;4.7.2;4.4.2;3.8.2.2,True,pendente,True,True,True,False,True,True
-c10,3,posicional,concordam,concordam,ilegal,4.4.3,ilegal,ilegal,3.8.2.2,4.4.3;4.4.1;4.7.2;4.4.2;3.8.2.2,True,pendente,True,True,True,False,True,True
-c11,1,posicional,concordam,concordam,ilegal,4.4.2,ilegal,ilegal,3.8.2.2,3.8.2.1;4.4.1;4.4.3;9.2.3.2;4.4.2,False,pendente,True,True,True,False,True,True
-c11,2,posicional,concordam,concordam,ilegal,4.4.2,ilegal,ilegal,3.8.2.2,3.8.2.1;4.4.1;4.4.3;9.2.3.2;4.4.2,False,pendente,True,True,True,False,True,True
-c11,3,posicional,concordam,concordam,ilegal,4.4.2,ilegal,ilegal,3.8.2.2,3.8.2.1;4.4.1;4.4.3;9.2.3.2;4.4.2,False,pendente,True,True,True,False,True,True
-c12,1,posicional,discordam,discordancia_esperada,ilegal,3,legal,legal,3.8.2.2,3.8.2.2;3.1.3;3.8.2.1;4.4.1;4.4.3,True,pendente,False,True,True,False,False,True
-c12,2,posicional,discordam,discordancia_esperada,ilegal,3,legal,legal,3.8.2.2,3.8.2.2;3.1.3;3.8.2.1;4.4.1;4.4.3,True,pendente,False,True,True,False,False,True
-c12,3,posicional,discordam,discordancia_esperada,ilegal,3,legal,legal,3.8.2.2,3.8.2.2;3.1.3;3.8.2.1;4.4.1;4.4.3,True,pendente,False,True,True,False,False,True
-c13,1,posicional,concordam,concordam,ilegal,4.4.1,ilegal,ilegal,3.8.2.1,3.8.2.1;9.2.3.2;4.4.1;4.7.2;4.4.3,True,pendente,True,True,True,False,True,True
-c13,2,posicional,concordam,concordam,ilegal,4.4.1,ilegal,ilegal,3.8.2.1,3.8.2.1;9.2.3.2;4.4.1;4.7.2;4.4.3,True,pendente,True,True,True,False,True,True
-c13,3,posicional,concordam,concordam,ilegal,4.4.1,ilegal,ilegal,3.8.2.1,3.8.2.1;9.2.3.2;4.4.1;4.7.2;4.4.3,True,pendente,True,True,True,False,True,True
-c14,1,posicional,concordam,concordam,ilegal,4.4.3,ilegal,ilegal,3.8.2.2,4.4.1;4.4.3;4.4.2;3.8.2.1;9.2.3.2,False,pendente,True,True,True,False,True,True
-c14,2,posicional,concordam,concordam,ilegal,4.4.3,ilegal,ilegal,3.8.2.2,4.4.1;4.4.3;4.4.2;3.8.2.1;9.2.3.2,False,pendente,True,True,True,False,True,True
-c14,3,posicional,concordam,concordam,ilegal,4.4.3,ilegal,ilegal,3.8.2.2,4.4.1;4.4.3;4.4.2;3.8.2.1;9.2.3.2,False,pendente,True,True,True,False,True,True
-c15,1,posicional,discordam,concordam,legal,3.6,ilegal,ilegal,3.9.2,3.6;3.8.2.1;4.6.2;9.2.3.2;3.7.3.3,False,pendente,True,True,True,False,False,True
-c15,2,posicional,discordam,concordam,legal,3.6,ilegal,ilegal,3.9.2,3.6;3.8.2.1;4.6.2;9.2.3.2;3.7.3.3,False,pendente,True,True,True,False,False,True
-c15,3,posicional,discordam,concordam,legal,3.6,ilegal,ilegal,3.9.2,3.6;3.8.2.1;4.6.2;9.2.3.2;3.7.3.3,False,pendente,True,True,True,False,False,True
-c16,1,posicional,concordam,concordam,ilegal,4.4.3,ilegal,ilegal,3.9.2,4.4.1;3.8.2;3.8.2.1;4.4.3;9.2.3.2,False,pendente,True,True,True,False,True,True
-c16,2,posicional,concordam,concordam,ilegal,4.4.1,ilegal,ilegal,3.9.2,4.4.1;3.8.2;3.8.2.1;4.4.3;9.2.3.2,False,pendente,True,True,True,False,True,True
-c16,3,posicional,concordam,concordam,ilegal,4.4.1,ilegal,ilegal,3.9.2,4.4.1;3.8.2;3.8.2.1;4.4.3;9.2.3.2,False,pendente,True,True,True,False,True,True
-c17,1,posicional,discordam,concordam,ilegal,3,legal,legal,3.9.1;3.8.1,4.4.1;3.9.2;4.4.2;4.4.3;9.2.3.2,False,pendente,False,True,True,False,False,True
-c17,2,posicional,discordam,concordam,ilegal,3,legal,legal,3.9.1;3.8.1,4.4.1;3.9.2;4.4.2;4.4.3;9.2.3.2,False,pendente,False,True,True,False,False,True
-c17,3,posicional,discordam,concordam,ilegal,3,legal,legal,3.9.1;3.8.1,4.4.1;3.9.2;4.4.2;4.4.3;9.2.3.2,False,pendente,False,True,True,False,False,True
-c18,1,posicional,concordam,concordam,ilegal,3.9.2,ilegal,ilegal,3.9.2,3.6;3.9.2;3.7.3.1;3.7.3.3;3.8.2,True,pendente,True,True,True,False,True,True
-c18,2,posicional,concordam,concordam,ilegal,3.9.2,ilegal,ilegal,3.9.2,3.6;3.9.2;3.7.3.1;3.7.3.3;3.8.2,True,pendente,True,True,True,False,True,True
-c18,3,posicional,concordam,concordam,ilegal,3.9.2,ilegal,ilegal,3.9.2,3.6;3.9.2;3.7.3.1;3.7.3.3;3.8.2,True,pendente,True,True,True,False,True,True
-c19,1,posicional,concordam,concordam,legal,5.1.2,legal,legal,1.4.1;5.1.1,9.6.2;5.1.1;5.1.2;1.5;5.2.1,True,pendente,True,True,True,False,True,True
-c19,2,posicional,concordam,concordam,legal,5.1.2,legal,legal,1.4.1;5.1.1,9.6.2;5.1.1;5.1.2;1.5;5.2.1,True,pendente,True,True,True,False,True,True
-c19,3,posicional,concordam,concordam,legal,5.1.2,legal,legal,1.4.1;5.1.1,9.6.2;5.1.1;5.1.2;1.5;5.2.1,True,pendente,True,True,True,False,True,True
-c20,1,posicional,concordam,concordam,legal,5.1.2,legal,legal,5.1.1;3.9.1,9.6.2;5.1.1;5.1.2;8.1.5;5.2.1,True,pendente,True,True,True,False,True,True
-c20,2,posicional,concordam,concordam,legal,5.1.2,legal,legal,5.1.1;3.9.1,9.6.2;5.1.1;5.1.2;8.1.5;5.2.1,True,pendente,True,True,True,False,True,True
-c20,3,posicional,concordam,concordam,legal,5.1.2,legal,legal,5.1.1;3.9.1,9.6.2;5.1.1;5.1.2;8.1.5;5.2.1,True,pendente,True,True,True,False,True,True
-c21,1,posicional,discordam,concordam,legal,4.4.1,afogado,afogado,5.2.1,4.4.3;4.7.2;3.10.3;3.9.2;4.4.1,False,pendente,True,True,True,False,False,True
-c21,2,posicional,discordam,concordam,legal,4.4.1,afogado,afogado,5.2.1,4.4.3;4.7.2;3.10.3;3.9.2;4.4.1,False,pendente,True,True,True,False,False,True
-c21,3,posicional,discordam,concordam,legal,4.4.1,afogado,afogado,5.2.1,4.4.3;4.7.2;3.10.3;3.9.2;4.4.1,False,pendente,True,True,True,False,False,True
-c22,1,posicional,recusa,concordam,nao consta no material,,posicao_morta,posicao_morta,5.2.2,1.5;1.4.1;5.1.1;3.6;5.2.2,True,pendente,,,False,False,False,True
-c22,2,posicional,recusa,concordam,nao consta no material,,posicao_morta,posicao_morta,5.2.2,1.5;1.4.1;5.1.1;3.6;5.2.2,True,pendente,,,False,False,False,True
-c22,3,posicional,recusa,concordam,nao consta no material,,posicao_morta,posicao_morta,5.2.2,1.5;1.4.1;5.1.1;3.6;5.2.2,True,pendente,,,False,False,False,True
-c23,1,posicional,discordam,concordam,legal,9.3.1,cinquenta_lances,cinquenta_lances,9.3,9.3.2;9.6.2;9.3.1;9.5.1;8.1.2,True,pendente,True,True,True,False,False,True
-c23,2,posicional,discordam,concordam,legal,9.3.1,cinquenta_lances,cinquenta_lances,9.3,9.3.2;9.6.2;9.3.1;9.5.1;8.1.2,True,pendente,True,True,True,False,False,True
-c23,3,posicional,discordam,concordam,legal,9.3.1,cinquenta_lances,cinquenta_lances,9.3,9.3.2;9.6.2;9.3.1;9.5.1;8.1.2,True,pendente,True,True,True,False,False,True
-c24,1,posicional,discordam,recusa,legal,4.4.3,23_lances,23_lances,,4.7.2;9.6.2;2.2;3.10.3;4.4.3,,pendente,True,True,False,False,False,True
-c24,2,posicional,discordam,recusa,legal,4.4.3,23_lances,23_lances,,4.7.2;9.6.2;2.2;3.10.3;4.4.3,,pendente,True,True,False,False,False,True
-c24,3,posicional,discordam,recusa,legal,4.4.3,23_lances,23_lances,,4.7.2;9.6.2;2.2;3.10.3;4.4.3,,pendente,True,True,False,False,False,True
-c25,1,normativa,sem_verificacao,sem_verificacao,ilegal,7.5.3,,,7.5.1,7.5.3;7.5.1;7.5.4;6.2.2;6.2.1,True,pendente,True,True,True,False,,
-c25,2,normativa,sem_verificacao,sem_verificacao,ilegal,7.5.3,,,7.5.1,7.5.3;7.5.1;7.5.4;6.2.2;6.2.1,True,pendente,True,True,True,False,,
-c25,3,normativa,sem_verificacao,sem_verificacao,ilegal,7.5.3,,,7.5.1,7.5.3;7.5.1;7.5.4;6.2.2;6.2.1,True,pendente,True,True,True,False,,
-c26,1,normativa,sem_verificacao,sem_verificacao,game is drawn,7.5.5,,,7.5.5,7.5.1;7.5.5;7.5.4;7.2.1;4.7.2,True,pendente,True,True,True,False,,
-c26,2,normativa,sem_verificacao,sem_verificacao,game is drawn,7.5.5,,,7.5.5,7.5.1;7.5.5;7.5.4;7.2.1;4.7.2,True,pendente,True,True,True,False,,
-c26,3,normativa,sem_verificacao,sem_verificacao,game is drawn,7.5.5,,,7.5.5,7.5.1;7.5.5;7.5.4;7.2.1;4.7.2,True,pendente,True,True,True,False,,
-c27,1,normativa,sem_verificacao,sem_verificacao,reinstated position,7.6,,,7.4,7.6;7.2.1;7.4.1;4.2;7.2.2,True,pendente,True,True,True,False,,
-c27,2,normativa,sem_verificacao,sem_verificacao,reinstated position,7.6,,,7.4,7.6;7.2.1;7.4.1;4.2;7.2.2,True,pendente,True,True,True,False,,
-c27,3,normativa,sem_verificacao,sem_verificacao,reinstated position,7.6,,,7.4,7.6;7.2.1;7.4.1;4.2;7.2.2,True,pendente,True,True,True,False,,
-c28,1,normativa,recusa,recusa,nao consta no material,,,,9.2,9.2;9.6.1;11.12;7.3;9.2.3.1,True,pendente,,,True,False,,
-c28,2,normativa,recusa,recusa,nao consta no material,,,,9.2,9.2;9.6.1;11.12;7.3;9.2.3.1,True,pendente,,,True,False,,
-c28,3,normativa,recusa,recusa,nao consta no material,,,,9.2,9.2;9.6.1;11.12;7.3;9.2.3.1,True,pendente,,,True,False,,
-c29,1,normativa,recusa,sem_verificacao,nao consta no material,,,,6.9,6.8;11.3.2.2;8.5.1;6.4;5.1.2,False,pendente,,,False,False,,
-c29,2,normativa,recusa,sem_verificacao,nao consta no material,,,,6.9,6.8;11.3.2.2;8.5.1;6.4;5.1.2,False,pendente,,,False,False,,
-c29,3,normativa,recusa,sem_verificacao,nao consta no material,,,,6.9,6.8;11.3.2.2;8.5.1;6.4;5.1.2,False,pendente,,,False,False,,
-c30,1,normativa,sem_verificacao,sem_verificacao,ilegal,12.8,,,11.3.2,12.8;11.3.2;8.1.2;11.5;8.1.5,True,pendente,True,True,True,False,,
-c30,2,normativa,sem_verificacao,sem_verificacao,ilegal,12.8,,,11.3.2,12.8;11.3.2;8.1.2;11.5;8.1.5,True,pendente,True,True,True,False,,
-c30,3,normativa,sem_verificacao,sem_verificacao,ilegal,12.8,,,11.3.2,12.8;11.3.2;8.1.2;11.5;8.1.5,True,pendente,True,True,True,False,,
-c31,1,normativa,recusa,recusa,nao consta no material,,,,,3.8.2;4.7.2;4.4.1;4.4.3;6.10,,pendente,,,True,False,,
-c31,2,normativa,recusa,recusa,nao consta no material,,,,,3.8.2;4.7.2;4.4.1;4.4.3;6.10,,pendente,,,True,False,,
-c31,3,normativa,recusa,recusa,nao consta no material,,,,,3.8.2;4.7.2;4.4.1;4.4.3;6.10,,pendente,,,True,False,,
-c32,1,normativa,recusa,recusa,nao consta no material,,,,,10.1;12.9.6;11.7;12.9.5;11.8,,pendente,,,True,False,,
-c32,2,normativa,recusa,recusa,nao consta no material,,,,,10.1;12.9.6;11.7;12.9.5;11.8,,pendente,,,True,False,,
-c32,3,normativa,recusa,recusa,nao consta no material,,,,,10.1;12.9.6;11.7;12.9.5;11.8,,pendente,,,True,False,,
-c33,1,normativa,recusa,recusa,nao consta no material,,,,,3.7.3.3;9.2.3.1;7.5.2;3.7.3.1;3.7.1,,pendente,,,True,False,,
-c33,2,normativa,recusa,recusa,nao consta no material,,,,,3.7.3.3;9.2.3.1;7.5.2;3.7.3.1;3.7.1,,pendente,,,True,False,,
-c33,3,normativa,recusa,recusa,nao consta no material,,,,,3.7.3.3;9.2.3.1;7.5.2;3.7.3.1;3.7.1,,pendente,,,True,False,,
-c34,1,normativa,recusa,recusa,nao consta no material,,,,,0.2;8.1.1.2;6.3.2;8.1.5;8.5.1,,rejeitado,,,True,True,,
-c34,2,normativa,recusa,recusa,nao consta no material,,,,,0.2;8.1.1.2;6.3.2;8.1.5;8.5.1,,pendente,,,True,False,,
-c34,3,normativa,recusa,recusa,nao consta no material,,,,,0.2;8.1.1.2;6.3.2;8.1.5;8.5.1,,pendente,,,True,False,,
-c35,1,normativa,recusa,recusa,nao consta no material,,,,,5.2.3;5.1.2;9.5.1;9.6;5.2.1,,rejeitado,,,True,True,,
-c35,2,normativa,recusa,recusa,nao consta no material,,,,,5.2.3;5.1.2;9.5.1;9.6;5.2.1,,pendente,,,True,False,,
-c35,3,normativa,recusa,recusa,nao consta no material,,,,,5.2.3;5.1.2;9.5.1;9.6;5.2.1,,pendente,,,True,False,,
+caso,execucao,classe,parada,parada_esperada,veredito_a,artigo_citado,veredito_b,veredito_ouro,artigo_ouro,artigos_recuperados,ouro_no_topk,citacao_identificavel,trecho_ancorado,recusa_correta,veredito_a_correto,veredito_b_correto
+c01,1,posicional,discordam,concordam,ilegal,3.7.3.2,legal,legal,3.7.3.1;3.7.3.2,9.2.3.1;3.7.3;3.7.3.1;3.7.3.2;9.6.2,True,True,True,True,False,True
+c01,2,posicional,discordam,concordam,ilegal,3.7.3.2,legal,legal,3.7.3.1;3.7.3.2,9.2.3.1;3.7.3;3.7.3.1;3.7.3.2;9.6.2,True,True,True,True,False,True
+c01,3,posicional,discordam,concordam,ilegal,3.7.3.2,legal,legal,3.7.3.1;3.7.3.2,9.2.3.1;3.7.3;3.7.3.1;3.7.3.2;9.6.2,True,True,True,True,False,True
+c02,1,posicional,concordam,concordam,ilegal,3.7.3.1,ilegal,ilegal,3.7.3.2,3.7.3.2;9.2.3.1;3.7.3.1;3.7.1;3.7.3,True,True,True,True,True,True
+c02,2,posicional,concordam,concordam,ilegal,3.7.3.2,ilegal,ilegal,3.7.3.2,3.7.3.2;9.2.3.1;3.7.3.1;3.7.1;3.7.3,True,True,True,True,True,True
+c02,3,posicional,concordam,concordam,ilegal,3.7.3.2,ilegal,ilegal,3.7.3.2,3.7.3.2;9.2.3.1;3.7.3.1;3.7.1;3.7.3,True,True,True,True,True,True
+c03,1,posicional,concordam,concordam,ilegal,4.4.4,ilegal,ilegal,3.9.2;3.7.3.2,9.2.3.1;3.7.3;3.7.3.1;3.7.3.2;4.4.4,True,True,True,True,True,True
+c03,2,posicional,concordam,concordam,ilegal,4.4.4,ilegal,ilegal,3.9.2;3.7.3.2,9.2.3.1;3.7.3;3.7.3.1;3.7.3.2;4.4.4,True,True,True,True,True,True
+c03,3,posicional,concordam,concordam,ilegal,4.4.4,ilegal,ilegal,3.9.2;3.7.3.2,9.2.3.1;3.7.3;3.7.3.1;3.7.3.2;4.4.4,True,True,True,True,True,True
+c04,1,posicional,discordam,concordam,ilegal,4,legal,legal,3.7.3.1;3.7.3.2,9.2.3.1;3.7.3.1;3.7.3;3.7.3.2;9.6.2,True,False,True,True,False,True
+c04,2,posicional,discordam,concordam,ilegal,4,legal,legal,3.7.3.1;3.7.3.2,9.2.3.1;3.7.3.1;3.7.3;3.7.3.2;9.6.2,True,False,True,True,False,True
+c04,3,posicional,discordam,concordam,ilegal,4,legal,legal,3.7.3.1;3.7.3.2,9.2.3.1;3.7.3.1;3.7.3;3.7.3.2;9.6.2,True,False,True,True,False,True
+c05,1,posicional,concordam,concordam,legal,3.7.3.3,legal,legal,3.7.3.3,7.5.2;3.7.3.3;4.6.2;3.4;4.4.4,True,True,True,True,True,True
+c05,2,posicional,concordam,concordam,legal,3.7.3.3,legal,legal,3.7.3.3,7.5.2;3.7.3.3;4.6.2;3.4;4.4.4,True,True,True,True,True,True
+c05,3,posicional,concordam,concordam,legal,3.7.3.3,legal,legal,3.7.3.3,7.5.2;3.7.3.3;4.6.2;3.4;4.4.4,True,True,True,True,True,True
+c06,1,posicional,discordam,concordam,ilegal,7.5.2,legal,legal,3.7.3.3,3.7.3.3;7.5.2;3.5;3.4;4.4.1,True,True,True,True,False,True
+c06,2,posicional,discordam,concordam,ilegal,7.5.2,legal,legal,3.7.3.3,3.7.3.3;7.5.2;3.5;3.4;4.4.1,True,True,True,True,False,True
+c06,3,posicional,discordam,concordam,ilegal,7.5.2,legal,legal,3.7.3.3,3.7.3.3;7.5.2;3.5;3.4;4.4.1,True,True,True,True,False,True
+c07,1,posicional,concordam,concordam,ilegal,7.5.2,ilegal,ilegal,3.7.3.3,7.5.2;3.7.3.3;3.7.3.1;3.8.2;6.2.1.2,True,True,True,True,True,True
+c07,2,posicional,concordam,concordam,ilegal,7.5.2,ilegal,ilegal,3.7.3.3,7.5.2;3.7.3.3;3.7.3.1;3.8.2;6.2.1.2,True,True,True,True,True,True
+c07,3,posicional,concordam,concordam,ilegal,7.5.2,ilegal,ilegal,3.7.3.3,7.5.2;3.7.3.3;3.7.3.1;3.8.2;6.2.1.2,True,True,True,True,True,True
+c08,1,posicional,concordam,concordam,legal,3.7.3.3,legal,legal,3.7.3.3;3.9.1,3.7.3.3;3.6;3.7.3.5;8.1.1.2;6.11.2,True,True,True,True,True,True
+c08,2,posicional,concordam,concordam,legal,3.7.3.3,legal,legal,3.7.3.3;3.9.1,3.7.3.3;3.6;3.7.3.5;8.1.1.2;6.11.2,True,True,True,True,True,True
+c08,3,posicional,concordam,concordam,legal,3.7.3.3,legal,legal,3.7.3.3;3.9.1,3.7.3.3;3.6;3.7.3.5;8.1.1.2;6.11.2,True,True,True,True,True,True
+c09,1,posicional,discordam,concordam,ilegal,4.4.3,legal,legal,3.8.2,4.4.1;4.4.3;4.7.2;4.4.2;3.8.2.2,True,True,True,True,False,True
+c09,2,posicional,discordam,concordam,ilegal,4.4.3,legal,legal,3.8.2,4.4.1;4.4.3;4.7.2;4.4.2;3.8.2.2,True,True,True,True,False,True
+c09,3,posicional,discordam,concordam,ilegal,4.4.3,legal,legal,3.8.2,4.4.1;4.4.3;4.7.2;4.4.2;3.8.2.2,True,True,True,True,False,True
+c10,1,posicional,concordam,concordam,ilegal,4.4.3,ilegal,ilegal,3.8.2.2,4.4.3;4.4.1;4.7.2;4.4.2;3.8.2.2,True,True,True,True,True,True
+c10,2,posicional,concordam,concordam,ilegal,4.4.3,ilegal,ilegal,3.8.2.2,4.4.3;4.4.1;4.7.2;4.4.2;3.8.2.2,True,True,True,True,True,True
+c10,3,posicional,concordam,concordam,ilegal,4.4.3,ilegal,ilegal,3.8.2.2,4.4.3;4.4.1;4.7.2;4.4.2;3.8.2.2,True,True,True,True,True,True
+c11,1,posicional,concordam,concordam,ilegal,4.4.2,ilegal,ilegal,3.8.2.2,3.8.2.1;4.4.1;4.4.3;9.2.3.2;4.4.2,False,True,True,True,True,True
+c11,2,posicional,concordam,concordam,ilegal,4.4.2,ilegal,ilegal,3.8.2.2,3.8.2.1;4.4.1;4.4.3;9.2.3.2;4.4.2,False,True,True,True,True,True
+c11,3,posicional,concordam,concordam,ilegal,4.4.2,ilegal,ilegal,3.8.2.2,3.8.2.1;4.4.1;4.4.3;9.2.3.2;4.4.2,False,True,True,True,True,True
+c12,1,posicional,discordam,discordancia_esperada,ilegal,3,legal,legal,3.8.2.2,3.8.2.2;3.1.3;3.8.2.1;4.4.1;4.4.3,True,False,True,True,False,True
+c12,2,posicional,discordam,discordancia_esperada,ilegal,3,legal,legal,3.8.2.2,3.8.2.2;3.1.3;3.8.2.1;4.4.1;4.4.3,True,False,True,True,False,True
+c12,3,posicional,discordam,discordancia_esperada,ilegal,3,legal,legal,3.8.2.2,3.8.2.2;3.1.3;3.8.2.1;4.4.1;4.4.3,True,False,True,True,False,True
+c13,1,posicional,concordam,concordam,ilegal,4.4.1,ilegal,ilegal,3.8.2.1,3.8.2.1;9.2.3.2;4.4.1;4.7.2;4.4.3,True,True,True,True,True,True
+c13,2,posicional,concordam,concordam,ilegal,4.4.1,ilegal,ilegal,3.8.2.1,3.8.2.1;9.2.3.2;4.4.1;4.7.2;4.4.3,True,True,True,True,True,True
+c13,3,posicional,concordam,concordam,ilegal,4.4.1,ilegal,ilegal,3.8.2.1,3.8.2.1;9.2.3.2;4.4.1;4.7.2;4.4.3,True,True,True,True,True,True
+c14,1,posicional,concordam,concordam,ilegal,4.4.3,ilegal,ilegal,3.8.2.2,4.4.1;4.4.3;4.4.2;3.8.2.1;9.2.3.2,False,True,True,True,True,True
+c14,2,posicional,concordam,concordam,ilegal,4.4.3,ilegal,ilegal,3.8.2.2,4.4.1;4.4.3;4.4.2;3.8.2.1;9.2.3.2,False,True,True,True,True,True
+c14,3,posicional,concordam,concordam,ilegal,4.4.3,ilegal,ilegal,3.8.2.2,4.4.1;4.4.3;4.4.2;3.8.2.1;9.2.3.2,False,True,True,True,True,True
+c15,1,posicional,discordam,concordam,legal,3.6,ilegal,ilegal,3.9.2,3.6;3.8.2.1;4.6.2;9.2.3.2;3.7.3.3,False,True,True,True,False,True
+c15,2,posicional,discordam,concordam,legal,3.6,ilegal,ilegal,3.9.2,3.6;3.8.2.1;4.6.2;9.2.3.2;3.7.3.3,False,True,True,True,False,True
+c15,3,posicional,discordam,concordam,legal,3.6,ilegal,ilegal,3.9.2,3.6;3.8.2.1;4.6.2;9.2.3.2;3.7.3.3,False,True,True,True,False,True
+c16,1,posicional,concordam,concordam,ilegal,4.4.3,ilegal,ilegal,3.9.2,4.4.1;3.8.2;3.8.2.1;4.4.3;9.2.3.2,False,True,True,True,True,True
+c16,2,posicional,concordam,concordam,ilegal,4.4.1,ilegal,ilegal,3.9.2,4.4.1;3.8.2;3.8.2.1;4.4.3;9.2.3.2,False,True,True,True,True,True
+c16,3,posicional,concordam,concordam,ilegal,4.4.1,ilegal,ilegal,3.9.2,4.4.1;3.8.2;3.8.2.1;4.4.3;9.2.3.2,False,True,True,True,True,True
+c17,1,posicional,discordam,concordam,ilegal,3,legal,legal,3.9.1;3.8.1,4.4.1;3.9.2;4.4.2;4.4.3;9.2.3.2,False,False,True,True,False,True
+c17,2,posicional,discordam,concordam,ilegal,3,legal,legal,3.9.1;3.8.1,4.4.1;3.9.2;4.4.2;4.4.3;9.2.3.2,False,False,True,True,False,True
+c17,3,posicional,discordam,concordam,ilegal,3,legal,legal,3.9.1;3.8.1,4.4.1;3.9.2;4.4.2;4.4.3;9.2.3.2,False,False,True,True,False,True
+c18,1,posicional,concordam,concordam,ilegal,3.9.2,ilegal,ilegal,3.9.2,3.6;3.9.2;3.7.3.1;3.7.3.3;3.8.2,True,True,True,True,True,True
+c18,2,posicional,concordam,concordam,ilegal,3.9.2,ilegal,ilegal,3.9.2,3.6;3.9.2;3.7.3.1;3.7.3.3;3.8.2,True,True,True,True,True,True
+c18,3,posicional,concordam,concordam,ilegal,3.9.2,ilegal,ilegal,3.9.2,3.6;3.9.2;3.7.3.1;3.7.3.3;3.8.2,True,True,True,True,True,True
+c19,1,posicional,concordam,concordam,legal,5.1.2,legal,legal,1.4.1;5.1.1,9.6.2;5.1.1;5.1.2;1.5;5.2.1,True,True,True,True,True,True
+c19,2,posicional,concordam,concordam,legal,5.1.2,legal,legal,1.4.1;5.1.1,9.6.2;5.1.1;5.1.2;1.5;5.2.1,True,True,True,True,True,True
+c19,3,posicional,concordam,concordam,legal,5.1.2,legal,legal,1.4.1;5.1.1,9.6.2;5.1.1;5.1.2;1.5;5.2.1,True,True,True,True,True,True
+c20,1,posicional,concordam,concordam,legal,5.1.2,legal,legal,5.1.1;3.9.1,9.6.2;5.1.1;5.1.2;8.1.5;5.2.1,True,True,True,True,True,True
+c20,2,posicional,concordam,concordam,legal,5.1.2,legal,legal,5.1.1;3.9.1,9.6.2;5.1.1;5.1.2;8.1.5;5.2.1,True,True,True,True,True,True
+c20,3,posicional,concordam,concordam,legal,5.1.2,legal,legal,5.1.1;3.9.1,9.6.2;5.1.1;5.1.2;8.1.5;5.2.1,True,True,True,True,True,True
+c21,1,posicional,discordam,concordam,legal,4.4.1,afogado,afogado,5.2.1,4.4.3;4.7.2;3.10.3;3.9.2;4.4.1,False,True,True,True,False,True
+c21,2,posicional,discordam,concordam,legal,4.4.1,afogado,afogado,5.2.1,4.4.3;4.7.2;3.10.3;3.9.2;4.4.1,False,True,True,True,False,True
+c21,3,posicional,discordam,concordam,legal,4.4.1,afogado,afogado,5.2.1,4.4.3;4.7.2;3.10.3;3.9.2;4.4.1,False,True,True,True,False,True
+c22,1,posicional,recusa,concordam,nao consta no material,,posicao_morta,posicao_morta,5.2.2,1.5;1.4.1;5.1.1;3.6;5.2.2,True,,,False,False,True
+c22,2,posicional,recusa,concordam,nao consta no material,,posicao_morta,posicao_morta,5.2.2,1.5;1.4.1;5.1.1;3.6;5.2.2,True,,,False,False,True
+c22,3,posicional,recusa,concordam,nao consta no material,,posicao_morta,posicao_morta,5.2.2,1.5;1.4.1;5.1.1;3.6;5.2.2,True,,,False,False,True
+c23,1,posicional,discordam,concordam,legal,9.3.1,cinquenta_lances,cinquenta_lances,9.3,9.3.2;9.6.2;9.3.1;9.5.1;8.1.2,True,True,True,True,False,True
+c23,2,posicional,discordam,concordam,legal,9.3.1,cinquenta_lances,cinquenta_lances,9.3,9.3.2;9.6.2;9.3.1;9.5.1;8.1.2,True,True,True,True,False,True
+c23,3,posicional,discordam,concordam,legal,9.3.1,cinquenta_lances,cinquenta_lances,9.3,9.3.2;9.6.2;9.3.1;9.5.1;8.1.2,True,True,True,True,False,True
+c24,1,posicional,discordam,recusa,legal,4.4.3,23_lances,23_lances,,4.7.2;9.6.2;2.2;3.10.3;4.4.3,,True,True,False,False,True
+c24,2,posicional,discordam,recusa,legal,4.4.3,23_lances,23_lances,,4.7.2;9.6.2;2.2;3.10.3;4.4.3,,True,True,False,False,True
+c24,3,posicional,discordam,recusa,legal,4.4.3,23_lances,23_lances,,4.7.2;9.6.2;2.2;3.10.3;4.4.3,,True,True,False,False,True
+c25,1,normativa,sem_verificacao,sem_verificacao,ilegal,7.5.3,,,7.5.1,7.5.3;7.5.1;7.5.4;6.2.2;6.2.1,True,True,True,True,,
+c25,2,normativa,sem_verificacao,sem_verificacao,ilegal,7.5.3,,,7.5.1,7.5.3;7.5.1;7.5.4;6.2.2;6.2.1,True,True,True,True,,
+c25,3,normativa,sem_verificacao,sem_verificacao,ilegal,7.5.3,,,7.5.1,7.5.3;7.5.1;7.5.4;6.2.2;6.2.1,True,True,True,True,,
+c26,1,normativa,sem_verificacao,sem_verificacao,game is drawn,7.5.5,,,7.5.5,7.5.1;7.5.5;7.5.4;7.2.1;4.7.2,True,True,True,True,,
+c26,2,normativa,sem_verificacao,sem_verificacao,game is drawn,7.5.5,,,7.5.5,7.5.1;7.5.5;7.5.4;7.2.1;4.7.2,True,True,True,True,,
+c26,3,normativa,sem_verificacao,sem_verificacao,game is drawn,7.5.5,,,7.5.5,7.5.1;7.5.5;7.5.4;7.2.1;4.7.2,True,True,True,True,,
+c27,1,normativa,sem_verificacao,sem_verificacao,reinstated position,7.6,,,7.4,7.6;7.2.1;7.4.1;4.2;7.2.2,True,True,True,True,,
+c27,2,normativa,sem_verificacao,sem_verificacao,reinstated position,7.6,,,7.4,7.6;7.2.1;7.4.1;4.2;7.2.2,True,True,True,True,,
+c27,3,normativa,sem_verificacao,sem_verificacao,reinstated position,7.6,,,7.4,7.6;7.2.1;7.4.1;4.2;7.2.2,True,True,True,True,,
+c28,1,normativa,recusa,recusa,nao consta no material,,,,9.2,9.2;9.6.1;11.12;7.3;9.2.3.1,True,,,True,,
+c28,2,normativa,recusa,recusa,nao consta no material,,,,9.2,9.2;9.6.1;11.12;7.3;9.2.3.1,True,,,True,,
+c28,3,normativa,recusa,recusa,nao consta no material,,,,9.2,9.2;9.6.1;11.12;7.3;9.2.3.1,True,,,True,,
+c29,1,normativa,recusa,sem_verificacao,nao consta no material,,,,6.9,6.8;11.3.2.2;8.5.1;6.4;5.1.2,False,,,False,,
+c29,2,normativa,recusa,sem_verificacao,nao consta no material,,,,6.9,6.8;11.3.2.2;8.5.1;6.4;5.1.2,False,,,False,,
+c29,3,normativa,recusa,sem_verificacao,nao consta no material,,,,6.9,6.8;11.3.2.2;8.5.1;6.4;5.1.2,False,,,False,,
+c30,1,normativa,sem_verificacao,sem_verificacao,ilegal,12.8,,,11.3.2,12.8;11.3.2;8.1.2;11.5;8.1.5,True,True,True,True,,
+c30,2,normativa,sem_verificacao,sem_verificacao,ilegal,12.8,,,11.3.2,12.8;11.3.2;8.1.2;11.5;8.1.5,True,True,True,True,,
+c30,3,normativa,sem_verificacao,sem_verificacao,ilegal,12.8,,,11.3.2,12.8;11.3.2;8.1.2;11.5;8.1.5,True,True,True,True,,
+c31,1,normativa,recusa,recusa,nao consta no material,,,,,3.8.2;4.7.2;4.4.1;4.4.3;6.10,,,,True,,
+c31,2,normativa,recusa,recusa,nao consta no material,,,,,3.8.2;4.7.2;4.4.1;4.4.3;6.10,,,,True,,
+c31,3,normativa,recusa,recusa,nao consta no material,,,,,3.8.2;4.7.2;4.4.1;4.4.3;6.10,,,,True,,
+c32,1,normativa,recusa,recusa,nao consta no material,,,,,10.1;12.9.6;11.7;12.9.5;11.8,,,,True,,
+c32,2,normativa,recusa,recusa,nao consta no material,,,,,10.1;12.9.6;11.7;12.9.5;11.8,,,,True,,
+c32,3,normativa,recusa,recusa,nao consta no material,,,,,10.1;12.9.6;11.7;12.9.5;11.8,,,,True,,
+c33,1,normativa,recusa,recusa,nao consta no material,,,,,3.7.3.3;9.2.3.1;7.5.2;3.7.3.1;3.7.1,,,,True,,
+c33,2,normativa,recusa,recusa,nao consta no material,,,,,3.7.3.3;9.2.3.1;7.5.2;3.7.3.1;3.7.1,,,,True,,
+c33,3,normativa,recusa,recusa,nao consta no material,,,,,3.7.3.3;9.2.3.1;7.5.2;3.7.3.1;3.7.1,,,,True,,
+c34,1,normativa,recusa,recusa,nao consta no material,,,,,0.2;8.1.1.2;6.3.2;8.1.5;8.5.1,,,,True,,
+c34,2,normativa,recusa,recusa,nao consta no material,,,,,0.2;8.1.1.2;6.3.2;8.1.5;8.5.1,,,,True,,
+c34,3,normativa,recusa,recusa,nao consta no material,,,,,0.2;8.1.1.2;6.3.2;8.1.5;8.5.1,,,,True,,
+c35,1,normativa,recusa,recusa,nao consta no material,,,,,5.2.3;5.1.2;9.5.1;9.6;5.2.1,,,,True,,
+c35,2,normativa,recusa,recusa,nao consta no material,,,,,5.2.3;5.1.2;9.5.1;9.6;5.2.1,,,,True,,
+c35,3,normativa,recusa,recusa,nao consta no material,,,,,5.2.3;5.1.2;9.5.1;9.6;5.2.1,,,,True,,

@@ -12,7 +12,6 @@ Gerado por `python3 src/grader.py` a partir de `traces/c*_r*.json`. Regras dos c
 | citacao_identificavel | 72/81 | 24/27 | c04, c12, c17 |
 | trecho_ancorado | 81/81 | 27/27 | - |
 | recusa_correta | 96/105 | 32/35 | c22, c24, c29 |
-| revisao_registrada | 2/105 | 0/35 | c01, c02, c03, c04, c05, c06, c07, c08, c09, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28, c29, c30, c31, c32, c33, c34, c35 |
 | veredito_a_correto | 39/72 | 13/24 | c01, c04, c06, c09, c12, c15, c17, c21, c22, c23, c24 |
 | veredito_b_correto | 72/72 | 24/24 | - |
 
@@ -39,11 +38,10 @@ Gerado por `python3 src/grader.py` a partir de `traces/c*_r*.json`. Regras dos c
 
 - Artigo do gabarito entre os 5 trechos: 22/29 casos
 
-## Revisao humana
+## Revisao humana (posterior, em resultados/rotulos_humanos.json)
 
-- Aprovacao nas execucoes oficiais: {'pendente': 103, 'rejeitado': 2}
-- Interface (exploratoria, fora da contagem oficial): {'openai/gpt-oss-120b:aprovado': 4, 'qwen3:8b:pendente': 7, 'openai/gpt-oss-120b:rejeitado': 2, 'qwen3:8b:aprovado': 6, 'openai/gpt-oss-120b:revisao_humana': 1, 'openai/gpt-oss-120b:pendente': 4, 'qwen3:8b:rejeitado': 22, 'qwen3:8b:revisao_humana': 4}
-- Rotulos por caso: 35 casos; trechos {'suficiente': 15, 'ausente': 12, 'parcial': 8}; revisao {'ok': 26, 'ajustar': 4, 'sem_rotulo': 4, 'remover': 1}
-- Casos marcados para ajustar ou remover: c06, c20, c22, c27, c31
-- Casos sem revisao: c21, c23, c28, c29
-- Traces oficiais com rotulo de resposta correta: c34_r1.json, c35_r1.json
+- Casos rotulados: 35
+- Trechos recuperados: {'suficiente': 15, 'ausente': 12, 'parcial': 8}
+- Revisao do caso: {'ok': 26, 'ajustar': 4, 'remover': 1}
+- Achados da revisao, declarados como limitacao (a suite fica congelada depois das execucoes): c06 ajustar, c20 ajustar, c22 remover, c27 ajustar, c31 ajustar
+- Traces com rotulo de resposta: 41

@@ -48,49 +48,6 @@
         "c29"
       ]
     },
-    "revisao_registrada": {
-      "execucoes_passam": 2,
-      "execucoes_aplicaveis": 105,
-      "casos_pass3": 0,
-      "casos_aplicaveis": 35,
-      "casos_falham_alguma": [
-        "c01",
-        "c02",
-        "c03",
-        "c04",
-        "c05",
-        "c06",
-        "c07",
-        "c08",
-        "c09",
-        "c10",
-        "c11",
-        "c12",
-        "c13",
-        "c14",
-        "c15",
-        "c16",
-        "c17",
-        "c18",
-        "c19",
-        "c20",
-        "c21",
-        "c22",
-        "c23",
-        "c24",
-        "c25",
-        "c26",
-        "c27",
-        "c28",
-        "c29",
-        "c30",
-        "c31",
-        "c32",
-        "c33",
-        "c34",
-        "c35"
-      ]
-    },
     "veredito_a_correto": {
       "execucoes_passam": 39,
       "execucoes_aplicaveis": 72,
@@ -205,50 +162,24 @@
     "de": 29
   },
   "revisao_humana": {
-    "aprovacao_execucoes_oficiais": {
-      "pendente": 103,
-      "rejeitado": 2
+    "casos_rotulados": 35,
+    "trechos": {
+      "suficiente": 15,
+      "ausente": 12,
+      "parcial": 8
     },
-    "interface_exploratoria": {
-      "openai/gpt-oss-120b:aprovado": 4,
-      "qwen3:8b:pendente": 7,
-      "openai/gpt-oss-120b:rejeitado": 2,
-      "qwen3:8b:aprovado": 6,
-      "openai/gpt-oss-120b:revisao_humana": 1,
-      "openai/gpt-oss-120b:pendente": 4,
-      "qwen3:8b:rejeitado": 22,
-      "qwen3:8b:revisao_humana": 4
+    "revisao_do_caso": {
+      "ok": 26,
+      "ajustar": 4,
+      "remover": 1
     },
-    "rotulos": {
-      "casos_rotulados": 35,
-      "trechos": {
-        "suficiente": 15,
-        "ausente": 12,
-        "parcial": 8
-      },
-      "revisao_do_caso": {
-        "ok": 26,
-        "ajustar": 4,
-        "sem_rotulo": 4,
-        "remover": 1
-      },
-      "casos_ajustar_ou_remover": [
-        "c06",
-        "c20",
-        "c22",
-        "c27",
-        "c31"
-      ],
-      "casos_sem_revisao": [
-        "c21",
-        "c23",
-        "c28",
-        "c29"
-      ],
-      "traces_oficiais_com_resposta_correta": [
-        "c34_r1.json",
-        "c35_r1.json"
-      ]
-    }
+    "achados_da_revisao": {
+      "c06": "ajustar",
+      "c20": "ajustar",
+      "c22": "remover",
+      "c27": "ajustar",
+      "c31": "ajustar"
+    },
+    "traces_com_rotulo_de_resposta": 41
   }
 }

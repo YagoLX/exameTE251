@@ -22,9 +22,9 @@ Criterios binarios por execucao (regras declaradas aqui, aplicadas igual a todas
                          Nao se aplica quando o Ramo A recusou ou nao devolveu JSON.
   recusa_correta         Recusou ("nao consta no material") se e somente se a suite
                          espera recusa (parada_esperada == "recusa").
-  revisao_registrada     O trace tem uma decisao humana gravada (aprovado, rejeitado ou
-                         revisao_humana). "pendente" nao conta. Em nenhum caso o agente
-                         emite resposta com a aprovacao pendente.
+
+A revisao humana nao e criterio automatico: ela foi feita depois das execucoes,
+caso a caso, e o grader so resume os rotulos de resultados/rotulos_humanos.json.
 
 Alem disso, so para os casos posicionais:
   veredito_a_correto     veredito do Ramo A == veredito_ouro (normalizado como no comparador)
@@ -53,8 +53,7 @@ RAIZ = Path(__file__).resolve().parents[1]
 RES = RAIZ / "resultados"
 SUITE = {json.loads(l)["id"]: json.loads(l)
          for l in (RAIZ / "suite" / "suite_30.jsonl").open(encoding="utf-8") if l.strip()}
-REVISADO = {"aprovado", "rejeitado", "revisao_humana"}
-CRITERIOS = ["citacao_identificavel", "trecho_ancorado", "recusa_correta", "revisao_registrada"]
+CRITERIOS = ["citacao_identificavel", "trecho_ancorado", "recusa_correta"]
 
 
 def alnum(s) -> str:
@@ -78,7 +77,6 @@ def avaliar(t: dict) -> dict:
     recusou = bool(resp) and _norm(resp.get("veredito", "")) == RECUSA
     respondeu = bool(resp) and not recusou
     ouro = caso.get("artigo_ouro") or []
-    decisao = (t.get("aprovacao") or {}).get("decisao", "")
 
     r = {
         "caso": t["caso"], "execucao": t["execucao"], "classe": t["classe"],
@@ -87,7 +85,6 @@ def avaliar(t: dict) -> dict:
         "veredito_b": (t["ramo_b"] or {}).get("veredito", ""), "veredito_ouro": caso.get("veredito_ouro") or "",
         "artigo_ouro": ";".join(ouro), "artigos_recuperados": ";".join(arts),
         "ouro_no_topk": ouro_no_topk(arts, ouro) if ouro else "",
-        "aprovacao": decisao,
     }
     if respondeu:
         r["citacao_identificavel"] = numero_artigo(resp.get("artigo")) in arts
@@ -96,7 +93,6 @@ def avaliar(t: dict) -> dict:
     else:
         r["citacao_identificavel"] = r["trecho_ancorado"] = ""      # nao se aplica
     r["recusa_correta"] = recusou == (caso["parada_esperada"] == "recusa")
-    r["revisao_registrada"] = decisao in REVISADO
 
     if t["classe"] == "posicional":
         ouro_v = caso["veredito_ouro"]
@@ -167,22 +163,17 @@ def main() -> None:
     com_ouro = [k for k in por_caso if SUITE[k].get("artigo_ouro")]
     busca_top5 = sum(por_caso[k][0]["ouro_no_topk"] is True for k in com_ouro)
 
-    # ---- revisao humana ----
-    aprov = Counter(l["aprovacao"] for l in linhas)
-    interface = Counter()
-    for f in glob.glob(str(RAIZ / "traces" / "interface" / "*.json")):
-        t = json.loads(Path(f).read_text(encoding="utf-8"))
-        interface[f'{t["config"]["modelo"]}:{(t.get("aprovacao") or {}).get("decisao")}'] += 1
+    # ---- revisao humana (posterior, por rotulos) ----
     rot_path = RES / "rotulos_humanos.json"
     rot = json.loads(rot_path.read_text(encoding="utf-8")) if rot_path.exists() else {"casos": {}, "traces": {}}
     rot_casos = rot.get("casos", {})
     rotulos = {
         "casos_rotulados": len(rot_casos),
-        "trechos": dict(Counter(v.get("trechos") or "sem_rotulo" for v in rot_casos.values())),
-        "revisao_do_caso": dict(Counter(v.get("revisao") or "sem_rotulo" for v in rot_casos.values())),
-        "casos_ajustar_ou_remover": sorted(k for k, v in rot_casos.items() if v.get("revisao") in ("ajustar", "remover")),
-        "casos_sem_revisao": sorted(k for k in SUITE if not (rot_casos.get(k) or {}).get("revisao")),
-        "traces_oficiais_com_resposta_correta": sorted(k for k in rot.get("traces", {}) if not k.startswith("interface")),
+        "trechos": dict(Counter(v["trechos"] for v in rot_casos.values() if v.get("trechos"))),
+        "revisao_do_caso": dict(Counter(v["revisao"] for v in rot_casos.values() if v.get("revisao"))),
+        "achados_da_revisao": {k: v["revisao"] for k, v in sorted(rot_casos.items())
+                               if v.get("revisao") in ("ajustar", "remover")},
+        "traces_com_rotulo_de_resposta": len(rot.get("traces", {})),
     }
 
     resumo = {
@@ -203,8 +194,7 @@ def main() -> None:
         },
         "variacao_entre_repeticoes": variaram,
         "busca_ouro_no_top5": {"casos": busca_top5, "de": len(com_ouro)},
-        "revisao_humana": {"aprovacao_execucoes_oficiais": dict(aprov),
-                           "interface_exploratoria": dict(interface), "rotulos": rotulos},
+        "revisao_humana": rotulos,
     }
 
     RES.mkdir(exist_ok=True)
@@ -244,13 +234,13 @@ def markdown(r: dict) -> str:
           f"- Casos que variaram entre as 3 repeticoes: {len(r['variacao_entre_repeticoes'])} "
           f"({'; '.join(f'{k}: {v}' for k, v in r['variacao_entre_repeticoes'].items()) or '-'})",
           "", "## Busca", "", f"- Artigo do gabarito entre os 5 trechos: {r['busca_ouro_no_top5']['casos']}/{r['busca_ouro_no_top5']['de']} casos",
-          "", "## Revisao humana", "",
-          f"- Aprovacao nas execucoes oficiais: {h['aprovacao_execucoes_oficiais']}",
-          f"- Interface (exploratoria, fora da contagem oficial): {h['interface_exploratoria']}",
-          f"- Rotulos por caso: {h['rotulos']['casos_rotulados']} casos; trechos {h['rotulos']['trechos']}; revisao {h['rotulos']['revisao_do_caso']}",
-          f"- Casos marcados para ajustar ou remover: {', '.join(h['rotulos']['casos_ajustar_ou_remover']) or '-'}",
-          f"- Casos sem revisao: {', '.join(h['rotulos']['casos_sem_revisao']) or '-'}",
-          f"- Traces oficiais com rotulo de resposta correta: {', '.join(h['rotulos']['traces_oficiais_com_resposta_correta']) or '-'}", ""]
+          "", "## Revisao humana (posterior, em resultados/rotulos_humanos.json)", "",
+          f"- Casos rotulados: {h['casos_rotulados']}",
+          f"- Trechos recuperados: {h['trechos']}",
+          f"- Revisao do caso: {h['revisao_do_caso']}",
+          f"- Achados da revisao, declarados como limitacao (a suite fica congelada depois das execucoes): "
+          f"{', '.join(f'{k} {v}' for k, v in h['achados_da_revisao'].items()) or '-'}",
+          f"- Traces com rotulo de resposta: {h['traces_com_rotulo_de_resposta']}", ""]
     return "\n".join(L)
 
 
