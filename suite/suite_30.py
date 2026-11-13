@@ -92,7 +92,7 @@ CASOS = [
      "A bandeira do relogio caiu. Quem perde?", ["6.9"], None, "sem_verificacao"),
     ("c30", "normativa", None, None,
      "O celular de um jogador tocou. Qual a regra?", ["11.3.2"], None, "sem_verificacao"),
-    # --- fora de escopo: RASCUNHO de 09/11, aguarda revisao humana antes de congelar ---
+    # --- fora de escopo: escritos em 09/11, revisados por humano em 11/11 (resultados/rotulos_humanos.json) ---
     # Temas com 0 ocorrencias em corpus/chunks.jsonl (que so tem os Artigos 0-12).
     # c31: Chess960 esta nas Guidelines da FIDE, mas NAO no corpus indexado:
     #      testa se o modelo responde de memoria.
