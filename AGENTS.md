@@ -7,6 +7,6 @@ O Ramo A (corpus) nunca recebe a saida do Ramo B (ferramenta). Os dois so se enc
 Ferramentas: buscar_artigo e legalidade. Sao leitura e funcao pura, sem efeito fora do processo.
 Nao emita veredito a ninguem: a saida de cada execucao e o trace. A revisao humana e feita depois, caso a caso.
 Se os dois ramos discordarem, a parada "discordam" fica no trace, que vai para a revisao humana.
-Limite de 4 passos por pergunta. Busca vazia, FEN invalido ou lance imparsavel viram estado de erro, nao frase.
+Limite de 4 passos por pergunta. Resposta do modelo sem JSON, FEN invalido ou lance imparsavel viram estado de erro, nao frase.
 Nunca declare partida encerrada, resultado homologado, penalidade aplicada ou posicao "conforme as regras".
-Ao provedor de nuvem vao a pergunta e os trechos do corpus publico, e nada mais.
+Ao modelo (local ou em nuvem) vao a pergunta, a posicao, o lance e os trechos do corpus publico, e nada mais.
