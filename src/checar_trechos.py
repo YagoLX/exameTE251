@@ -5,8 +5,8 @@ checar_trechos.py - planilha para a checagem HUMANA dos trechos recuperados.
 Para cada caso da suite: consulta (= pergunta), top-k (artigo + texto), e se
 algum artigo_ouro esta no top-k (calculado em codigo, por prefixo: ouro 3.8.2
 casa com 3.8.2.2 recuperado e vice-versa NAO; so o recuperado igual ou mais
-especifico que o ouro conta). A coluna `rotulo` fica VAZIA: e preenchida a mao
-com suficiente / parcial / ausente, lendo os trechos.
+especifico que o ouro conta). O rotulo humano dos trechos (suficiente / parcial /
+ausente) fica em resultados/rotulos_humanos.json, gravado pela interface.
 
 Uso:
     python src/checar_trechos.py                  # resultados/checagem_trechos_tfidf_k3.csv
@@ -45,7 +45,7 @@ def main() -> None:
     campos = ["caso", "classe", "consulta", "artigo_ouro"]
     for i in range(1, a.k + 1):
         campos += [f"top{i}_artigo", f"top{i}_score", f"top{i}_texto"]
-    campos += ["ouro_no_topk", "rotulo"]
+    campos += ["ouro_no_topk"]
 
     acertos = com_ouro = 0
     with destino.open("w", encoding="utf-8", newline="") as f:
@@ -54,7 +54,7 @@ def main() -> None:
         for c in casos:
             hits = idx.buscar(c["pergunta"], k=a.k)
             linha = {"caso": c["id"], "classe": c["classe"], "consulta": c["pergunta"],
-                     "artigo_ouro": "|".join(c["artigo_ouro"]), "rotulo": ""}
+                     "artigo_ouro": "|".join(c["artigo_ouro"])}
             for i, h in enumerate(hits, 1):
                 linha[f"top{i}_artigo"] = h["artigo"]
                 linha[f"top{i}_score"] = h["score"]
@@ -71,7 +71,7 @@ def main() -> None:
                   f" ouro={linha['artigo_ouro']:<16} top={'|'.join(h['artigo'] for h in hits)}")
 
     print(f"\nartigo_ouro no top-{a.k}: {acertos}/{com_ouro} casos com ouro")
-    print(f"{destino.relative_to(RAIZ)}  (coluna 'rotulo' vazia: preencher a mao)")
+    print(destino.relative_to(RAIZ))
 
 
 if __name__ == "__main__":
