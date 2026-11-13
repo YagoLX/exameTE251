@@ -1,0 +1,88 @@
+{
+  "caso": "c28",
+  "execucao": 2,
+  "inicio": "2026-11-11T13:36:05+00:00",
+  "classe": "normativa",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "Was there a threefold repetition in this game?",
+  "fen": null,
+  "lance": null,
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "9.2",
+        "texto": "The game is drawn, upon a correct claim by a player having the move, when the same position for at least the third time (not necessarily by a repetition of moves):",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.7969
+      },
+      {
+        "artigo": "9.6.1",
+        "texto": "the same position has appeared, as in 9.2.2 at least five times.",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.7797
+      },
+      {
+        "artigo": "11.12",
+        "texto": "Checking a ‘three times occurrence of the position’ or a ’50 moves’ claim is a duty of the players, under supervision of the arbiter.",
+        "artigo_titulo": "Article 11: The Conduct of the Players",
+        "score": 0.7778
+      },
+      {
+        "artigo": "7.3",
+        "texto": "If a game has started with colours reversed then, if less than 10 moves have been made by both players, it shall be discontinued and a new game played with the correct colours. After 10 moves or more, the game shall continue.",
+        "artigo_titulo": "Article 7: Irregularities",
+        "score": 0.7673
+      },
+      {
+        "artigo": "9.2.3.1",
+        "texto": "at the start of the sequence a pawn could have been captured en passant.",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.763
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 9.2 (Article 9: The Drawn Game)\nThe game is drawn, upon a correct claim by a player having the move, when the same position for at least the third time (not necessarily by a repetition of moves):\n\n[2] Article 9.6.1 (Article 9: The Drawn Game)\nthe same position has appeared, as in 9.2.2 at least five times.\n\n[3] Article 11.12 (Article 11: The Conduct of the Players)\nChecking a ‘three times occurrence of the position’ or a ’50 moves’ claim is a duty of the players, under supervision of the arbiter.\n\n[4] Article 7.3 (Article 7: Irregularities)\nIf a game has started with colours reversed then, if less than 10 moves have been made by both players, it shall be discontinued and a new game played with the correct colours. After 10 moves or more, the game shall continue.\n\n[5] Article 9.2.3.1 (Article 9: The Drawn Game)\nat the start of the sequence a pawn could have been captured en passant.\n\nPOSITION\nFEN: (none)\n(no position given)\n\nMOVE IN QUESTION\n(no specific move)\n\nQUESTION\nWas there a threefold repetition in this game?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "6e1de3e5ae3b428e0a20e63f0055dd1d82a88527f395e6c13460714d328d8869",
+    "bruto": "{\n  \"veredito\": \"nao consta no material\",\n  \"artigo\": null,\n  \"trecho_citado\": null,\n  \"justificativa\": \"A position and move in question are not provided, making it impossible to determine if there was a threefold repetition.\"\n}",
+    "resposta": {
+      "veredito": "nao consta no material",
+      "artigo": null,
+      "trecho_citado": null,
+      "justificativa": "A position and move in question are not provided, making it impossible to determine if there was a threefold repetition."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 508,
+        "prompt_tokens_details": {
+          "cached_tokens": 507
+        },
+        "completion_tokens": 64,
+        "total_tokens": 572
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": null,
+  "parada": "recusa",
+  "comparador": {
+    "parada": "recusa",
+    "motivo": "sem FEN: nada a comparar"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm"
+  ],
+  "aprovacao": {
+    "decisao": "pendente",
+    "motivo": "sem terminal interativo",
+    "em": "2026-11-11T13:36:05+00:00"
+  }
+}

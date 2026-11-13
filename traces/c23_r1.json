@@ -1,0 +1,104 @@
+{
+  "caso": "c23",
+  "execucao": 1,
+  "inicio": "2026-11-11T13:26:48+00:00",
+  "classe": "posicional",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "Nobody has moved a pawn or captured for 50 moves. Can I claim a draw?",
+  "fen": "8/8/4k3/8/8/4K3/8/7R w - - 100 80",
+  "lance": null,
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "9.3.2",
+        "texto": "the last 50 moves by each player have been completed without the movement of any pawn and without any capture.",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.8935
+      },
+      {
+        "artigo": "9.6.2",
+        "texto": "any series of at least 75 moves have been made by each player without the movement of any pawn and without any capture. If the last move resulted in checkmate, that shall take precedence.",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.8794
+      },
+      {
+        "artigo": "9.3.1",
+        "texto": "he/she indicates his/her move, which cannot be changed, by writing it on the paper scoresheet or entering it on the electronic scoresheet and declares to the arbiter his/her intention to make this move which will result in the last 50 moves by each player having been made without the movement of any pawn and without any capture, or",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.8749
+      },
+      {
+        "artigo": "9.5.1",
+        "texto": "If a player claims a draw under Article 9.2 or 9.3, he/she or the arbiter shall pause the chessclock. He/She is not allowed to withdraw his/her claim.",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.871
+      },
+      {
+        "artigo": "8.1.2",
+        "texto": "It is forbidden to record the moves in advance, unless the player is claiming a draw according to Article 9.2, or 9.3 or adjourning a game according to Guidelines I.1.1",
+        "artigo_titulo": "Article 8: The recording of the moves",
+        "score": 0.8565
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 9.3.2 (Article 9: The Drawn Game)\nthe last 50 moves by each player have been completed without the movement of any pawn and without any capture.\n\n[2] Article 9.6.2 (Article 9: The Drawn Game)\nany series of at least 75 moves have been made by each player without the movement of any pawn and without any capture. If the last move resulted in checkmate, that shall take precedence.\n\n[3] Article 9.3.1 (Article 9: The Drawn Game)\nhe/she indicates his/her move, which cannot be changed, by writing it on the paper scoresheet or entering it on the electronic scoresheet and declares to the arbiter his/her intention to make this move which will result in the last 50 moves by each player having been made without the movement of any pawn and without any capture, or\n\n[4] Article 9.5.1 (Article 9: The Drawn Game)\nIf a player claims a draw under Article 9.2 or 9.3, he/she or the arbiter shall pause the chessclock. He/She is not allowed to withdraw his/her claim.\n\n[5] Article 8.1.2 (Article 8: The recording of the moves)\nIt is forbidden to record the moves in advance, unless the player is claiming a draw according to Article 9.2, or 9.3 or adjourning a game according to Guidelines I.1.1\n\nPOSITION\nFEN: 8/8/4k3/8/8/4K3/8/7R w - - 100 80\n. . . . . . . .\n. . . . . . . .\n. . . . k . . .\n. . . . . . . .\n. . . . . . . .\n. . . . K . . .\n. . . . . . . .\n. . . . . . . R\n(uppercase = White, lowercase = Black; White to move)\n\nMOVE IN QUESTION\n(no specific move)\n\nQUESTION\nNobody has moved a pawn or captured for 50 moves. Can I claim a draw?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "fcd350979e7802f5be4417e89c9a81436372c9b4579dfb9873100dacb9b29e15",
+    "bruto": "{\n  \"veredito\": \"legal\",\n  \"artigo\": \"9.3.1\",\n  \"trecho_citado\": \"he/she indicates his/her move, which cannot be changed, by writing it on the paper scoresheet or entering it on the electronic scoresheet and declares to the arbiter his/her intention to make this move which will result in the last 50 moves by each player having been made without the movement of any pawn and without any capture,\",\n  \"justificativa\": \"The position meets the criteria for a draw under Article 9.3.1 as no pawn has been moved and no capture has occurred for the last 50 moves.\"\n}",
+    "resposta": {
+      "veredito": "legal",
+      "artigo": "9.3.1",
+      "trecho_citado": "he/she indicates his/her move, which cannot be changed, by writing it on the paper scoresheet or entering it on the electronic scoresheet and declares to the arbiter his/her intention to make this move which will result in the last 50 moves by each player having been made without the movement of any pawn and without any capture,",
+      "justificativa": "The position meets the criteria for a draw under Article 9.3.1 as no pawn has been moved and no capture has occurred for the last 50 moves."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 689,
+        "prompt_tokens_details": {
+          "cached_tokens": 29
+        },
+        "completion_tokens": 144,
+        "total_tokens": 833
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": {
+    "fen": "8/8/4k3/8/8/4K3/8/7R w - - 100 80",
+    "lance": null,
+    "fonte": "python-chess 1.11.2",
+    "veredito": "cinquenta_lances",
+    "flags": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": false,
+      "material_insuficiente": false,
+      "cinquenta_lances": true,
+      "n_lances_legais": 22,
+      "vez_de": "brancas"
+    }
+  },
+  "parada": "discordam",
+  "comparador": {
+    "parada": "discordam",
+    "motivo": "A='legal' B='cinquenta_lances'"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm",
+    "legalidade",
+    "comparador"
+  ],
+  "aprovacao": {
+    "decisao": "pendente",
+    "motivo": "sem terminal interativo",
+    "em": "2026-11-11T13:26:48+00:00"
+  }
+}

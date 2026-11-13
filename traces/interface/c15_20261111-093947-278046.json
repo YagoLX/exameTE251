@@ -1,0 +1,104 @@
+{
+  "caso": "c15",
+  "execucao": "interface",
+  "inicio": "2026-11-11T12:39:47+00:00",
+  "classe": "posicional",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "Can I move my knight off e2?",
+  "fen": "4r2k/8/8/8/8/8/4N3/4K3 w - - 0 1",
+  "lance": "e2c3",
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "3.6",
+        "texto": "The knight may move to one of the squares nearest to that on which it stands but not on the same rank, file or diagonal.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8428
+      },
+      {
+        "artigo": "3.8.2.1",
+        "texto": "The right to castle has been lost:\n1) If the king has already moved, or\n2) With a rook that has already moved.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8219
+      },
+      {
+        "artigo": "4.6.2",
+        "texto": "removing the pawn and putting the new piece on the square of promotion may occur in any order.",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8198
+      },
+      {
+        "artigo": "9.2.3.2",
+        "texto": "a king had castling rights with a rook that has not been moved, but forfeited these after moving. The castling rights are lost only after the king or rook is moved.",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.8198
+      },
+      {
+        "artigo": "3.7.3.3",
+        "texto": "When a player, having the move, plays a pawn to the rank furthest from its starting position, he/she must exchange that pawn as part of the same move for a new queen, rook, bishop or knight of the same colour on the intended square of arrival. This is called the square of ‘promotion’.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8196
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 3.6 (Article 3: The Moves of the Pieces)\nThe knight may move to one of the squares nearest to that on which it stands but not on the same rank, file or diagonal.\n\n[2] Article 3.8.2.1 (Article 3: The Moves of the Pieces)\nThe right to castle has been lost:\n1) If the king has already moved, or\n2) With a rook that has already moved.\n\n[3] Article 4.6.2 (Article 4: The Act of Moving the Pieces)\nremoving the pawn and putting the new piece on the square of promotion may occur in any order.\n\n[4] Article 9.2.3.2 (Article 9: The Drawn Game)\na king had castling rights with a rook that has not been moved, but forfeited these after moving. The castling rights are lost only after the king or rook is moved.\n\n[5] Article 3.7.3.3 (Article 3: The Moves of the Pieces)\nWhen a player, having the move, plays a pawn to the rank furthest from its starting position, he/she must exchange that pawn as part of the same move for a new queen, rook, bishop or knight of the same colour on the intended square of arrival. This is called the square of ‘promotion’.\n\nPOSITION\nFEN: 4r2k/8/8/8/8/8/4N3/4K3 w - - 0 1\n. . . . r . . k\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . N . . .\n. . . . K . . .\n(uppercase = White, lowercase = Black; White to move)\n\nMOVE IN QUESTION\nWhite knight from e2 to c3 (UCI: e2c3)\n\nQUESTION\nCan I move my knight off e2?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "a836213648b5309dfd8848f7c39e89457d47dbadecc7b943db082212de0bd4ae",
+    "bruto": "{\n  \"veredito\": \"legal\",\n  \"artigo\": \"3.6\",\n  \"trecho_citado\": \"The knight may move to one of the squares nearest to that on which it stands but not on the same rank, file or diagonal.\",\n  \"justificativa\": \"The knight move from e2 to c3 is legal as it follows the knight's movement rules.\"\n}",
+    "resposta": {
+      "veredito": "legal",
+      "artigo": "3.6",
+      "trecho_citado": "The knight may move to one of the squares nearest to that on which it stands but not on the same rank, file or diagonal.",
+      "justificativa": "The knight move from e2 to c3 is legal as it follows the knight's movement rules."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 659,
+        "prompt_tokens_details": {
+          "cached_tokens": 29
+        },
+        "completion_tokens": 85,
+        "total_tokens": 744
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": {
+    "fen": "4r2k/8/8/8/8/8/4N3/4K3 w - - 0 1",
+    "lance": "e2c3",
+    "fonte": "python-chess 1.11.2",
+    "veredito": "ilegal",
+    "flags": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": false,
+      "material_insuficiente": false,
+      "cinquenta_lances": false,
+      "n_lances_legais": 4,
+      "vez_de": "brancas"
+    }
+  },
+  "parada": "discordam",
+  "comparador": {
+    "parada": "discordam",
+    "motivo": "A='legal' B='ilegal'"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm",
+    "legalidade",
+    "comparador"
+  ],
+  "aprovacao": {
+    "decisao": "rejeitado",
+    "via": "interface",
+    "em": "2026-11-11T12:40:29+00:00"
+  }
+}

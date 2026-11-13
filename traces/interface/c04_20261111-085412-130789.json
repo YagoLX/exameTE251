@@ -1,0 +1,110 @@
+{
+  "caso": "c04",
+  "execucao": "interface",
+  "inicio": "2026-11-11T11:54:12+00:00",
+  "classe": "posicional",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "Can my pawn on a5 take the b5 pawn en passant?",
+  "fen": "rnbqkbnr/p1pppppp/8/PpP5/8/8/1P1PPPPP/RNBQKBNR w KQkq b6 0 3",
+  "lance": "a5b6",
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "9.2.3.1",
+        "texto": "at the start of the sequence a pawn could have been captured en passant.",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.8456
+      },
+      {
+        "artigo": "3.7.3.1",
+        "texto": "A pawn occupying a square on the same rank as and on an adjacent file to an opponent’s pawn which has just advanced two squares in one move from its original square may capture this opponent’s pawn as though the latter had been moved only one square.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8398
+      },
+      {
+        "artigo": "3.7.3",
+        "texto": "the pawn may move to a square occupied by an opponent’s piece diagonally in front of it on an adjacent file, capturing that piece.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.833
+      },
+      {
+        "artigo": "3.7.3.2",
+        "texto": "This capture is only legal on the move following this advance and is called an ‘en passant’ capture.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8317
+      },
+      {
+        "artigo": "9.6.2",
+        "texto": "any series of at least 75 moves have been made by each player without the movement of any pawn and without any capture. If the last move resulted in checkmate, that shall take precedence.",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.8248
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 9.2.3.1 (Article 9: The Drawn Game)\nat the start of the sequence a pawn could have been captured en passant.\n\n[2] Article 3.7.3.1 (Article 3: The Moves of the Pieces)\nA pawn occupying a square on the same rank as and on an adjacent file to an opponent’s pawn which has just advanced two squares in one move from its original square may capture this opponent’s pawn as though the latter had been moved only one square.\n\n[3] Article 3.7.3 (Article 3: The Moves of the Pieces)\nthe pawn may move to a square occupied by an opponent’s piece diagonally in front of it on an adjacent file, capturing that piece.\n\n[4] Article 3.7.3.2 (Article 3: The Moves of the Pieces)\nThis capture is only legal on the move following this advance and is called an ‘en passant’ capture.\n\n[5] Article 9.6.2 (Article 9: The Drawn Game)\nany series of at least 75 moves have been made by each player without the movement of any pawn and without any capture. If the last move resulted in checkmate, that shall take precedence.\n\nPOSITION\nFEN: rnbqkbnr/p1pppppp/8/PpP5/8/8/1P1PPPPP/RNBQKBNR w KQkq b6 0 3\nr n b q k b n r\np . p p p p p p\n. . . . . . . .\nP p P . . . . .\n. . . . . . . .\n. . . . . . . .\n. P . P P P P P\nR N B Q K B N R\n(uppercase = White, lowercase = Black; White to move)\n\nMOVE IN QUESTION\nWhite pawn from a5 to b6 (UCI: a5b6)\n\nQUESTION\nCan my pawn on a5 take the b5 pawn en passant?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "869b9d09d92eaa3e5dac97187a21079f4389d1d8e4bd83e88e4ac2e4cce59093",
+    "bruto": "{\n  \"veredito\": \"ilegal\",\n  \"artigo\": \"4\",\n  \"trecho_citado\": \"This capture is only legal on the move following this advance and is called an ‘en passant’ capture.\",\n  \"justificativa\": \"The en passant capture is only legal on the move following the advance. The move in question does not satisfy this condition.\"\n}",
+    "resposta": {
+      "veredito": "ilegal",
+      "artigo": "4",
+      "trecho_citado": "This capture is only legal on the move following this advance and is called an ‘en passant’ capture.",
+      "justificativa": "The en passant capture is only legal on the move following the advance. The move in question does not satisfy this condition."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 658,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens": 84,
+        "total_tokens": 742
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": {
+    "fen": "rnbqkbnr/p1pppppp/8/PpP5/8/8/1P1PPPPP/RNBQKBNR w KQkq b6 0 3",
+    "lance": "a5b6",
+    "fonte": "python-chess 1.11.2",
+    "veredito": "legal",
+    "san": "axb6",
+    "flags": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": false,
+      "material_insuficiente": false,
+      "cinquenta_lances": false,
+      "n_lances_legais": 26,
+      "vez_de": "brancas"
+    },
+    "depois": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": false
+    }
+  },
+  "parada": "discordam",
+  "comparador": {
+    "parada": "discordam",
+    "motivo": "A='ilegal' B='legal'"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm",
+    "legalidade",
+    "comparador"
+  ],
+  "aprovacao": {
+    "decisao": "rejeitado",
+    "via": "interface",
+    "em": "2026-11-11T11:55:19+00:00"
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "caso": "c08",
+  "execucao": "interface",
+  "inicio": "2026-11-11T12:00:49+00:00",
+  "classe": "posicional",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "Can I promote to a knight on g8 to give check?",
+  "fen": "8/4k1P1/8/8/8/8/8/K7 w - - 0 1",
+  "lance": "g7g8n",
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "3.7.3.3",
+        "texto": "When a player, having the move, plays a pawn to the rank furthest from its starting position, he/she must exchange that pawn as part of the same move for a new queen, rook, bishop or knight of the same colour on the intended square of arrival. This is called the square of ‘promotion’.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8171
+      },
+      {
+        "artigo": "3.6",
+        "texto": "The knight may move to one of the squares nearest to that on which it stands but not on the same rank, file or diagonal.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8134
+      },
+      {
+        "artigo": "3.7.3.5",
+        "texto": "This exchange of a pawn for another piece is called promotion, and the effect of the new piece is immediate.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8062
+      },
+      {
+        "artigo": "8.1.1.2",
+        "texto": "by entering moves on the FIDE certified ‘electronic scoresheet’ prescribed for the competition.",
+        "artigo_titulo": "Article 8: The recording of the moves",
+        "score": 0.8008
+      },
+      {
+        "artigo": "6.11.2",
+        "texto": "A player may pause the chessclock only in order to seek the arbiter’s assistance, for example when promotion has taken place and the piece required is not available.",
+        "artigo_titulo": "Article 6: The Chessclock",
+        "score": 0.8001
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 3.7.3.3 (Article 3: The Moves of the Pieces)\nWhen a player, having the move, plays a pawn to the rank furthest from its starting position, he/she must exchange that pawn as part of the same move for a new queen, rook, bishop or knight of the same colour on the intended square of arrival. This is called the square of ‘promotion’.\n\n[2] Article 3.6 (Article 3: The Moves of the Pieces)\nThe knight may move to one of the squares nearest to that on which it stands but not on the same rank, file or diagonal.\n\n[3] Article 3.7.3.5 (Article 3: The Moves of the Pieces)\nThis exchange of a pawn for another piece is called promotion, and the effect of the new piece is immediate.\n\n[4] Article 8.1.1.2 (Article 8: The recording of the moves)\nby entering moves on the FIDE certified ‘electronic scoresheet’ prescribed for the competition.\n\n[5] Article 6.11.2 (Article 6: The Chessclock)\nA player may pause the chessclock only in order to seek the arbiter’s assistance, for example when promotion has taken place and the piece required is not available.\n\nPOSITION\nFEN: 8/4k1P1/8/8/8/8/8/K7 w - - 0 1\n. . . . . . . .\n. . . . k . P .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\nK . . . . . . .\n(uppercase = White, lowercase = Black; White to move)\n\nMOVE IN QUESTION\nWhite pawn from g7 to g8, becoming a knight (UCI: g7g8n)\n\nQUESTION\nCan I promote to a knight on g8 to give check?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "54fc96cc4faaa6f9bce61d6f9e245a8c98fb7477d37abebdad28c635dd55cbaa",
+    "bruto": "{\n  \"veredito\": \"legal\",\n  \"artigo\": \"3.7.3.3\",\n  \"trecho_citado\": \"When a player, having the move, plays a pawn to the rank furthest from its starting position, he/she must exchange that pawn as part of the same move for a new queen, rook, bishop or knight of the same colour on the intended square of arrival.\",\n  \"justificativa\": \"The promotion to a knight is allowed as per the rule, and the move is legal if it results in check.\"\n}",
+    "resposta": {
+      "veredito": "legal",
+      "artigo": "3.7.3.3",
+      "trecho_citado": "When a player, having the move, plays a pawn to the rank furthest from its starting position, he/she must exchange that pawn as part of the same move for a new queen, rook, bishop or knight of the same colour on the intended square of arrival.",
+      "justificativa": "The promotion to a knight is allowed as per the rule, and the move is legal if it results in check."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 648,
+        "prompt_tokens_details": {
+          "cached_tokens": 29
+        },
+        "completion_tokens": 120,
+        "total_tokens": 768
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": {
+    "fen": "8/4k1P1/8/8/8/8/8/K7 w - - 0 1",
+    "lance": "g7g8n",
+    "fonte": "python-chess 1.11.2",
+    "veredito": "legal",
+    "san": "g8=N+",
+    "flags": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": false,
+      "material_insuficiente": false,
+      "cinquenta_lances": false,
+      "n_lances_legais": 7,
+      "vez_de": "brancas"
+    },
+    "depois": {
+      "em_xeque": true,
+      "mate": false,
+      "afogado": false
+    }
+  },
+  "parada": "concordam",
+  "comparador": {
+    "parada": "concordam",
+    "motivo": "A='legal' B='legal'"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm",
+    "legalidade",
+    "comparador"
+  ],
+  "aprovacao": {
+    "decisao": "aprovado",
+    "via": "interface",
+    "em": "2026-11-11T12:12:49+00:00"
+  }
+}

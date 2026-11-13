@@ -1,0 +1,110 @@
+{
+  "caso": "c12",
+  "execucao": "interface",
+  "inicio": "2026-11-11T12:34:24+00:00",
+  "classe": "posicional",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "Can I castle queenside even though b1 is under attack?",
+  "fen": "r3k2r/8/8/8/8/8/1r6/R3K2R w KQkq - 0 1",
+  "lance": "e1c1",
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "3.8.2.2",
+        "texto": "Castling is prevented temporarily:\n3) If the square on which the king stands, or the square which it must cross, or the square which it is to occupy, is attacked by one or more of the opponent's pieces, or\n4) If there is any piece between the king and the rook with which castling is to be effected.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8258
+      },
+      {
+        "artigo": "3.1.3",
+        "texto": "A piece is considered to attack a square even if this piece is constrained from moving to that square because it would then leave or place the king of its own colour under attack.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8122
+      },
+      {
+        "artigo": "3.8.2.1",
+        "texto": "The right to castle has been lost:\n1) If the king has already moved, or\n2) With a rook that has already moved.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8116
+      },
+      {
+        "artigo": "4.4.1",
+        "texto": "touches his/her king and a rook he/she must castle on that side if it is legal to do so",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8114
+      },
+      {
+        "artigo": "4.4.3",
+        "texto": "intending to castle, touches the king and then a rook, but castling with this rook is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8091
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 3.8.2.2 (Article 3: The Moves of the Pieces)\nCastling is prevented temporarily:\n3) If the square on which the king stands, or the square which it must cross, or the square which it is to occupy, is attacked by one or more of the opponent's pieces, or\n4) If there is any piece between the king and the rook with which castling is to be effected.\n\n[2] Article 3.1.3 (Article 3: The Moves of the Pieces)\nA piece is considered to attack a square even if this piece is constrained from moving to that square because it would then leave or place the king of its own colour under attack.\n\n[3] Article 3.8.2.1 (Article 3: The Moves of the Pieces)\nThe right to castle has been lost:\n1) If the king has already moved, or\n2) With a rook that has already moved.\n\n[4] Article 4.4.1 (Article 4: The Act of Moving the Pieces)\ntouches his/her king and a rook he/she must castle on that side if it is legal to do so\n\n[5] Article 4.4.3 (Article 4: The Act of Moving the Pieces)\nintending to castle, touches the king and then a rook, but castling with this rook is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.\n\nPOSITION\nFEN: r3k2r/8/8/8/8/8/1r6/R3K2R w KQkq - 0 1\nr . . . k . . r\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. r . . . . . .\nR . . . K . . R\n(uppercase = White, lowercase = Black; White to move)\n\nMOVE IN QUESTION\nWhite king from e1 to c1 (UCI: e1c1)\n\nQUESTION\nCan I castle queenside even though b1 is under attack?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "72cf339d0a8259c8678754c7a228e7676c58695c8d3581dd34fc77e5fe27b61d",
+    "bruto": "{\n  \"veredito\": \"ilegal\",\n  \"artigo\": \"3\",\n  \"trecho_citado\": \"A piece is considered to attack a square even if this piece is constrained from moving to that square because it would then leave or place the king of its own colour under attack.\",\n  \"justificativa\": \"The square b1 is under attack, which means castling queenside is illegal.\"\n}",
+    "resposta": {
+      "veredito": "ilegal",
+      "artigo": "3",
+      "trecho_citado": "A piece is considered to attack a square even if this piece is constrained from moving to that square because it would then leave or place the king of its own colour under attack.",
+      "justificativa": "The square b1 is under attack, which means castling queenside is illegal."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 714,
+        "prompt_tokens_details": {
+          "cached_tokens": 35
+        },
+        "completion_tokens": 89,
+        "total_tokens": 803
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": {
+    "fen": "r3k2r/8/8/8/8/8/1r6/R3K2R w KQkq - 0 1",
+    "lance": "e1c1",
+    "fonte": "python-chess 1.11.2",
+    "veredito": "legal",
+    "san": "O-O-O",
+    "flags": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": false,
+      "material_insuficiente": false,
+      "cinquenta_lances": false,
+      "n_lances_legais": 23,
+      "vez_de": "brancas"
+    },
+    "depois": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": false
+    }
+  },
+  "parada": "discordam",
+  "comparador": {
+    "parada": "discordam",
+    "motivo": "A='ilegal' B='legal'"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm",
+    "legalidade",
+    "comparador"
+  ],
+  "aprovacao": {
+    "decisao": "rejeitado",
+    "via": "interface",
+    "em": "2026-11-11T12:35:25+00:00"
+  }
+}

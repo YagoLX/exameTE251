@@ -1,0 +1,87 @@
+{
+  "caso": "c31",
+  "execucao": "interface",
+  "inicio": "2026-11-11T13:13:24+00:00",
+  "classe": "normativa",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "How does castling work in Chess960?",
+  "fen": null,
+  "lance": null,
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "3.8.2",
+        "texto": "by ‘castling’. This is a move of the king and either rook of the same colour along the player’s first rank, counting as a single move of the king and executed as follows: the king is transferred from its original square two squares towards the rook on its original square, then that rook is transferred to the square the king has just crossed.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8377
+      },
+      {
+        "artigo": "4.7.2",
+        "texto": "Castling, when the player's hand has released the rook on the square previously crossed by the king. When the player has released the king from his/her hand, the move is not yet made, but the player no longer has the right to make any move other than castling on that side, if this is legal. If castling on this side is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8329
+      },
+      {
+        "artigo": "4.4.1",
+        "texto": "touches his/her king and a rook he/she must castle on that side if it is legal to do so",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8321
+      },
+      {
+        "artigo": "4.4.3",
+        "texto": "intending to castle, touches the king and then a rook, but castling with this rook is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8311
+      },
+      {
+        "artigo": "6.10",
+        "texto": "Chessclock setting:",
+        "artigo_titulo": "Article 6: The Chessclock",
+        "score": 0.8304
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 3.8.2 (Article 3: The Moves of the Pieces)\nby ‘castling’. This is a move of the king and either rook of the same colour along the player’s first rank, counting as a single move of the king and executed as follows: the king is transferred from its original square two squares towards the rook on its original square, then that rook is transferred to the square the king has just crossed.\n\n[2] Article 4.7.2 (Article 4: The Act of Moving the Pieces)\nCastling, when the player's hand has released the rook on the square previously crossed by the king. When the player has released the king from his/her hand, the move is not yet made, but the player no longer has the right to make any move other than castling on that side, if this is legal. If castling on this side is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.\n\n[3] Article 4.4.1 (Article 4: The Act of Moving the Pieces)\ntouches his/her king and a rook he/she must castle on that side if it is legal to do so\n\n[4] Article 4.4.3 (Article 4: The Act of Moving the Pieces)\nintending to castle, touches the king and then a rook, but castling with this rook is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.\n\n[5] Article 6.10 (Article 6: The Chessclock)\nChessclock setting:\n\nPOSITION\nFEN: (none)\n(no position given)\n\nMOVE IN QUESTION\n(no specific move)\n\nQUESTION\nHow does castling work in Chess960?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "a8183c435ed8c38f4efebf916fc978516d6833ff9587a86d2bba4c7152fd27c3",
+    "bruto": "{\n  \"veredito\": \"nao consta no material\",\n  \"artigo\": null,\n  \"trecho_citado\": null,\n  \"justificativa\": \"The excerpts provided do not contain specific information about how castling works in Chess960.\"\n}",
+    "resposta": {
+      "veredito": "nao consta no material",
+      "artigo": null,
+      "trecho_citado": null,
+      "justificativa": "The excerpts provided do not contain specific information about how castling works in Chess960."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 644,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens": 60,
+        "total_tokens": 704
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": null,
+  "parada": "recusa",
+  "comparador": {
+    "parada": "recusa",
+    "motivo": "sem FEN: nada a comparar"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm"
+  ],
+  "aprovacao": {
+    "decisao": "pendente",
+    "em": "2026-11-11T13:13:24+00:00"
+  }
+}

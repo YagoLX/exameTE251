@@ -1,0 +1,104 @@
+{
+  "caso": "c13",
+  "execucao": 3,
+  "inicio": "2026-11-11T13:40:00+00:00",
+  "classe": "posicional",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "My king moved earlier and went back to e1. Can I castle now?",
+  "fen": "r3k2r/8/8/8/8/8/8/R3K2R w kq - 0 1",
+  "lance": "e1g1",
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "3.8.2.1",
+        "texto": "The right to castle has been lost:\n1) If the king has already moved, or\n2) With a rook that has already moved.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8606
+      },
+      {
+        "artigo": "9.2.3.2",
+        "texto": "a king had castling rights with a rook that has not been moved, but forfeited these after moving. The castling rights are lost only after the king or rook is moved.",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.8524
+      },
+      {
+        "artigo": "4.4.1",
+        "texto": "touches his/her king and a rook he/she must castle on that side if it is legal to do so",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8458
+      },
+      {
+        "artigo": "4.7.2",
+        "texto": "Castling, when the player's hand has released the rook on the square previously crossed by the king. When the player has released the king from his/her hand, the move is not yet made, but the player no longer has the right to make any move other than castling on that side, if this is legal. If castling on this side is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.844
+      },
+      {
+        "artigo": "4.4.3",
+        "texto": "intending to castle, touches the king and then a rook, but castling with this rook is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8434
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 3.8.2.1 (Article 3: The Moves of the Pieces)\nThe right to castle has been lost:\n1) If the king has already moved, or\n2) With a rook that has already moved.\n\n[2] Article 9.2.3.2 (Article 9: The Drawn Game)\na king had castling rights with a rook that has not been moved, but forfeited these after moving. The castling rights are lost only after the king or rook is moved.\n\n[3] Article 4.4.1 (Article 4: The Act of Moving the Pieces)\ntouches his/her king and a rook he/she must castle on that side if it is legal to do so\n\n[4] Article 4.7.2 (Article 4: The Act of Moving the Pieces)\nCastling, when the player's hand has released the rook on the square previously crossed by the king. When the player has released the king from his/her hand, the move is not yet made, but the player no longer has the right to make any move other than castling on that side, if this is legal. If castling on this side is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.\n\n[5] Article 4.4.3 (Article 4: The Act of Moving the Pieces)\nintending to castle, touches the king and then a rook, but castling with this rook is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.\n\nPOSITION\nFEN: r3k2r/8/8/8/8/8/8/R3K2R w kq - 0 1\nr . . . k . . r\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\nR . . . K . . R\n(uppercase = White, lowercase = Black; White to move)\n\nMOVE IN QUESTION\nWhite king from e1 to g1 (UCI: e1g1)\n\nQUESTION\nMy king moved earlier and went back to e1. Can I castle now?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "0dce0d3b02f8f7c652aa1458bcc57e90ba7d9acb4a3201f3cda3ea6f109b6960",
+    "bruto": "{\n  \"veredito\": \"ilegal\",\n  \"artigo\": \"4.4.1\",\n  \"trecho_citado\": \"touches his/her king and a rook he/she must castle on that side if it is legal to do so\",\n  \"justificativa\": \"The king has already moved, which means the right to castle has been lost. The player must castle if it is legal to do so.\"\n}",
+    "resposta": {
+      "veredito": "ilegal",
+      "artigo": "4.4.1",
+      "trecho_citado": "touches his/her king and a rook he/she must castle on that side if it is legal to do so",
+      "justificativa": "The king has already moved, which means the right to castle has been lost. The player must castle if it is legal to do so."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 762,
+        "prompt_tokens_details": {
+          "cached_tokens": 761
+        },
+        "completion_tokens": 92,
+        "total_tokens": 854
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": {
+    "fen": "r3k2r/8/8/8/8/8/8/R3K2R w kq - 0 1",
+    "lance": "e1g1",
+    "fonte": "python-chess 1.11.2",
+    "veredito": "ilegal",
+    "flags": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": false,
+      "material_insuficiente": false,
+      "cinquenta_lances": false,
+      "n_lances_legais": 24,
+      "vez_de": "brancas"
+    }
+  },
+  "parada": "concordam",
+  "comparador": {
+    "parada": "concordam",
+    "motivo": "A='ilegal' B='ilegal'"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm",
+    "legalidade",
+    "comparador"
+  ],
+  "aprovacao": {
+    "decisao": "pendente",
+    "motivo": "sem terminal interativo",
+    "em": "2026-11-11T13:40:00+00:00"
+  }
+}

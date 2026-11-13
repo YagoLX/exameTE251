@@ -1,0 +1,88 @@
+{
+  "caso": "c25",
+  "execucao": 2,
+  "inicio": "2026-11-11T13:35:39+00:00",
+  "classe": "normativa",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "My opponent made an illegal move and pressed the clock. What happens now?",
+  "fen": null,
+  "lance": null,
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "7.5.3",
+        "texto": "If the player presses the clock without making a move, it shall be considered and penalised as if an illegal move.",
+        "artigo_titulo": "Article 7: Irregularities",
+        "score": 0.9034
+      },
+      {
+        "artigo": "7.5.1",
+        "texto": "An illegal move is completed once the player has pressed his/her clock. If during a game it is found that an illegal move has been completed, the position immediately before the irregularity shall be reinstated. If the position immediately before the irregularity cannot be determined, the game shall continue from the last identifiable position prior to the irregularity. Articles 4.3 and 4.7 apply to the move replacing the illegal move. The game shall then continue from this reinstated position.",
+        "artigo_titulo": "Article 7: Irregularities",
+        "score": 0.893
+      },
+      {
+        "artigo": "7.5.4",
+        "texto": "If a player uses two hands to make a single move (for example in case of castling, capturing or promotion) and pressed the clock, it shall be considered and penalised as if an illegal move.",
+        "artigo_titulo": "Article 7: Irregularities",
+        "score": 0.8839
+      },
+      {
+        "artigo": "6.2.2",
+        "texto": "A player must be allowed to pause his/her clock after making his/her move, even after the opponent has made his/her next move. The time between making the move on the chessboard and pressing the clock is regarded as part of the time allotted to the player.",
+        "artigo_titulo": "Article 6: The Chessclock",
+        "score": 0.8739
+      },
+      {
+        "artigo": "6.2.1",
+        "texto": "During the game each player, having made his/her move on the chessboard, shall pause his/her own clock and start his/her opponent’s clock (that is to say, he/she shall press his/her clock). This ‘completes’ the move. A move is also completed if:",
+        "artigo_titulo": "Article 6: The Chessclock",
+        "score": 0.8723
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 7.5.3 (Article 7: Irregularities)\nIf the player presses the clock without making a move, it shall be considered and penalised as if an illegal move.\n\n[2] Article 7.5.1 (Article 7: Irregularities)\nAn illegal move is completed once the player has pressed his/her clock. If during a game it is found that an illegal move has been completed, the position immediately before the irregularity shall be reinstated. If the position immediately before the irregularity cannot be determined, the game shall continue from the last identifiable position prior to the irregularity. Articles 4.3 and 4.7 apply to the move replacing the illegal move. The game shall then continue from this reinstated position.\n\n[3] Article 7.5.4 (Article 7: Irregularities)\nIf a player uses two hands to make a single move (for example in case of castling, capturing or promotion) and pressed the clock, it shall be considered and penalised as if an illegal move.\n\n[4] Article 6.2.2 (Article 6: The Chessclock)\nA player must be allowed to pause his/her clock after making his/her move, even after the opponent has made his/her next move. The time between making the move on the chessboard and pressing the clock is regarded as part of the time allotted to the player.\n\n[5] Article 6.2.1 (Article 6: The Chessclock)\nDuring the game each player, having made his/her move on the chessboard, shall pause his/her own clock and start his/her opponent’s clock (that is to say, he/she shall press his/her clock). This ‘completes’ the move. A move is also completed if:\n\nPOSITION\nFEN: (none)\n(no position given)\n\nMOVE IN QUESTION\n(no specific move)\n\nQUESTION\nMy opponent made an illegal move and pressed the clock. What happens now?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "2845e7e0992b4776febdf68171355bda62a8c1f94c484bff09adead13aef0d22",
+    "bruto": "{\n  \"veredito\": \"ilegal\",\n  \"artigo\": \"7.5.3\",\n  \"trecho_citado\": \"If the player presses the clock without making a move, it shall be considered and penalised as if an illegal move.\",\n  \"justificativa\": \"The opponent pressed the clock without making a move, which is considered an illegal move according to Article 7.5.3.\"\n}",
+    "resposta": {
+      "veredito": "ilegal",
+      "artigo": "7.5.3",
+      "trecho_citado": "If the player presses the clock without making a move, it shall be considered and penalised as if an illegal move.",
+      "justificativa": "The opponent pressed the clock without making a move, which is considered an illegal move according to Article 7.5.3."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 632,
+        "prompt_tokens_details": {
+          "cached_tokens": 631
+        },
+        "completion_tokens": 91,
+        "total_tokens": 723
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": null,
+  "parada": "sem_verificacao",
+  "comparador": {
+    "parada": "sem_verificacao",
+    "motivo": "sem FEN: nada a comparar"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm"
+  ],
+  "aprovacao": {
+    "decisao": "pendente",
+    "motivo": "sem terminal interativo",
+    "em": "2026-11-11T13:35:39+00:00"
+  }
+}

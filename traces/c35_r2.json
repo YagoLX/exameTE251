@@ -1,0 +1,88 @@
+{
+  "caso": "c35",
+  "execucao": 2,
+  "inicio": "2026-11-11T13:36:52+00:00",
+  "classe": "normativa",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "In an Armageddon game, who wins if it ends in a draw?",
+  "fen": null,
+  "lance": null,
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "5.2.3",
+        "texto": "The game is drawn upon agreement between the two players during the game, provided both players have made at least one move. This immediately ends the game.",
+        "artigo_titulo": "Article 5: The Completion of the Game",
+        "score": 0.7998
+      },
+      {
+        "artigo": "5.1.2",
+        "texto": "The game is lost by the player who declares he/she resigns (this immediately ends the game), unless the position is such that the opponent cannot checkmate the player’s king by any possible series of legal moves. In this case the result of the game is a draw.",
+        "artigo_titulo": "Article 5: The Completion of the Game",
+        "score": 0.7909
+      },
+      {
+        "artigo": "9.5.1",
+        "texto": "If a player claims a draw under Article 9.2 or 9.3, he/she or the arbiter shall pause the chessclock. He/She is not allowed to withdraw his/her claim.",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.7882
+      },
+      {
+        "artigo": "9.6",
+        "texto": "If one or both of the following occur(s) then the game is drawn:",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.788
+      },
+      {
+        "artigo": "5.2.1",
+        "texto": "The game is drawn when the player to move has no legal move and his/her king is not in check. The game is said to end in ‘stalemate’. This immediately ends the game, provided that the move producing the stalemate position was in accordance with Article 3 and Articles 4.2 – 4.7.",
+        "artigo_titulo": "Article 5: The Completion of the Game",
+        "score": 0.788
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 5.2.3 (Article 5: The Completion of the Game)\nThe game is drawn upon agreement between the two players during the game, provided both players have made at least one move. This immediately ends the game.\n\n[2] Article 5.1.2 (Article 5: The Completion of the Game)\nThe game is lost by the player who declares he/she resigns (this immediately ends the game), unless the position is such that the opponent cannot checkmate the player’s king by any possible series of legal moves. In this case the result of the game is a draw.\n\n[3] Article 9.5.1 (Article 9: The Drawn Game)\nIf a player claims a draw under Article 9.2 or 9.3, he/she or the arbiter shall pause the chessclock. He/She is not allowed to withdraw his/her claim.\n\n[4] Article 9.6 (Article 9: The Drawn Game)\nIf one or both of the following occur(s) then the game is drawn:\n\n[5] Article 5.2.1 (Article 5: The Completion of the Game)\nThe game is drawn when the player to move has no legal move and his/her king is not in check. The game is said to end in ‘stalemate’. This immediately ends the game, provided that the move producing the stalemate position was in accordance with Article 3 and Articles 4.2 – 4.7.\n\nPOSITION\nFEN: (none)\n(no position given)\n\nMOVE IN QUESTION\n(no specific move)\n\nQUESTION\nIn an Armageddon game, who wins if it ends in a draw?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "9f725adb92401312653c910b250073d8a053bd096a9bf5be2bf50dc91e5c3d4d",
+    "bruto": "{\n  \"veredito\": \"nao consta no material\",\n  \"artigo\": null,\n  \"trecho_citado\": null,\n  \"justificativa\": \"The excerpts do not provide information about the outcome of a draw in an Armageddon game.\"\n}",
+    "resposta": {
+      "veredito": "nao consta no material",
+      "artigo": null,
+      "trecho_citado": null,
+      "justificativa": "The excerpts do not provide information about the outcome of a draw in an Armageddon game."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 574,
+        "prompt_tokens_details": {
+          "cached_tokens": 573
+        },
+        "completion_tokens": 60,
+        "total_tokens": 634
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": null,
+  "parada": "recusa",
+  "comparador": {
+    "parada": "recusa",
+    "motivo": "sem FEN: nada a comparar"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm"
+  ],
+  "aprovacao": {
+    "decisao": "pendente",
+    "motivo": "sem terminal interativo",
+    "em": "2026-11-11T13:36:52+00:00"
+  }
+}

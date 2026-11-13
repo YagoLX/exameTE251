@@ -1,0 +1,88 @@
+{
+  "caso": "c29",
+  "execucao": "interface",
+  "inicio": "2026-11-11T13:24:20+00:00",
+  "classe": "normativa",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "My opponent's flag fell. Do they lose?",
+  "fen": null,
+  "lance": null,
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "6.8",
+        "texto": "A flag is considered to have fallen when the arbiter observes the fact or when either player has made a valid claim to that effect.",
+        "artigo_titulo": "Article 6: The Chessclock",
+        "score": 0.8763
+      },
+      {
+        "artigo": "11.3.2.2",
+        "texto": "If it is evident that a player has such a device on their person in the playing venue, the player shall lose the game. The opponent shall win. The regulations of an event may specify a different, less severe, penalty.",
+        "artigo_titulo": "Article 11: The Conduct of the Players",
+        "score": 0.852
+      },
+      {
+        "artigo": "8.5.1",
+        "texto": "If neither player keeps score under Article 8.4, the arbiter or an assistant should try to be present and keep score. In this case, immediately after a flag has fallen the arbiter shall pause the chessclock. Then both players shall update their scoresheets, using the arbiter’s or the opponent’s scoresheet.",
+        "artigo_titulo": "Article 8: The recording of the moves",
+        "score": 0.8492
+      },
+      {
+        "artigo": "6.4",
+        "texto": "Immediately after a flag falls, the requirements of Article 6.3.1 must be checked.",
+        "artigo_titulo": "Article 6: The Chessclock",
+        "score": 0.8456
+      },
+      {
+        "artigo": "5.1.2",
+        "texto": "The game is lost by the player who declares he/she resigns (this immediately ends the game), unless the position is such that the opponent cannot checkmate the player’s king by any possible series of legal moves. In this case the result of the game is a draw.",
+        "artigo_titulo": "Article 5: The Completion of the Game",
+        "score": 0.8412
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 6.8 (Article 6: The Chessclock)\nA flag is considered to have fallen when the arbiter observes the fact or when either player has made a valid claim to that effect.\n\n[2] Article 11.3.2.2 (Article 11: The Conduct of the Players)\nIf it is evident that a player has such a device on their person in the playing venue, the player shall lose the game. The opponent shall win. The regulations of an event may specify a different, less severe, penalty.\n\n[3] Article 8.5.1 (Article 8: The recording of the moves)\nIf neither player keeps score under Article 8.4, the arbiter or an assistant should try to be present and keep score. In this case, immediately after a flag has fallen the arbiter shall pause the chessclock. Then both players shall update their scoresheets, using the arbiter’s or the opponent’s scoresheet.\n\n[4] Article 6.4 (Article 6: The Chessclock)\nImmediately after a flag falls, the requirements of Article 6.3.1 must be checked.\n\n[5] Article 5.1.2 (Article 5: The Completion of the Game)\nThe game is lost by the player who declares he/she resigns (this immediately ends the game), unless the position is such that the opponent cannot checkmate the player’s king by any possible series of legal moves. In this case the result of the game is a draw.\n\nPOSITION\nFEN: (none)\n(no position given)\n\nMOVE IN QUESTION\n(no specific move)\n\nQUESTION\nMy opponent's flag fell. Do they lose?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "f56f8dad9d212c39b3be0ed52be9367b813be3e0ef58ff60f428b3524d16b6bf",
+    "bruto": "{\n  \"veredito\": \"nao consta no material\",\n  \"artigo\": null,\n  \"trecho_citado\": null,\n  \"justificativa\": \"The excerpts do not provide sufficient information to determine if the opponent loses due to their flag falling.\"\n}",
+    "resposta": {
+      "veredito": "nao consta no material",
+      "artigo": null,
+      "trecho_citado": null,
+      "justificativa": "The excerpts do not provide sufficient information to determine if the opponent loses due to their flag falling."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 572,
+        "prompt_tokens_details": {
+          "cached_tokens": 29
+        },
+        "completion_tokens": 60,
+        "total_tokens": 632
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": null,
+  "parada": "recusa",
+  "comparador": {
+    "parada": "recusa",
+    "motivo": "sem FEN: nada a comparar"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm"
+  ],
+  "aprovacao": {
+    "decisao": "rejeitado",
+    "via": "interface",
+    "em": "2026-11-11T13:25:21+00:00"
+  }
+}

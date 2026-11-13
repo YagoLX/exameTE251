@@ -1,0 +1,105 @@
+{
+  "caso": "c07",
+  "execucao": 2,
+  "inicio": "2026-11-11T13:32:14+00:00",
+  "classe": "posicional",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "Can my pawn turn into a second king when it reaches the last rank?",
+  "fen": "8/P6k/8/8/8/8/8/K7 w - - 0 1",
+  "lance": "a7a8k",
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "7.5.2",
+        "texto": "If the player has moved a pawn to the furthest distant rank, pressed the clock, but not replaced the pawn with a new piece, the move is illegal. The pawn shall be replaced by a queen of the same colour as the pawn.",
+        "artigo_titulo": "Article 7: Irregularities",
+        "score": 0.8454
+      },
+      {
+        "artigo": "3.7.3.3",
+        "texto": "When a player, having the move, plays a pawn to the rank furthest from its starting position, he/she must exchange that pawn as part of the same move for a new queen, rook, bishop or knight of the same colour on the intended square of arrival. This is called the square of ‘promotion’.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8377
+      },
+      {
+        "artigo": "3.7.3.1",
+        "texto": "A pawn occupying a square on the same rank as and on an adjacent file to an opponent’s pawn which has just advanced two squares in one move from its original square may capture this opponent’s pawn as though the latter had been moved only one square.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8377
+      },
+      {
+        "artigo": "3.8.2",
+        "texto": "by ‘castling’. This is a move of the king and either rook of the same colour along the player’s first rank, counting as a single move of the king and executed as follows: the king is transferred from its original square two squares towards the rook on its original square, then that rook is transferred to the square the king has just crossed.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8357
+      },
+      {
+        "artigo": "6.2.1.2",
+        "texto": "the player has made his/her next move, when his/her previous move was not completed.",
+        "artigo_titulo": "Article 6: The Chessclock",
+        "score": 0.8322
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 7.5.2 (Article 7: Irregularities)\nIf the player has moved a pawn to the furthest distant rank, pressed the clock, but not replaced the pawn with a new piece, the move is illegal. The pawn shall be replaced by a queen of the same colour as the pawn.\n\n[2] Article 3.7.3.3 (Article 3: The Moves of the Pieces)\nWhen a player, having the move, plays a pawn to the rank furthest from its starting position, he/she must exchange that pawn as part of the same move for a new queen, rook, bishop or knight of the same colour on the intended square of arrival. This is called the square of ‘promotion’.\n\n[3] Article 3.7.3.1 (Article 3: The Moves of the Pieces)\nA pawn occupying a square on the same rank as and on an adjacent file to an opponent’s pawn which has just advanced two squares in one move from its original square may capture this opponent’s pawn as though the latter had been moved only one square.\n\n[4] Article 3.8.2 (Article 3: The Moves of the Pieces)\nby ‘castling’. This is a move of the king and either rook of the same colour along the player’s first rank, counting as a single move of the king and executed as follows: the king is transferred from its original square two squares towards the rook on its original square, then that rook is transferred to the square the king has just crossed.\n\n[5] Article 6.2.1.2 (Article 6: The Chessclock)\nthe player has made his/her next move, when his/her previous move was not completed.\n\nPOSITION\nFEN: 8/P6k/8/8/8/8/8/K7 w - - 0 1\n. . . . . . . .\nP . . . . . . k\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\nK . . . . . . .\n(uppercase = White, lowercase = Black; White to move)\n\nMOVE IN QUESTION\nWhite pawn from a7 to a8, becoming a 'k' (UCI: a7a8k)\n\nQUESTION\nCan my pawn turn into a second king when it reaches the last rank?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "487c44fffdffb52601729218e20d3e0514b9337f11fd73920330a55ad0f21a64",
+    "bruto": "{\n  \"veredito\": \"ilegal\",\n  \"artigo\": \"7.5.2\",\n  \"trecho_citado\": \"If the player has moved a pawn to the furthest distant rank, pressed the clock, but not replaced the pawn with a new piece, the move is illegal. The pawn shall be replaced by a queen of the same colour as the pawn.\",\n  \"justificativa\": \"The move is illegal because the pawn must be replaced by a queen, rook, bishop, or knight, not a king.\"\n}",
+    "resposta": {
+      "veredito": "ilegal",
+      "artigo": "7.5.2",
+      "trecho_citado": "If the player has moved a pawn to the furthest distant rank, pressed the clock, but not replaced the pawn with a new piece, the move is illegal. The pawn shall be replaced by a queen of the same colour as the pawn.",
+      "justificativa": "The move is illegal because the pawn must be replaced by a queen, rook, bishop, or knight, not a king."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 739,
+        "prompt_tokens_details": {
+          "cached_tokens": 738
+        },
+        "completion_tokens": 116,
+        "total_tokens": 855
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": {
+    "fen": "8/P6k/8/8/8/8/8/K7 w - - 0 1",
+    "lance": "a7a8k",
+    "fonte": "python-chess 1.11.2",
+    "veredito": "ilegal",
+    "flags": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": false,
+      "material_insuficiente": false,
+      "cinquenta_lances": false,
+      "n_lances_legais": 7,
+      "vez_de": "brancas"
+    },
+    "aviso": "promocao para 'k' nao e peca permitida; a FIDE admite apenas dama, torre, bispo ou cavalo"
+  },
+  "parada": "concordam",
+  "comparador": {
+    "parada": "concordam",
+    "motivo": "A='ilegal' B='ilegal'"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm",
+    "legalidade",
+    "comparador"
+  ],
+  "aprovacao": {
+    "decisao": "pendente",
+    "motivo": "sem terminal interativo",
+    "em": "2026-11-11T13:32:14+00:00"
+  }
+}

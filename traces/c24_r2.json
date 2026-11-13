@@ -1,0 +1,104 @@
+{
+  "caso": "c24",
+  "execucao": 2,
+  "inicio": "2026-11-11T13:35:30+00:00",
+  "classe": "posicional",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "How many legal moves does White have here?",
+  "fen": "r3k2r/8/8/8/8/8/1r6/R3K2R w KQkq - 0 1",
+  "lance": null,
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "4.7.2",
+        "texto": "Castling, when the player's hand has released the rook on the square previously crossed by the king. When the player has released the king from his/her hand, the move is not yet made, but the player no longer has the right to make any move other than castling on that side, if this is legal. If castling on this side is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.816
+      },
+      {
+        "artigo": "9.6.2",
+        "texto": "any series of at least 75 moves have been made by each player without the movement of any pawn and without any capture. If the last move resulted in checkmate, that shall take precedence.",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.8138
+      },
+      {
+        "artigo": "2.2",
+        "texto": "At the beginning of the game White has 16 light-coloured pieces (the ‘white’ pieces); Black has 16 dark-coloured pieces (the ‘black’ pieces).\nStaunton Pieces\np Q K B N R",
+        "artigo_titulo": "Article 2: The Initial Position of the Pieces on the Chessboard",
+        "score": 0.8131
+      },
+      {
+        "artigo": "3.10.3",
+        "texto": "A position is illegal when it cannot have been reached by any series of legal moves.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8073
+      },
+      {
+        "artigo": "4.4.3",
+        "texto": "intending to castle, touches the king and then a rook, but castling with this rook is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8071
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 4.7.2 (Article 4: The Act of Moving the Pieces)\nCastling, when the player's hand has released the rook on the square previously crossed by the king. When the player has released the king from his/her hand, the move is not yet made, but the player no longer has the right to make any move other than castling on that side, if this is legal. If castling on this side is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.\n\n[2] Article 9.6.2 (Article 9: The Drawn Game)\nany series of at least 75 moves have been made by each player without the movement of any pawn and without any capture. If the last move resulted in checkmate, that shall take precedence.\n\n[3] Article 2.2 (Article 2: The Initial Position of the Pieces on the Chessboard)\nAt the beginning of the game White has 16 light-coloured pieces (the ‘white’ pieces); Black has 16 dark-coloured pieces (the ‘black’ pieces).\nStaunton Pieces\np Q K B N R\n\n[4] Article 3.10.3 (Article 3: The Moves of the Pieces)\nA position is illegal when it cannot have been reached by any series of legal moves.\n\n[5] Article 4.4.3 (Article 4: The Act of Moving the Pieces)\nintending to castle, touches the king and then a rook, but castling with this rook is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.\n\nPOSITION\nFEN: r3k2r/8/8/8/8/8/1r6/R3K2R w KQkq - 0 1\nr . . . k . . r\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. r . . . . . .\nR . . . K . . R\n(uppercase = White, lowercase = Black; White to move)\n\nMOVE IN QUESTION\n(no specific move)\n\nQUESTION\nHow many legal moves does White have here?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "eb32e7f00684ff13a475abb5657099ee106829aba36c52a47fb767d346b36423",
+    "bruto": "{\n  \"veredito\": \"legal\",\n  \"artigo\": \"4.4.3\",\n  \"trecho_citado\": \"intending to castle, touches the king and then a rook, but castling with this rook is illegal, the player must make another legal move with his/her king (which may include castling with the other rook).\",\n  \"justificativa\": \"The position is such that White has legal moves, and the player must make another legal move with his/her king if castling is illegal.\"\n}",
+    "resposta": {
+      "veredito": "legal",
+      "artigo": "4.4.3",
+      "trecho_citado": "intending to castle, touches the king and then a rook, but castling with this rook is illegal, the player must make another legal move with his/her king (which may include castling with the other rook).",
+      "justificativa": "The position is such that White has legal moves, and the player must make another legal move with his/her king if castling is illegal."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 761,
+        "prompt_tokens_details": {
+          "cached_tokens": 760
+        },
+        "completion_tokens": 116,
+        "total_tokens": 877
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": {
+    "fen": "r3k2r/8/8/8/8/8/1r6/R3K2R w KQkq - 0 1",
+    "lance": null,
+    "fonte": "python-chess 1.11.2",
+    "veredito": "23_lances",
+    "flags": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": false,
+      "material_insuficiente": false,
+      "cinquenta_lances": false,
+      "n_lances_legais": 23,
+      "vez_de": "brancas"
+    }
+  },
+  "parada": "discordam",
+  "comparador": {
+    "parada": "discordam",
+    "motivo": "A='legal' B='23_lances'"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm",
+    "legalidade",
+    "comparador"
+  ],
+  "aprovacao": {
+    "decisao": "pendente",
+    "motivo": "sem terminal interativo",
+    "em": "2026-11-11T13:35:30+00:00"
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "caso": "c21",
+  "execucao": 2,
+  "inicio": "2026-11-11T13:34:57+00:00",
+  "classe": "posicional",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "It's Black to move. Does Black have any legal move?",
+  "fen": "7k/5Q2/6K1/8/8/8/8/8 b - - 0 1",
+  "lance": null,
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "4.4.3",
+        "texto": "intending to castle, touches the king and then a rook, but castling with this rook is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8553
+      },
+      {
+        "artigo": "4.7.2",
+        "texto": "Castling, when the player's hand has released the rook on the square previously crossed by the king. When the player has released the king from his/her hand, the move is not yet made, but the player no longer has the right to make any move other than castling on that side, if this is legal. If castling on this side is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8541
+      },
+      {
+        "artigo": "3.10.3",
+        "texto": "A position is illegal when it cannot have been reached by any series of legal moves.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8534
+      },
+      {
+        "artigo": "3.9.2",
+        "texto": "No piece can be moved that will either expose the king of the same colour to check or leave that king in check.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8494
+      },
+      {
+        "artigo": "4.4.1",
+        "texto": "touches his/her king and a rook he/she must castle on that side if it is legal to do so",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.848
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 4.4.3 (Article 4: The Act of Moving the Pieces)\nintending to castle, touches the king and then a rook, but castling with this rook is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.\n\n[2] Article 4.7.2 (Article 4: The Act of Moving the Pieces)\nCastling, when the player's hand has released the rook on the square previously crossed by the king. When the player has released the king from his/her hand, the move is not yet made, but the player no longer has the right to make any move other than castling on that side, if this is legal. If castling on this side is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.\n\n[3] Article 3.10.3 (Article 3: The Moves of the Pieces)\nA position is illegal when it cannot have been reached by any series of legal moves.\n\n[4] Article 3.9.2 (Article 3: The Moves of the Pieces)\nNo piece can be moved that will either expose the king of the same colour to check or leave that king in check.\n\n[5] Article 4.4.1 (Article 4: The Act of Moving the Pieces)\ntouches his/her king and a rook he/she must castle on that side if it is legal to do so\n\nPOSITION\nFEN: 7k/5Q2/6K1/8/8/8/8/8 b - - 0 1\n. . . . . . . k\n. . . . . Q . .\n. . . . . . K .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n(uppercase = White, lowercase = Black; Black to move)\n\nMOVE IN QUESTION\n(no specific move)\n\nQUESTION\nIt's Black to move. Does Black have any legal move?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "0458a7736846e5cd0e3d42532ba7831f09e5c4ac0640ef9785e0ca4d098e973a",
+    "bruto": "{\n  \"veredito\": \"legal\",\n  \"artigo\": \"4.4.1\",\n  \"trecho_citado\": \"touches his/her king and a rook he/she must castle on that side if it is legal to do so\",\n  \"justificativa\": \"Black has a legal move to castle, as the king and rook are in position for castling, and the move is legal according to the rules.\"\n}",
+    "resposta": {
+      "veredito": "legal",
+      "artigo": "4.4.1",
+      "trecho_citado": "touches his/her king and a rook he/she must castle on that side if it is legal to do so",
+      "justificativa": "Black has a legal move to castle, as the king and rook are in position for castling, and the move is legal according to the rules."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 713,
+        "prompt_tokens_details": {
+          "cached_tokens": 712
+        },
+        "completion_tokens": 94,
+        "total_tokens": 807
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": {
+    "fen": "7k/5Q2/6K1/8/8/8/8/8 b - - 0 1",
+    "lance": null,
+    "fonte": "python-chess 1.11.2",
+    "veredito": "afogado",
+    "flags": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": true,
+      "material_insuficiente": false,
+      "cinquenta_lances": false,
+      "n_lances_legais": 0,
+      "vez_de": "pretas"
+    }
+  },
+  "parada": "discordam",
+  "comparador": {
+    "parada": "discordam",
+    "motivo": "A='legal' B='afogado'"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm",
+    "legalidade",
+    "comparador"
+  ],
+  "aprovacao": {
+    "decisao": "pendente",
+    "motivo": "sem terminal interativo",
+    "em": "2026-11-11T13:34:57+00:00"
+  }
+}

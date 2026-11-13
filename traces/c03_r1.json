@@ -1,0 +1,104 @@
+{
+  "caso": "c03",
+  "execucao": 1,
+  "inicio": "2026-11-11T13:17:00+00:00",
+  "classe": "posicional",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "Can Black take the d4 pawn en passant?",
+  "fen": "8/8/8/8/k1pP3R/8/8/4K3 b - d3 0 1",
+  "lance": "c4d3",
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "9.2.3.1",
+        "texto": "at the start of the sequence a pawn could have been captured en passant.",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.8373
+      },
+      {
+        "artigo": "3.7.3",
+        "texto": "the pawn may move to a square occupied by an opponent’s piece diagonally in front of it on an adjacent file, capturing that piece.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8282
+      },
+      {
+        "artigo": "3.7.3.1",
+        "texto": "A pawn occupying a square on the same rank as and on an adjacent file to an opponent’s pawn which has just advanced two squares in one move from its original square may capture this opponent’s pawn as though the latter had been moved only one square.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8256
+      },
+      {
+        "artigo": "3.7.3.2",
+        "texto": "This capture is only legal on the move following this advance and is called an ‘en passant’ capture.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8236
+      },
+      {
+        "artigo": "4.4.4",
+        "texto": "promotes a pawn, the choice of the piece is finalised when the piece has touched the square of promotion.",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8196
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 9.2.3.1 (Article 9: The Drawn Game)\nat the start of the sequence a pawn could have been captured en passant.\n\n[2] Article 3.7.3 (Article 3: The Moves of the Pieces)\nthe pawn may move to a square occupied by an opponent’s piece diagonally in front of it on an adjacent file, capturing that piece.\n\n[3] Article 3.7.3.1 (Article 3: The Moves of the Pieces)\nA pawn occupying a square on the same rank as and on an adjacent file to an opponent’s pawn which has just advanced two squares in one move from its original square may capture this opponent’s pawn as though the latter had been moved only one square.\n\n[4] Article 3.7.3.2 (Article 3: The Moves of the Pieces)\nThis capture is only legal on the move following this advance and is called an ‘en passant’ capture.\n\n[5] Article 4.4.4 (Article 4: The Act of Moving the Pieces)\npromotes a pawn, the choice of the piece is finalised when the piece has touched the square of promotion.\n\nPOSITION\nFEN: 8/8/8/8/k1pP3R/8/8/4K3 b - d3 0 1\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\nk . p P . . . R\n. . . . . . . .\n. . . . . . . .\n. . . . K . . .\n(uppercase = White, lowercase = Black; Black to move)\n\nMOVE IN QUESTION\nBlack pawn from c4 to d3 (UCI: c4d3)\n\nQUESTION\nCan Black take the d4 pawn en passant?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "03ca34a1b68b8c1828204ff0e167e9647dc41c018a3e6d979137d6206a05eda7",
+    "bruto": "{\n  \"veredito\": \"ilegal\",\n  \"artigo\": \"4.4.4\",\n  \"trecho_citado\": \"promotes a pawn, the choice of the piece is finalised when the piece has touched the square of promotion.\",\n  \"justificativa\": \"The move c4d3 is not a legal en passant capture because the pawn on d4 is not on the same rank as the Black pawn on c4. The en passant capture requires the pawn to be on the same rank and adjacent file.\"\n}",
+    "resposta": {
+      "veredito": "ilegal",
+      "artigo": "4.4.4",
+      "trecho_citado": "promotes a pawn, the choice of the piece is finalised when the piece has touched the square of promotion.",
+      "justificativa": "The move c4d3 is not a legal en passant capture because the pawn on d4 is not on the same rank as the Black pawn on c4. The en passant capture requires the pawn to be on the same rank and adjacent file."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 622,
+        "prompt_tokens_details": {
+          "cached_tokens": 234
+        },
+        "completion_tokens": 116,
+        "total_tokens": 738
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": {
+    "fen": "8/8/8/8/k1pP3R/8/8/4K3 b - d3 0 1",
+    "lance": "c4d3",
+    "fonte": "python-chess 1.11.2",
+    "veredito": "ilegal",
+    "flags": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": false,
+      "material_insuficiente": false,
+      "cinquenta_lances": false,
+      "n_lances_legais": 6,
+      "vez_de": "pretas"
+    }
+  },
+  "parada": "concordam",
+  "comparador": {
+    "parada": "concordam",
+    "motivo": "A='ilegal' B='ilegal'"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm",
+    "legalidade",
+    "comparador"
+  ],
+  "aprovacao": {
+    "decisao": "pendente",
+    "motivo": "sem terminal interativo",
+    "em": "2026-11-11T13:17:00+00:00"
+  }
+}

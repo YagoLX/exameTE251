@@ -1,0 +1,88 @@
+{
+  "caso": "c27",
+  "execucao": 2,
+  "inicio": "2026-11-11T13:35:59+00:00",
+  "classe": "normativa",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "I knocked some pieces over by accident. How do we fix the board?",
+  "fen": null,
+  "lance": null,
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "7.6",
+        "texto": "If, during a game it is found that any piece has been displaced from its correct square, the position before the irregularity shall be reinstated. If the position immediately before the irregularity cannot be determined, the game shall continue from the last identifiable position prior to the irregularity. The game shall then continue from this reinstated position.",
+        "artigo_titulo": "Article 7: Irregularities",
+        "score": 0.8315
+      },
+      {
+        "artigo": "7.2.1",
+        "texto": "If during a game it is found that the initial position of the pieces was incorrect, the game shall be cancelled and a new game shall be played.",
+        "artigo_titulo": "Article 7: Irregularities",
+        "score": 0.828
+      },
+      {
+        "artigo": "7.4.1",
+        "texto": "If a player displaces one or more pieces, he/she shall re-establish the correct position in his/her own time.",
+        "artigo_titulo": "Article 7: Irregularities",
+        "score": 0.826
+      },
+      {
+        "artigo": "4.2",
+        "texto": "Adjusting the pieces or other physical contact with a piece:",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8237
+      },
+      {
+        "artigo": "7.2.2",
+        "texto": "If during a game it is found that the chessboard has been placed contrary to Article 2.1, the game shall continue but the position reached must be transferred to a correctly placed chessboard.",
+        "artigo_titulo": "Article 7: Irregularities",
+        "score": 0.8231
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 7.6 (Article 7: Irregularities)\nIf, during a game it is found that any piece has been displaced from its correct square, the position before the irregularity shall be reinstated. If the position immediately before the irregularity cannot be determined, the game shall continue from the last identifiable position prior to the irregularity. The game shall then continue from this reinstated position.\n\n[2] Article 7.2.1 (Article 7: Irregularities)\nIf during a game it is found that the initial position of the pieces was incorrect, the game shall be cancelled and a new game shall be played.\n\n[3] Article 7.4.1 (Article 7: Irregularities)\nIf a player displaces one or more pieces, he/she shall re-establish the correct position in his/her own time.\n\n[4] Article 4.2 (Article 4: The Act of Moving the Pieces)\nAdjusting the pieces or other physical contact with a piece:\n\n[5] Article 7.2.2 (Article 7: Irregularities)\nIf during a game it is found that the chessboard has been placed contrary to Article 2.1, the game shall continue but the position reached must be transferred to a correctly placed chessboard.\n\nPOSITION\nFEN: (none)\n(no position given)\n\nMOVE IN QUESTION\n(no specific move)\n\nQUESTION\nI knocked some pieces over by accident. How do we fix the board?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "911267757c222898778d72eeee3da48669b3c7b6afb42c1daf667341a5aae5ca",
+    "bruto": "{\n  \"veredito\": \"reinstated position\",\n  \"artigo\": \"7.6\",\n  \"trecho_citado\": \"The position before the irregularity shall be reinstated.\",\n  \"justificativa\": \"The pieces were displaced accidentally, so the position before the irregularity shall be reinstated.\"\n}",
+    "resposta": {
+      "veredito": "reinstated position",
+      "artigo": "7.6",
+      "trecho_citado": "The position before the irregularity shall be reinstated.",
+      "justificativa": "The pieces were displaced accidentally, so the position before the irregularity shall be reinstated."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 529,
+        "prompt_tokens_details": {
+          "cached_tokens": 528
+        },
+        "completion_tokens": 70,
+        "total_tokens": 599
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": null,
+  "parada": "sem_verificacao",
+  "comparador": {
+    "parada": "sem_verificacao",
+    "motivo": "sem FEN: nada a comparar"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm"
+  ],
+  "aprovacao": {
+    "decisao": "pendente",
+    "motivo": "sem terminal interativo",
+    "em": "2026-11-11T13:35:59+00:00"
+  }
+}

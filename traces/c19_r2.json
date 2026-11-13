@@ -1,0 +1,110 @@
+{
+  "caso": "c19",
+  "execucao": 2,
+  "inicio": "2026-11-11T13:34:34+00:00",
+  "classe": "posicional",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "Is Ra8 checkmate?",
+  "fen": "6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1",
+  "lance": "a1a8",
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "9.6.2",
+        "texto": "any series of at least 75 moves have been made by each player without the movement of any pawn and without any capture. If the last move resulted in checkmate, that shall take precedence.",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.8089
+      },
+      {
+        "artigo": "5.1.1",
+        "texto": "The game is won by the player who has checkmated his/her opponent’s king. This immediately ends the game, provided that the move producing the checkmate position was in accordance with Article 3 and Articles 4.2 – 4.7.",
+        "artigo_titulo": "Article 5: The Completion of the Game",
+        "score": 0.8013
+      },
+      {
+        "artigo": "5.1.2",
+        "texto": "The game is lost by the player who declares he/she resigns (this immediately ends the game), unless the position is such that the opponent cannot checkmate the player’s king by any possible series of legal moves. In this case the result of the game is a draw.",
+        "artigo_titulo": "Article 5: The Completion of the Game",
+        "score": 0.7999
+      },
+      {
+        "artigo": "1.5",
+        "texto": "If the position is such that neither player can possibly checkmate the opponent’s king, the game is drawn (see Article 5.2.2).",
+        "artigo_titulo": "Article 1: The Nature and Objectives of the Game of Chess",
+        "score": 0.7974
+      },
+      {
+        "artigo": "5.2.1",
+        "texto": "The game is drawn when the player to move has no legal move and his/her king is not in check. The game is said to end in ‘stalemate’. This immediately ends the game, provided that the move producing the stalemate position was in accordance with Article 3 and Articles 4.2 – 4.7.",
+        "artigo_titulo": "Article 5: The Completion of the Game",
+        "score": 0.7954
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 9.6.2 (Article 9: The Drawn Game)\nany series of at least 75 moves have been made by each player without the movement of any pawn and without any capture. If the last move resulted in checkmate, that shall take precedence.\n\n[2] Article 5.1.1 (Article 5: The Completion of the Game)\nThe game is won by the player who has checkmated his/her opponent’s king. This immediately ends the game, provided that the move producing the checkmate position was in accordance with Article 3 and Articles 4.2 – 4.7.\n\n[3] Article 5.1.2 (Article 5: The Completion of the Game)\nThe game is lost by the player who declares he/she resigns (this immediately ends the game), unless the position is such that the opponent cannot checkmate the player’s king by any possible series of legal moves. In this case the result of the game is a draw.\n\n[4] Article 1.5 (Article 1: The Nature and Objectives of the Game of Chess)\nIf the position is such that neither player can possibly checkmate the opponent’s king, the game is drawn (see Article 5.2.2).\n\n[5] Article 5.2.1 (Article 5: The Completion of the Game)\nThe game is drawn when the player to move has no legal move and his/her king is not in check. The game is said to end in ‘stalemate’. This immediately ends the game, provided that the move producing the stalemate position was in accordance with Article 3 and Articles 4.2 – 4.7.\n\nPOSITION\nFEN: 6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1\n. . . . . . k .\n. . . . . p p p\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\nR . . . . . K .\n(uppercase = White, lowercase = Black; White to move)\n\nMOVE IN QUESTION\nWhite rook from a1 to a8 (UCI: a1a8)\n\nQUESTION\nIs Ra8 checkmate?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "b34e2e38e9e7e09326eec6daf3df4aedc25ec4804d421c8363949f33896a944d",
+    "bruto": "{\n  \"veredito\": \"legal\",\n  \"artigo\": \"5.1.2\",\n  \"trecho_citado\": \"The game is lost by the player who declares he/she resigns (this immediately ends the game), unless the position is such that the opponent cannot checkmate the player’s king by any possible series of legal moves. In this case the result of the game is a draw.\",\n  \"justificativa\": \"The move Ra8 is legal as it does not violate any of the rules cited. The position after the move may result in checkmate, which would end the game according to the rules.\"\n}",
+    "resposta": {
+      "veredito": "legal",
+      "artigo": "5.1.2",
+      "trecho_citado": "The game is lost by the player who declares he/she resigns (this immediately ends the game), unless the position is such that the opponent cannot checkmate the player’s king by any possible series of legal moves. In this case the result of the game is a draw.",
+      "justificativa": "The move Ra8 is legal as it does not violate any of the rules cited. The position after the move may result in checkmate, which would end the game according to the rules."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 720,
+        "prompt_tokens_details": {
+          "cached_tokens": 719
+        },
+        "completion_tokens": 133,
+        "total_tokens": 853
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": {
+    "fen": "6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1",
+    "lance": "a1a8",
+    "fonte": "python-chess 1.11.2",
+    "veredito": "legal",
+    "san": "Ra8#",
+    "flags": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": false,
+      "material_insuficiente": false,
+      "cinquenta_lances": false,
+      "n_lances_legais": 17,
+      "vez_de": "brancas"
+    },
+    "depois": {
+      "em_xeque": true,
+      "mate": true,
+      "afogado": false
+    }
+  },
+  "parada": "concordam",
+  "comparador": {
+    "parada": "concordam",
+    "motivo": "A='legal' B='legal'"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm",
+    "legalidade",
+    "comparador"
+  ],
+  "aprovacao": {
+    "decisao": "pendente",
+    "motivo": "sem terminal interativo",
+    "em": "2026-11-11T13:34:34+00:00"
+  }
+}

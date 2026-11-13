@@ -1,0 +1,110 @@
+{
+  "caso": "c05",
+  "execucao": "interface",
+  "inicio": "2026-11-11T11:56:43+00:00",
+  "classe": "posicional",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "Can I push my pawn to a8 and make a queen?",
+  "fen": "8/P6k/8/8/8/8/8/K7 w - - 0 1",
+  "lance": "a7a8q",
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "7.5.2",
+        "texto": "If the player has moved a pawn to the furthest distant rank, pressed the clock, but not replaced the pawn with a new piece, the move is illegal. The pawn shall be replaced by a queen of the same colour as the pawn.",
+        "artigo_titulo": "Article 7: Irregularities",
+        "score": 0.8387
+      },
+      {
+        "artigo": "3.7.3.3",
+        "texto": "When a player, having the move, plays a pawn to the rank furthest from its starting position, he/she must exchange that pawn as part of the same move for a new queen, rook, bishop or knight of the same colour on the intended square of arrival. This is called the square of ‘promotion’.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8331
+      },
+      {
+        "artigo": "4.6.2",
+        "texto": "removing the pawn and putting the new piece on the square of promotion may occur in any order.",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8287
+      },
+      {
+        "artigo": "3.4",
+        "texto": "The queen may move to any square along the file, the rank or a diagonal on which it stands.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8286
+      },
+      {
+        "artigo": "4.4.4",
+        "texto": "promotes a pawn, the choice of the piece is finalised when the piece has touched the square of promotion.",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8252
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 7.5.2 (Article 7: Irregularities)\nIf the player has moved a pawn to the furthest distant rank, pressed the clock, but not replaced the pawn with a new piece, the move is illegal. The pawn shall be replaced by a queen of the same colour as the pawn.\n\n[2] Article 3.7.3.3 (Article 3: The Moves of the Pieces)\nWhen a player, having the move, plays a pawn to the rank furthest from its starting position, he/she must exchange that pawn as part of the same move for a new queen, rook, bishop or knight of the same colour on the intended square of arrival. This is called the square of ‘promotion’.\n\n[3] Article 4.6.2 (Article 4: The Act of Moving the Pieces)\nremoving the pawn and putting the new piece on the square of promotion may occur in any order.\n\n[4] Article 3.4 (Article 3: The Moves of the Pieces)\nThe queen may move to any square along the file, the rank or a diagonal on which it stands.\n\n[5] Article 4.4.4 (Article 4: The Act of Moving the Pieces)\npromotes a pawn, the choice of the piece is finalised when the piece has touched the square of promotion.\n\nPOSITION\nFEN: 8/P6k/8/8/8/8/8/K7 w - - 0 1\n. . . . . . . .\nP . . . . . . k\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\nK . . . . . . .\n(uppercase = White, lowercase = Black; White to move)\n\nMOVE IN QUESTION\nWhite pawn from a7 to a8, becoming a queen (UCI: a7a8q)\n\nQUESTION\nCan I push my pawn to a8 and make a queen?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "a3d6c1f7e42b4d6cbbb16eca1450d1eeb45308167f44aafc8f08495d6d0c324a",
+    "bruto": "{\n  \"veredito\": \"legal\",\n  \"artigo\": \"3.7.3.3\",\n  \"trecho_citado\": \"When a player, having the move, plays a pawn to the rank furthest from its starting position, he/she must exchange that pawn as part of the same move for a new queen, rook, bishop or knight of the same colour on the intended square of arrival.\",\n  \"justificativa\": \"The move is legal as it follows the rule of pawn promotion as described in Article 3.7.3.3.\"\n}",
+    "resposta": {
+      "veredito": "legal",
+      "artigo": "3.7.3.3",
+      "trecho_citado": "When a player, having the move, plays a pawn to the rank furthest from its starting position, he/she must exchange that pawn as part of the same move for a new queen, rook, bishop or knight of the same colour on the intended square of arrival.",
+      "justificativa": "The move is legal as it follows the rule of pawn promotion as described in Article 3.7.3.3."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 655,
+        "prompt_tokens_details": {
+          "cached_tokens": 29
+        },
+        "completion_tokens": 122,
+        "total_tokens": 777
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": {
+    "fen": "8/P6k/8/8/8/8/8/K7 w - - 0 1",
+    "lance": "a7a8q",
+    "fonte": "python-chess 1.11.2",
+    "veredito": "legal",
+    "san": "a8=Q",
+    "flags": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": false,
+      "material_insuficiente": false,
+      "cinquenta_lances": false,
+      "n_lances_legais": 7,
+      "vez_de": "brancas"
+    },
+    "depois": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": false
+    }
+  },
+  "parada": "concordam",
+  "comparador": {
+    "parada": "concordam",
+    "motivo": "A='legal' B='legal'"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm",
+    "legalidade",
+    "comparador"
+  ],
+  "aprovacao": {
+    "decisao": "aprovado",
+    "via": "interface",
+    "em": "2026-11-11T11:57:27+00:00"
+  }
+}

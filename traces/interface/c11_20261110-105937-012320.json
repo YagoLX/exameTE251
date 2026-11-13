@@ -1,0 +1,89 @@
+{
+  "caso": "c11",
+  "execucao": "interface",
+  "inicio": "2026-11-10T13:59:37+00:00",
+  "classe": "posicional",
+  "config": {
+    "provedor": "groq",
+    "modelo": "openai/gpt-oss-120b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "Black's rook is hitting f1. Can I still castle short?",
+  "fen": "r3k2r/8/8/8/8/8/5r2/R3K2R w KQkq - 0 1",
+  "lance": "e1g1",
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "3.8.2.1",
+        "texto": "The right to castle has been lost:\n1) If the king has already moved, or\n2) With a rook that has already moved.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8402
+      },
+      {
+        "artigo": "4.4.1",
+        "texto": "touches his/her king and a rook he/she must castle on that side if it is legal to do so",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8397
+      },
+      {
+        "artigo": "4.4.3",
+        "texto": "intending to castle, touches the king and then a rook, but castling with this rook is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8389
+      },
+      {
+        "artigo": "9.2.3.2",
+        "texto": "a king had castling rights with a rook that has not been moved, but forfeited these after moving. The castling rights are lost only after the king or rook is moved.",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.8356
+      },
+      {
+        "artigo": "4.4.2",
+        "texto": "deliberately touches a rook and then his/her king he/she is not allowed to castle on that side on that move and the situation shall be governed by Article 4.3.1.",
+        "artigo_titulo": "Article 4: The Act of Moving the Pieces",
+        "score": 0.8329
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 3.8.2.1 (Article 3: The Moves of the Pieces)\nThe right to castle has been lost:\n1) If the king has already moved, or\n2) With a rook that has already moved.\n\n[2] Article 4.4.1 (Article 4: The Act of Moving the Pieces)\ntouches his/her king and a rook he/she must castle on that side if it is legal to do so\n\n[3] Article 4.4.3 (Article 4: The Act of Moving the Pieces)\nintending to castle, touches the king and then a rook, but castling with this rook is illegal, the player must make another legal move with his/her king (which may include castling with the other rook). If the king has no legal move, the player is free to make any legal move.\n\n[4] Article 9.2.3.2 (Article 9: The Drawn Game)\na king had castling rights with a rook that has not been moved, but forfeited these after moving. The castling rights are lost only after the king or rook is moved.\n\n[5] Article 4.4.2 (Article 4: The Act of Moving the Pieces)\ndeliberately touches a rook and then his/her king he/she is not allowed to castle on that side on that move and the situation shall be governed by Article 4.3.1.\n\nPOSITION\nFEN: r3k2r/8/8/8/8/8/5r2/R3K2R w KQkq - 0 1\nr . . . k . . r\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . r . .\nR . . . K . . R\n(uppercase = White, lowercase = Black; White to move)\n\nMOVE IN QUESTION\nWhite king from e1 to g1 (UCI: e1g1)\n\nQUESTION\nBlack's rook is hitting f1. Can I still castle short?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "6416cf8c078158ec0ae323b5247ef59896da726f738928003786a55f292bc661",
+    "bruto": null,
+    "resposta": null,
+    "meta": {
+      "erro_http": 404,
+      "corpo": "{\"error\":{\"message\":\"Not Found\"}}"
+    }
+  },
+  "ramo_b": {
+    "fen": "r3k2r/8/8/8/8/8/5r2/R3K2R w KQkq - 0 1",
+    "lance": "e1g1",
+    "fonte": "python-chess 1.11.2",
+    "veredito": "ilegal",
+    "flags": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": false,
+      "material_insuficiente": false,
+      "cinquenta_lances": false,
+      "n_lances_legais": 22,
+      "vez_de": "brancas"
+    }
+  },
+  "parada": "erro",
+  "comparador": {
+    "parada": "erro",
+    "motivo": "Ramo A sem JSON valido com 'veredito'"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm",
+    "legalidade",
+    "comparador"
+  ],
+  "aprovacao": {
+    "decisao": "pendente",
+    "em": "2026-11-10T13:59:37+00:00"
+  }
+}

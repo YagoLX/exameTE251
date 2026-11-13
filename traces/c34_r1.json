@@ -1,0 +1,88 @@
+{
+  "caso": "c34",
+  "execucao": 1,
+  "inicio": "2026-11-11T13:29:40+00:00",
+  "classe": "normativa",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "Which tiebreak system is used in a Swiss tournament?",
+  "fen": null,
+  "lance": null,
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "0.2",
+        "texto": "Preface\nThe Laws of Chess cannot cover all possible situations that may arise during a game, nor can they regulate all administrative questions. Where cases are not precisely regulated by an Article of the Laws, it should be possible to reach a correct decision by studying analogous situations which are regulated in the Laws.\nThe Laws assume that arbiters have the necessary competence, sound judgement and absolute objectivity. Too detailed a rule might deprive the arbiter of his/her freedom of judgement and thus prevent him/her from finding a solution to a problem dictated by fairness, logic and special factors. FIDE appeals to all chess players and federations to accept this view.\nA necessary condition for a game to be rated by FIDE is that it shall be played according to the FIDE Laws of Chess.\nIt is recommended that competitive games not rated by FIDE be played according to the FIDE Laws of Chess.\nMember federations may ask FIDE to give a ruling on matters relating to the Laws of Chess.",
+        "artigo_titulo": null,
+        "score": 0.7576
+      },
+      {
+        "artigo": "8.1.1.2",
+        "texto": "by entering moves on the FIDE certified ‘electronic scoresheet’ prescribed for the competition.",
+        "artigo_titulo": "Article 8: The recording of the moves",
+        "score": 0.7482
+      },
+      {
+        "artigo": "6.3.2",
+        "texto": "The time saved by a player during one period is added to his/her time available for the next period, where applicable. In the time-delay mode both players receive an allotted ‘main thinking time’. Each player also receives a ‘fixed extra time’ with every move. The countdown of the main thinking time only commences after the fixed extra time has expired. Provided the player presses his/her clock before the expiration of the fixed extra time, the main thinking time does not change, irrespective of the proportion of the fixed extra time used.",
+        "artigo_titulo": "Article 6: The Chessclock",
+        "score": 0.7475
+      },
+      {
+        "artigo": "8.1.5",
+        "texto": "Both players must record the offer of a draw on the scoresheet with a symbol (=).",
+        "artigo_titulo": "Article 8: The recording of the moves",
+        "score": 0.745
+      },
+      {
+        "artigo": "8.5.1",
+        "texto": "If neither player keeps score under Article 8.4, the arbiter or an assistant should try to be present and keep score. In this case, immediately after a flag has fallen the arbiter shall pause the chessclock. Then both players shall update their scoresheets, using the arbiter’s or the opponent’s scoresheet.",
+        "artigo_titulo": "Article 8: The recording of the moves",
+        "score": 0.7449
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 0.2 (None)\nPreface\nThe Laws of Chess cannot cover all possible situations that may arise during a game, nor can they regulate all administrative questions. Where cases are not precisely regulated by an Article of the Laws, it should be possible to reach a correct decision by studying analogous situations which are regulated in the Laws.\nThe Laws assume that arbiters have the necessary competence, sound judgement and absolute objectivity. Too detailed a rule might deprive the arbiter of his/her freedom of judgement and thus prevent him/her from finding a solution to a problem dictated by fairness, logic and special factors. FIDE appeals to all chess players and federations to accept this view.\nA necessary condition for a game to be rated by FIDE is that it shall be played according to the FIDE Laws of Chess.\nIt is recommended that competitive games not rated by FIDE be played according to the FIDE Laws of Chess.\nMember federations may ask FIDE to give a ruling on matters relating to the Laws of Chess.\n\n[2] Article 8.1.1.2 (Article 8: The recording of the moves)\nby entering moves on the FIDE certified ‘electronic scoresheet’ prescribed for the competition.\n\n[3] Article 6.3.2 (Article 6: The Chessclock)\nThe time saved by a player during one period is added to his/her time available for the next period, where applicable. In the time-delay mode both players receive an allotted ‘main thinking time’. Each player also receives a ‘fixed extra time’ with every move. The countdown of the main thinking time only commences after the fixed extra time has expired. Provided the player presses his/her clock before the expiration of the fixed extra time, the main thinking time does not change, irrespective of the proportion of the fixed extra time used.\n\n[4] Article 8.1.5 (Article 8: The recording of the moves)\nBoth players must record the offer of a draw on the scoresheet with a symbol (=).\n\n[5] Article 8.5.1 (Article 8: The recording of the moves)\nIf neither player keeps score under Article 8.4, the arbiter or an assistant should try to be present and keep score. In this case, immediately after a flag has fallen the arbiter shall pause the chessclock. Then both players shall update their scoresheets, using the arbiter’s or the opponent’s scoresheet.\n\nPOSITION\nFEN: (none)\n(no position given)\n\nMOVE IN QUESTION\n(no specific move)\n\nQUESTION\nWhich tiebreak system is used in a Swiss tournament?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "cc9a0fb4800772c9bb663f7489e21b3e1789a0dec3d65684092cb2153edb40c0",
+    "bruto": "{\"veredito\": \"nao consta no material\", \"artigo\": null, \"trecho_citado\": null, \"justificativa\": \"The excerpts provided do not mention any tiebreak system used in a Swiss tournament.\"}",
+    "resposta": {
+      "veredito": "nao consta no material",
+      "artigo": null,
+      "trecho_citado": null,
+      "justificativa": "The excerpts provided do not mention any tiebreak system used in a Swiss tournament."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 761,
+        "prompt_tokens_details": {
+          "cached_tokens": 29
+        },
+        "completion_tokens": 52,
+        "total_tokens": 813
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": null,
+  "parada": "recusa",
+  "comparador": {
+    "parada": "recusa",
+    "motivo": "sem FEN: nada a comparar"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm"
+  ],
+  "aprovacao": {
+    "decisao": "rejeitado",
+    "via": "interface",
+    "em": "2026-11-11T13:32:21+00:00"
+  }
+}

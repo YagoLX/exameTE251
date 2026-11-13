@@ -1,0 +1,88 @@
+{
+  "caso": "c32",
+  "execucao": 2,
+  "inicio": "2026-11-11T13:36:33+00:00",
+  "classe": "normativa",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "How many rating points do I lose if I forfeit a game?",
+  "fen": null,
+  "lance": null,
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "10.1",
+        "texto": "Unless the regulations of an event specify otherwise, a player who wins his/her game, or wins by forfeit, scores one point (1), a player who loses his/her game, or forfeits, scores no points (0), and a player who draws his/her game scores a half point (½).",
+        "artigo_titulo": "Article 10: Points",
+        "score": 0.8718
+      },
+      {
+        "artigo": "12.9.6",
+        "texto": "declaring the game to be lost by the offending player (the arbiter shall also decide the opponent’s score),",
+        "artigo_titulo": "Article 12: The Role of the Arbiter (see Preface)",
+        "score": 0.8323
+      },
+      {
+        "artigo": "11.7",
+        "texto": "Persistent refusal by a player to comply with the Laws of Chess shall be penalised by loss of the game. The arbiter shall decide the score of the opponent.",
+        "artigo_titulo": "Article 11: The Conduct of the Players",
+        "score": 0.828
+      },
+      {
+        "artigo": "12.9.5",
+        "texto": "reducing the points scored in the game by the offending person,",
+        "artigo_titulo": "Article 12: The Role of the Arbiter (see Preface)",
+        "score": 0.8274
+      },
+      {
+        "artigo": "11.8",
+        "texto": "If both players are found guilty according to Article 11.7, the game shall be declared lost by both players.",
+        "artigo_titulo": "Article 11: The Conduct of the Players",
+        "score": 0.826
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 10.1 (Article 10: Points)\nUnless the regulations of an event specify otherwise, a player who wins his/her game, or wins by forfeit, scores one point (1), a player who loses his/her game, or forfeits, scores no points (0), and a player who draws his/her game scores a half point (½).\n\n[2] Article 12.9.6 (Article 12: The Role of the Arbiter (see Preface))\ndeclaring the game to be lost by the offending player (the arbiter shall also decide the opponent’s score),\n\n[3] Article 11.7 (Article 11: The Conduct of the Players)\nPersistent refusal by a player to comply with the Laws of Chess shall be penalised by loss of the game. The arbiter shall decide the score of the opponent.\n\n[4] Article 12.9.5 (Article 12: The Role of the Arbiter (see Preface))\nreducing the points scored in the game by the offending person,\n\n[5] Article 11.8 (Article 11: The Conduct of the Players)\nIf both players are found guilty according to Article 11.7, the game shall be declared lost by both players.\n\nPOSITION\nFEN: (none)\n(no position given)\n\nMOVE IN QUESTION\n(no specific move)\n\nQUESTION\nHow many rating points do I lose if I forfeit a game?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "dfa86b28f59c80fe40f2f6e279f0e16b8428c92ab4bfd0898c8f15cf1cf38ee3",
+    "bruto": "{\n  \"veredito\": \"nao consta no material\",\n  \"artigo\": null,\n  \"trecho_citado\": null,\n  \"justificativa\": \"The excerpts do not provide information on rating points lost due to a forfeit.\"\n}",
+    "resposta": {
+      "veredito": "nao consta no material",
+      "artigo": null,
+      "trecho_citado": null,
+      "justificativa": "The excerpts do not provide information on rating points lost due to a forfeit."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 531,
+        "prompt_tokens_details": {
+          "cached_tokens": 530
+        },
+        "completion_tokens": 57,
+        "total_tokens": 588
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": null,
+  "parada": "recusa",
+  "comparador": {
+    "parada": "recusa",
+    "motivo": "sem FEN: nada a comparar"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm"
+  ],
+  "aprovacao": {
+    "decisao": "pendente",
+    "motivo": "sem terminal interativo",
+    "em": "2026-11-11T13:36:33+00:00"
+  }
+}

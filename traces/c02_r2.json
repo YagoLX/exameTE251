@@ -1,0 +1,104 @@
+{
+  "caso": "c02",
+  "execucao": 2,
+  "inicio": "2026-11-11T13:30:53+00:00",
+  "classe": "posicional",
+  "config": {
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "temperatura": 0.0,
+    "k": 5,
+    "backend": "e5",
+    "indice": "e5-multilingual-e5-large"
+  },
+  "pergunta": "Black's pawn is right next to mine on d5. Can I take it en passant?",
+  "fen": "rnbqkbnr/ppp2ppp/4p3/3pP3/8/8/PPPP1PPP/RNBQKBNR w KQkq - 0 3",
+  "lance": "e5d6",
+  "ramo_a": {
+    "hits": [
+      {
+        "artigo": "3.7.3.2",
+        "texto": "This capture is only legal on the move following this advance and is called an ‘en passant’ capture.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8584
+      },
+      {
+        "artigo": "9.2.3.1",
+        "texto": "at the start of the sequence a pawn could have been captured en passant.",
+        "artigo_titulo": "Article 9: The Drawn Game",
+        "score": 0.8534
+      },
+      {
+        "artigo": "3.7.3.1",
+        "texto": "A pawn occupying a square on the same rank as and on an adjacent file to an opponent’s pawn which has just advanced two squares in one move from its original square may capture this opponent’s pawn as though the latter had been moved only one square.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8457
+      },
+      {
+        "artigo": "3.7.1",
+        "texto": "The pawn may move forward to the square immediately in front of it on the same file, provided that this square is unoccupied, or",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.8457
+      },
+      {
+        "artigo": "3.7.3",
+        "texto": "the pawn may move to a square occupied by an opponent’s piece diagonally in front of it on an adjacent file, capturing that piece.",
+        "artigo_titulo": "Article 3: The Moves of the Pieces",
+        "score": 0.844
+      }
+    ],
+    "prompt": "EXCERPTS FROM THE FIDE LAWS OF CHESS (retrieved for this question)\n[1] Article 3.7.3.2 (Article 3: The Moves of the Pieces)\nThis capture is only legal on the move following this advance and is called an ‘en passant’ capture.\n\n[2] Article 9.2.3.1 (Article 9: The Drawn Game)\nat the start of the sequence a pawn could have been captured en passant.\n\n[3] Article 3.7.3.1 (Article 3: The Moves of the Pieces)\nA pawn occupying a square on the same rank as and on an adjacent file to an opponent’s pawn which has just advanced two squares in one move from its original square may capture this opponent’s pawn as though the latter had been moved only one square.\n\n[4] Article 3.7.1 (Article 3: The Moves of the Pieces)\nThe pawn may move forward to the square immediately in front of it on the same file, provided that this square is unoccupied, or\n\n[5] Article 3.7.3 (Article 3: The Moves of the Pieces)\nthe pawn may move to a square occupied by an opponent’s piece diagonally in front of it on an adjacent file, capturing that piece.\n\nPOSITION\nFEN: rnbqkbnr/ppp2ppp/4p3/3pP3/8/8/PPPP1PPP/RNBQKBNR w KQkq - 0 3\nr n b q k b n r\np p p . . p p p\n. . . . p . . .\n. . . p P . . .\n. . . . . . . .\n. . . . . . . .\nP P P P . P P P\nR N B Q K B N R\n(uppercase = White, lowercase = Black; White to move)\n\nMOVE IN QUESTION\nWhite pawn from e5 to d6 (UCI: e5d6)\n\nQUESTION\nBlack's pawn is right next to mine on d5. Can I take it en passant?\n\nINSTRUCTIONS\nAnswer only from the excerpts above, never from memory.\n- Cite only an Article number that appears in the excerpts.\n- If the excerpts do not settle the question, set \"veredito\" to exactly: nao consta no material\n- Do not declare the game over, a penalty applied, or the position \"in accordance with the rules\".\n- If there is a move, \"veredito\" is \"legal\", \"ilegal\" or \"nao consta no material\".\n  If there is no move, \"veredito\" is a short answer (at most five words) or \"nao consta no material\".\nReply with one JSON object and nothing else:\n{\"veredito\": \"...\", \"artigo\": \"<Article number or null>\", \"trecho_citado\": \"<sentence from the excerpt or null>\", \"justificativa\": \"<at most two sentences>\"}\n",
+    "prompt_sha256": "79a8582554d09fb710cf7ca0324c06ae676a11834894cb584aa5bbbbd8b73c5e",
+    "bruto": "{\n  \"veredito\": \"ilegal\",\n  \"artigo\": \"3.7.3.2\",\n  \"trecho_citado\": \"This capture is only legal on the move following this advance and is called an ‘en passant’ capture.\",\n  \"justificativa\": \"The en passant capture is only legal immediately after the opponent's pawn advances two squares from its original position. In this position, the Black pawn is not on its original square, so the en passant capture is not applicable.\"\n}",
+    "resposta": {
+      "veredito": "ilegal",
+      "artigo": "3.7.3.2",
+      "trecho_citado": "This capture is only legal on the move following this advance and is called an ‘en passant’ capture.",
+      "justificativa": "The en passant capture is only legal immediately after the opponent's pawn advances two squares from its original position. In this position, the Black pawn is not on its original square, so the en passant capture is not applicable."
+    },
+    "meta": {
+      "modelo_servido": "qwen3:8b",
+      "uso": {
+        "prompt_tokens": 653,
+        "prompt_tokens_details": {
+          "cached_tokens": 652
+        },
+        "completion_tokens": 111,
+        "total_tokens": 764
+      },
+      "system_fingerprint": "fp_ollama",
+      "tentativas": 1
+    }
+  },
+  "ramo_b": {
+    "fen": "rnbqkbnr/ppp2ppp/4p3/3pP3/8/8/PPPP1PPP/RNBQKBNR w KQkq - 0 3",
+    "lance": "e5d6",
+    "fonte": "python-chess 1.11.2",
+    "veredito": "ilegal",
+    "flags": {
+      "em_xeque": false,
+      "mate": false,
+      "afogado": false,
+      "material_insuficiente": false,
+      "cinquenta_lances": false,
+      "n_lances_legais": 29,
+      "vez_de": "brancas"
+    }
+  },
+  "parada": "concordam",
+  "comparador": {
+    "parada": "concordam",
+    "motivo": "A='ilegal' B='ilegal'"
+  },
+  "passos": [
+    "buscar_artigo",
+    "llm",
+    "legalidade",
+    "comparador"
+  ],
+  "aprovacao": {
+    "decisao": "pendente",
+    "motivo": "sem terminal interativo",
+    "em": "2026-11-11T13:30:53+00:00"
+  }
+}
