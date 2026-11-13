@@ -2,18 +2,19 @@
 """
 agente.py - o pipeline. Unico modulo que ve os dois ramos.
 
-  pergunta -> classe (codigo: tem FEN?) -> Ramo A (busca + LLM no Groq)
+  pergunta -> classe (codigo: tem FEN?) -> Ramo A (busca + LLM)
            -> Ramo B (legalidade)       -> comparador -> trace JSON em traces/
-           -> aprovacao humana (input s/n, gravada no trace)
+
+O agente nao emite veredito a ninguem: a saida de cada execucao e o trace.
+A revisao humana e feita depois, caso a caso (resultados/rotulos_humanos.json).
 
 Passos por pergunta (limite 4, AGENTS.md): buscar, redigir (LLM), legalidade, comparar.
-Ao Groq vao SO o prompt de montar_prompt: pergunta, FEN e trechos do corpus publico.
+Ao modelo vai SO o prompt de montar_prompt: pergunta, posicao, lance e trechos do corpus publico.
 
 Uso:
-    export GROQ_API_KEY=...
     python src/agente.py c12 --execucao 1
-    python src/agente.py --todos --execucao 1     # pede aprovacao a cada caso
-    python src/agente.py c12 --seco               # nao chama a API; testa o resto
+    python src/agente.py --todos --execucao 1     # as execucoes oficiais (em lote)
+    python src/agente.py c12 --seco               # nao chama o modelo; testa o resto
     (interface grafica: python src/interface.py)
 """
 from __future__ import annotations
@@ -112,26 +113,14 @@ def parsear(bruto: str | None) -> dict | None:
     return d if isinstance(d, dict) else None
 
 
-def aprovar(trace: dict) -> dict:
-    """Unica acao com efeito externo: emitir o veredito. Exige um humano."""
-    if not sys.stdin.isatty():
-        return {"decisao": "pendente", "motivo": "sem terminal interativo", "em": agora()}
-    p, a = trace["parada"], trace["ramo_a"]["resposta"] or {}
-    print(f"\n[{trace['caso']}] parada={p}  A={a.get('veredito')!r} art={a.get('artigo')}  "
-          f"B={(trace['ramo_b'] or {}).get('veredito')!r}")
-    if p == "discordam":
-        print("  Ramos discordam: nenhuma resposta e redigida; vai para revisao humana.")
-    r = input("  Aprovar emissao? [s/n] ").strip().lower()
-    return {"decisao": "aprovado" if r == "s" else "rejeitado", "entrada": r, "via": "terminal", "em": agora()}
-
-
 def agora() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
 def rodar(caso: dict, idx: Indice, a) -> dict:
-    """Roda os dois ramos e o comparador. A aprovacao fica 'pendente': quem a
-    decide e um humano, pelo terminal (aprovar) ou pela interface (registrar_aprovacao).
+    """Roda os dois ramos e o comparador e devolve o trace. Nada e emitido.
+    O campo `aprovacao` so guarda a decisao opcional de um revisor na interface
+    (registrar_aprovacao); "pendente" quer dizer que nenhum revisor marcou o trace.
     `a` precisa de: modelo, temperatura, k, backend, seco, execucao."""
     passos = []
     classe = "posicional" if caso.get("fen") else "normativa"     # em codigo, nao por LLM
@@ -173,7 +162,7 @@ def rodar(caso: dict, idx: Indice, a) -> dict:
 
 
 def registrar_aprovacao(caminho: Path, decisao: str, via: str) -> dict:
-    """Grava a decisao humana no trace. Nunca apaga a decisao anterior: empilha."""
+    """Grava no trace a decisao de um revisor (interface). Nunca apaga a anterior: empilha."""
     t = json.loads(caminho.read_text(encoding="utf-8"))
     anterior = t.get("aprovacao")
     t["aprovacao"] = {"decisao": decisao, "via": via, "em": agora()}
@@ -210,9 +199,8 @@ def main() -> None:
             print(f"  {caso['id']}  pulado: traces/{nome} ja existe (trace nao se sobrescreve)")
             continue
         t = rodar(caso, idx, a)
-        t["aprovacao"] = aprovar(t)
         (TRACES / nome).write_text(json.dumps(t, ensure_ascii=False, indent=2), encoding="utf-8")
-        print(f"  {t['caso']}  parada={t['parada']:<15} aprovacao={t['aprovacao']['decisao']:<10} traces/{nome}")
+        print(f"  {t['caso']}  parada={t['parada']:<15} traces/{nome}")
 
 
 if __name__ == "__main__":
